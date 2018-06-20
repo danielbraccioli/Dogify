@@ -31,7 +31,7 @@ public class Servidor extends Thread {
 			System.out.println("Servidor inicializado correctamente...");
 
 		
-	//		sf = HibernateUtil.getSessionFactory();
+	 		sf = HibernateUtil.getSessionFactory();
 
 		} catch (Exception e) {
 			e.printStackTrace();
