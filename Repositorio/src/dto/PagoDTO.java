@@ -1,16 +1,17 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import net.sourceforge.jtds.jdbc.DateTime;
 
 public class PagoDTO implements Serializable {
 		private int idPago;
-		private DateTime fechaHora;
+		private Date fechaHora;
 		private ReservaDTO reserva;
 		private ClienteDTO cliente;
 	
-		public PagoDTO(int idPago, DateTime fechaHora, ReservaDTO reserva, ClienteDTO cliente) {
+		public PagoDTO(int idPago, Date fechaHora, ReservaDTO reserva, ClienteDTO cliente) {
 			super();
 			this.idPago = idPago;
 			this.fechaHora = fechaHora;
@@ -23,10 +24,10 @@ public class PagoDTO implements Serializable {
 		public void setIdPago(int idPago) {
 			this.idPago = idPago;
 		}
-		public DateTime getFechaHora() {
+		public Date getFechaHora() {
 			return fechaHora;
 		}
-		public void setFechaHora(DateTime fechaHora) {
+		public void setFechaHora(Date fechaHora) {
 			this.fechaHora = fechaHora;
 		}
 		public ReservaDTO getReserva() {

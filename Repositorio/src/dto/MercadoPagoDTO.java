@@ -12,7 +12,7 @@ public class MercadoPagoDTO extends PagoDTO implements Serializable {
 	private String titularNombre;
 	private String dni;
 	
-	public MercadoPagoDTO(int idPago, DateTime fechaHora, ReservaDTO reserva, ClienteDTO cliente, String nroTarjeta,
+	public MercadoPagoDTO(int idPago, Date fechaHora, ReservaDTO reserva, ClienteDTO cliente, String nroTarjeta,
 			Date vtoTarjeta, String titularNombre, String dni) {
 		super(idPago, fechaHora, reserva, cliente);
 		this.nroTarjeta = nroTarjeta;

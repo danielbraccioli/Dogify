@@ -1,12 +1,12 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import net.sourceforge.jtds.jdbc.DateTime;
 
 public class EfectivoDTO extends PagoDTO  implements Serializable{
 
-	public EfectivoDTO(int idPago, DateTime fechaHora, ReservaDTO reserva, ClienteDTO cliente) {
+	public EfectivoDTO(int idPago, Date fechaHora, ReservaDTO reserva, ClienteDTO cliente) {
 		super(idPago, fechaHora, reserva, cliente);
 		// TODO Auto-generated constructor stub
 	}
