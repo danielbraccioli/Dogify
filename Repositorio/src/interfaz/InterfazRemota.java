@@ -14,6 +14,7 @@ public interface InterfazRemota extends Remote{
 	
 	
 	public boolean altaCliente() throws RemoteException;
+	public UsuarioDTO loginUsuario(String email,String password) throws RemoteException;
 
 
 }

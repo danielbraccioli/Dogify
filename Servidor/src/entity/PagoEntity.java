@@ -25,13 +25,6 @@ public class PagoEntity implements Serializable{
 		@JoinColumn(name="idUsuario")
 		private ClienteEntity cliente;
 	
-		public PagoEntity(int idPago, Date fechaHora, ReservaEntity reserva, ClienteEntity cliente) {
-			super();
-			this.idPago = idPago;
-			this.fechaHora = fechaHora;
-			this.reserva = reserva;
-			this.cliente = cliente;
-		}
 		public int getIdPago() {
 			return idPago;
 		}

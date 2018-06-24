@@ -2,6 +2,8 @@ package negocio;
 
 import java.util.*;
 
+import dto.PaseoDTO;
+
 public class Paseo {
 	
 		private int idPaseo;
@@ -40,6 +42,15 @@ public class Paseo {
 			this.ubicacionLongitud = ubicacionLongitud;
 			this.fotos = fotos;
 		}
+		
+		
+		
+		public Paseo() {
+			// TODO Auto-generated constructor stub
+		}
+
+
+
 		public int getIdPaseo() {
 			return idPaseo;
 		}
@@ -123,6 +134,10 @@ public class Paseo {
 		}
 		public void setFotos(List<String> fotos) {
 			this.fotos = fotos;
+		}
+		public List<PaseoDTO> recuperarPaseos() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 		
 		

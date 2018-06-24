@@ -22,19 +22,6 @@ public class ClienteEntity extends UsuarioEntity implements Serializable {
 
 		
 
-
-
-
-		public ClienteEntity(int idUsuario, String email, String password, String nombre, String apellido, String dni,
-				Date fechaNacimiento, String avatar, DireccionEntity direccion, List<PerroEntity> perros,
-				List<ReservaEntity> reservas, float cuentaCorriente) {
-			super(idUsuario, email, password, nombre, apellido, dni, fechaNacimiento, avatar, direccion);
-			this.perros = perros;
-			this.reservas = reservas;
-			this.cuentaCorriente = cuentaCorriente;
-		}
-
-
 		public List<PerroEntity> getPerros() {
 			return perros;
 		}

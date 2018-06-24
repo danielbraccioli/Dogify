@@ -23,15 +23,7 @@ public class ReservaEntity implements Serializable {
 	private List<MensajeEntity> mensajes = new ArrayList<MensajeEntity>();
 	
 	
-	public ReservaEntity(int idReserva, String estado, String horaRetiro, String horaDevolucion, List<MensajeEntity> mensajes) {
-		super();
-		this.idReserva = idReserva;
-		this.estado = estado;
-		this.horaRetiro = horaRetiro;
-		this.horaDevolucion = horaDevolucion;
-		this.mensajes = mensajes;
-	}
-
+	
 	public int getIdReserva() {
 		return idReserva;
 	}

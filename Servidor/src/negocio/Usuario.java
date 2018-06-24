@@ -2,6 +2,9 @@ package negocio;
 
 import java.util.Date;
 
+import dao.UsuarioDAO;
+import dto.UsuarioDTO;
+
 public class Usuario {
 	private String email;
 	private String password;
@@ -20,6 +23,11 @@ public class Usuario {
 	}
 	
 	
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public String getEmail() {
 		return email;
 	}
@@ -67,6 +75,12 @@ public class Usuario {
 	}
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+
+
+	public UsuarioDTO BuscarUsuarioByEmail(Usuario usuario) {
+		// TODO Auto-generated method stub
+		return UsuarioDAO.getInstancia().loginUsuario(usuario);
 	}
 	
 	

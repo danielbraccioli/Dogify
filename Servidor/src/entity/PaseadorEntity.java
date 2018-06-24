@@ -24,17 +24,6 @@ public class PaseadorEntity extends UsuarioEntity implements Serializable {
 		
 		
 
-		
-		public PaseadorEntity(int idUsuario, String email, String password, String nombre, String apellido, String dni,
-				Date fechaNacimiento, String avatar, DireccionEntity direccion, String numeroRegistro, String perfil,
-				int reputacion, List<CalificacionEntity> calificaciones, List<PaseoEntity> paseos) {
-			super(idUsuario, email, password, nombre, apellido, dni, fechaNacimiento, avatar, direccion);
-			this.numeroRegistro = numeroRegistro;
-			this.perfil = perfil;
-			this.reputacion = reputacion;
-			this.calificaciones = calificaciones;
-			this.paseos = paseos;
-		}
 		public String getNumeroRegistro() {
 			return numeroRegistro;
 		}

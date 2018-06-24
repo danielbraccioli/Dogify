@@ -20,14 +20,6 @@ public class CalificacionEntity implements Serializable {
 	private ReservaEntity reserva;
 		
 	
-	public CalificacionEntity(int idCalificacion, int puntaje, String comentarios, Date fecha, ReservaEntity reserva) {
-		super();
-		this.idCalificacion = idCalificacion;
-		this.puntaje = puntaje;
-		this.comentarios = comentarios;
-		this.fecha = fecha;
-		this.reserva = reserva;
-	}
 	public int getIdCalificacion() {
 		return idCalificacion;
 	}

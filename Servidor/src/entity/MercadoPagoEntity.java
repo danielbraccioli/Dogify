@@ -16,14 +16,6 @@ public class MercadoPagoEntity extends PagoEntity implements Serializable {
 	private String titularNombre;
 	private String dni;
 	
-	public MercadoPagoEntity(int idPago, Date fechaHora, ReservaEntity reserva, ClienteEntity cliente, String nroTarjeta,
-			Date vtoTarjeta, String titularNombre, String dni) {
-		super(idPago, fechaHora, reserva, cliente);
-		this.nroTarjeta = nroTarjeta;
-		this.vtoTarjeta = vtoTarjeta;
-		this.titularNombre = titularNombre;
-		this.dni = dni;
-	}
 
 	public String getNroTarjeta() {
 		return nroTarjeta;

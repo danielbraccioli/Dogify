@@ -12,10 +12,6 @@ import net.sourceforge.jtds.jdbc.DateTime;
 @DiscriminatorValue("Efectivo")
 public class EfectivoEntity extends PagoEntity  implements Serializable{
 
-	public EfectivoEntity(int idPago, Date fechaHora, ReservaEntity reserva, ClienteEntity cliente) {
-		super(idPago, fechaHora, reserva, cliente);
-		// TODO Auto-generated constructor stub
-	}
 	
 	
 

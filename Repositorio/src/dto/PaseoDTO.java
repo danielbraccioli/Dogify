@@ -18,29 +18,9 @@ public class PaseoDTO implements Serializable {
 		private String barrio;
 		private String ubicacionLatitud;
 		private String ubicacionLongitud;
-		private List<String> fotos = new ArrayList<String>();
+//		private List<String> fotos = new ArrayList<String>();
 		
 		
-		
-		public PaseoDTO(int idPaseo, List<ReservaDTO> reservas, Date fecha, String estado, float tarifa, String horarioInicio,
-				String horarioFin, String horaInicio, String horaFin, int capacidad, String barrio,
-				String ubicacionLatitud, String ubicacionLongitud, List<String> fotos) {
-			super();
-			this.idPaseo = idPaseo;
-			this.reservas = reservas;
-			this.fecha = fecha;
-			this.estado = estado;
-			this.tarifa = tarifa;
-			this.horarioInicio = horarioInicio;
-			this.horarioFin = horarioFin;
-			this.horaInicio = horaInicio;
-			this.horaFin = horaFin;
-			this.capacidad = capacidad;
-			this.barrio = barrio;
-			this.ubicacionLatitud = ubicacionLatitud;
-			this.ubicacionLongitud = ubicacionLongitud;
-			this.fotos = fotos;
-		}
 		public int getIdPaseo() {
 			return idPaseo;
 		}
@@ -119,14 +99,14 @@ public class PaseoDTO implements Serializable {
 		public void setUbicacionLongitud(String ubicacionLongitud) {
 			this.ubicacionLongitud = ubicacionLongitud;
 		}
-		public List<String> getFotos() {
+/*		public List<String> getFotos() {
 			return fotos;
 		}
 		public void setFotos(List<String> fotos) {
 			this.fotos = fotos;
 		}
 		
-		
+*/		
 		
 		
 	

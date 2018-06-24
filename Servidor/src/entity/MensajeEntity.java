@@ -23,14 +23,7 @@ public class MensajeEntity implements Serializable {
 	private UsuarioEntity cliente;
 
 
-	public MensajeEntity(int idMensaje, Date fechaHora, String mensaje, UsuarioEntity cliente, UsuarioEntity paseador) {
-		super();
-		this.idMensaje = idMensaje;
-		this.fechaHora = fechaHora;
-		this.mensaje = mensaje;
-  		this.cliente = cliente;
-	}
-
+	
 	public int getIdMensaje() {
 		return idMensaje;
 	}

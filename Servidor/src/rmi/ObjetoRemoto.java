@@ -36,6 +36,14 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 			return ModuloUsuarios.getInstancia().altaCliente();
 		}
 
+		@Override
+		public UsuarioDTO loginUsuario(String email, String password) throws RemoteException {
+			// TODO Auto-generated method stub
+			return ModuloUsuarios.getInstancia().login(email, password);
+		}
+		
+		
+
 
 
 }

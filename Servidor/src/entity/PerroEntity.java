@@ -23,19 +23,6 @@ public class PerroEntity implements Serializable {
 	private String requiereBozal;
 	private String tamano;
 	
-	public PerroEntity(int idPerro, String nombre, String raza, int edad, String sexo, String observaciones,
-			String dadoDeBaja, String requiereBozal, String tamano) {
-		super();
-		this.idPerro = idPerro;
-		this.nombre = nombre;
-		this.raza = raza;
-		this.edad = edad;
-		this.sexo = sexo;
-		this.observaciones = observaciones;
-		this.dadoDeBaja = dadoDeBaja;
-		this.requiereBozal = requiereBozal;
-		this.tamano = tamano;
-	}
 
 	public int getIdPerro() {
 		return idPerro;

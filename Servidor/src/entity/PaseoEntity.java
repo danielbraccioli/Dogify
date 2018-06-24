@@ -39,24 +39,6 @@ public class PaseoEntity implements Serializable{
 		public int getIdPaseo() {
 			return idPaseo;
 		}
-		public PaseoEntity(int idPaseo, List<ReservaEntity> reservas, Date fecha, String estado, float tarifa,
-			String horarioInicio, String horarioFin, String horaInicio, String horaFin, int capacidad, String barrio,
-			String ubicacionLatitud, String ubicacionLongitud) {
-		super();
-		this.idPaseo = idPaseo;
-		this.reservas = reservas;
-		this.fecha = fecha;
-		this.estado = estado;
-		this.tarifa = tarifa;
-		this.horarioInicio = horarioInicio;
-		this.horarioFin = horarioFin;
-		this.horaInicio = horaInicio;
-		this.horaFin = horaFin;
-		this.capacidad = capacidad;
-		this.barrio = barrio;
-		this.ubicacionLatitud = ubicacionLatitud;
-		this.ubicacionLongitud = ubicacionLongitud;
-	}
 		public void setIdPaseo(int idPaseo) {
 			this.idPaseo = idPaseo;
 		}

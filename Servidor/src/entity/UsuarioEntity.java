@@ -27,22 +27,6 @@ public class UsuarioEntity implements Serializable {
 	private DireccionEntity direccion;
 
 	
-	
-	public UsuarioEntity(int idUsuario, String email, String password, String nombre, String apellido, String dni,
-			Date fechaNacimiento, String avatar, DireccionEntity direccion) {
-		super();
-		this.idUsuario = idUsuario;
-		this.email = email;
-		this.password = password;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.dni = dni;
-		this.fechaNacimiento = fechaNacimiento;
-		this.avatar = avatar;
-		this.direccion = direccion;
-	}
-
-
 	public int getIdUsuario() {
 		return idUsuario;
 	}

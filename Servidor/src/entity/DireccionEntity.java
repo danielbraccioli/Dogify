@@ -20,17 +20,7 @@ public class DireccionEntity implements Serializable {
 		private String dpto;
 		private String barrio;
 		
-		public DireccionEntity(String calle, int numero, int piso, String dpto, String barrio) {
-			super();
-			this.calle = calle;
-			this.numero = numero;
-			this.piso = piso;
-			this.dpto = dpto;
-			this.barrio = barrio;
-		}
-		
-		
-		
+			
 		public String getCalle() {
 			return calle;
 		}
