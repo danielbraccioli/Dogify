@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dao.UsuarioDAO;
+import dto.ReservaDTO;
+
 public class Cliente extends Usuario {
 	
 
@@ -13,13 +16,6 @@ public class Cliente extends Usuario {
 
 		
 
-		public Cliente(String email, String password, String nombre, String apellido, String dni, Date fechaNacimiento,
-				String avatar, Direccion direccion, List<Perro> perros, List<Reserva> reservas, float cuentaCorriente) {
-			super(email, password, nombre, apellido, dni, fechaNacimiento, avatar, direccion);
-			this.perros = perros;
-			this.reservas = reservas;
-			this.cuentaCorriente = cuentaCorriente;
-		}
 
 
 		public List<Perro> getPerros() {
@@ -49,6 +45,19 @@ public class Cliente extends Usuario {
 
 		public void setCuentaCorriente(float cuentaCorriente) {
 			this.cuentaCorriente = cuentaCorriente;
+		}
+
+
+		public void agregarReserva(int idReserva) {
+
+			UsuarioDAO.getInstancia().agregarReserva(this.getIdUsuario(),idReserva);
+			
+		}
+
+
+		public List<ReservaDTO> reservasCliente() {
+			// TODO Auto-generated method stub
+			return UsuarioDAO.getInstancia().recuperarReservas(this.getIdUsuario());
 		}	
 	
 		

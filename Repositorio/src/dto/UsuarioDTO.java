@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UsuarioDTO implements Serializable {
+	private int idUsuario;
 	private String email;
 	private String password;
 	private String nombre;
@@ -15,17 +16,14 @@ public class UsuarioDTO implements Serializable {
 
 	
 	
-	public UsuarioDTO(String email2, String password2, String nombre2, String apellido2, String dni2,
-			Date fechaNacimiento2, String avatar2, DireccionDTO direccion2) {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	public UsuarioDTO() {
-		// TODO Auto-generated constructor stub
-	}
 
 
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 	public String getEmail() {
 		return email;
 	}

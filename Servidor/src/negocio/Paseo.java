@@ -1,7 +1,9 @@
 package negocio;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import dao.PaseoDAO;
 import dto.PaseoDTO;
 
 public class Paseo {
@@ -135,10 +137,17 @@ public class Paseo {
 		public void setFotos(List<String> fotos) {
 			this.fotos = fotos;
 		}
-		public List<PaseoDTO> recuperarPaseos() {
-			// TODO Auto-generated method stub
-			return null;
+		public List<PaseoDTO> recuperarPaseos(Date fecha,String barrio) {
+			return PaseoDAO.getInstancia().listaPaseos(fecha, barrio);
 		}
+
+
+		public void agregarReserva(int idReserva) {
+			PaseoDAO.getInstancia().agregarReserva(this.idPaseo,idReserva);
+			
+		}
+		
+		
 		
 		
 		

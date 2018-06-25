@@ -1,6 +1,9 @@
 package dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -44,11 +47,10 @@ public class PaseoDAO {
 	}
 	
 	
-	public List<PaseoDTO> recuperarFacturas() {
-		List<PaseoEntity> paseos = this.listaPaseo();
-		List<PaseoDTO> PaseosDTO = new ArrayList<PaseoDTO>();
+	private List<PaseoDTO> recuperarPaseos(List<PaseoEntity> paseosE) {
+			List<PaseoDTO> PaseosDTO = new ArrayList<PaseoDTO>();
 		
-		for (PaseoEntity pas : paseos){
+		for (PaseoEntity pas : paseosE){
 			PaseoDTO pasDTO = new PaseoDTO();
 			pasDTO.setIdPaseo(pas.getIdPaseo());
 			pasDTO.setBarrio(pas.getBarrio());
@@ -71,19 +73,63 @@ public class PaseoDAO {
 		return PaseosDTO;
 	}
 	
-	public List<PaseoEntity> listaPaseo() {
+	public List<PaseoDTO> listaPaseos(Date fecha,String barrio) {
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			java.util.Date dutyDay = (java.util.Date) dateFormat.parse(dateFormat.format(fecha));
+			Session session = sf.openSession();
+			session.beginTransaction();
+			List<PaseoEntity> listaPaseosEntity = session.createQuery("from PaseoEntity p where p.fecha = :fecha and p.barrio = :barrio")
+			.setParameter("fecha", dutyDay)
+			.setParameter("barrio",barrio).list();
+			session.getTransaction().commit();
+			session.close();
+			return recuperarPaseos(listaPaseosEntity);
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("Error PaseoDAO.listaPaseos");
+			return null;
+		}
+	}
+	
+	public PaseoEntity recuperarPaseo(int idPaseo) {
 		try {
 			Session session = sf.openSession();
 			session.beginTransaction();
-			List<PaseoEntity> listaPaseosEntity = session.createQuery("from PaseoEntity").list();
+			PaseoEntity paseo = (PaseoEntity) session
+					.createQuery("from PaseoEntity c where c.idPaseo = :idPaseo ")
+					.setParameter("idPaseo", idPaseo).uniqueResult();
 			session.getTransaction().commit();
 			session.close();
-			return listaPaseosEntity;
+			return paseo;
 		} catch (Exception e) {
 			System.out.println(e);
-			System.out.println("Error PaseoDAO.listaFacturas");
-			return null;
+			System.out.println("Error PaseoDAO.recuperarPaseo");
 		}
+		return null;
+	}
+	
+
+	
+	public void modificarPaseo(PaseoEntity paseo) {
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			session.update(paseo);
+			session.getTransaction().commit();
+			session.close();
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("Error PaseoDAO.modificarPaseo");
+		}
+	}
+
+	public void agregarReserva(int idPaseo, int idReserva) {
+		ReservaEntity reserva = ReservaDAO.getInstancia().recuperarReserva(idReserva);
+		PaseoEntity paseo = this.recuperarPaseo(idPaseo);
+		paseo.agregarReserva(reserva);
+		this.modificarPaseo(paseo);
+		
 	}
 	
 

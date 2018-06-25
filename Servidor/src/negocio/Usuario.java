@@ -6,6 +6,7 @@ import dao.UsuarioDAO;
 import dto.UsuarioDTO;
 
 public class Usuario {
+	private int idUsuario;
 	private String email;
 	private String password;
 	private String nombre;
@@ -17,12 +18,16 @@ public class Usuario {
 
 	
 	
-	public Usuario(String email2, String password2, String nombre2, String apellido2, String dni2,
-			Date fechaNacimiento2, String avatar2, Direccion direccion2) {
-		// TODO Auto-generated constructor stub
+	public int getIdUsuario() {
+		return idUsuario;
 	}
-	
-	
+
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}

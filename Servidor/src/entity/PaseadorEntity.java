@@ -18,7 +18,7 @@ public class PaseadorEntity extends UsuarioEntity implements Serializable {
 		private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
 		
 		@OneToMany(cascade = CascadeType.ALL)
-		@JoinColumn(name = "idcliente")
+		@JoinColumn(name = "idPaseador")
 		private List<PaseoEntity> paseos = new ArrayList<PaseoEntity>();
 
 		

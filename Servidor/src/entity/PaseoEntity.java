@@ -1,7 +1,9 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -114,6 +116,11 @@ public class PaseoEntity implements Serializable{
 		public void setUbicacionLongitud(String ubicacionLongitud) {
 			this.ubicacionLongitud = ubicacionLongitud;
 		}
+		
+		public void agregarReserva(ReservaEntity reserva){
+			reservas.add(reserva);
+		}
+		
 //		public List<String> getFotos() {
 //			return fotos;
 	//	}

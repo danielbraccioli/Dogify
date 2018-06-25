@@ -15,7 +15,7 @@ public class ClienteEntity extends UsuarioEntity implements Serializable {
 		@JoinColumn(name = "idcliente")
 		private List<PerroEntity> perros = new ArrayList<PerroEntity>();
 		
-		@OneToMany(cascade = CascadeType.ALL)
+		@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 		@JoinColumn(name = "idcliente")
 		private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
 		private float cuentaCorriente ;
@@ -51,6 +51,9 @@ public class ClienteEntity extends UsuarioEntity implements Serializable {
 			this.cuentaCorriente = cuentaCorriente;
 		}	
 	
+		public void agregarReserva(ReservaEntity reserva){
+			reservas.add(reserva);
+		}
 		
 
 

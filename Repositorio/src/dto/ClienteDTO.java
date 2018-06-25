@@ -12,16 +12,7 @@ public class ClienteDTO extends UsuarioDTO implements Serializable {
 		private List<ReservaDTO> reservas = new ArrayList<ReservaDTO>();
 		private float cuentaCorriente ;
 
-		
-
-		public ClienteDTO(String email, String password, String nombre, String apellido, String dni, Date fechaNacimiento,
-				String avatar, DireccionDTO direccion, List<PerroDTO> perros, List<ReservaDTO> reservas, float cuentaCorriente) {
-			super(email, password, nombre, apellido, dni, fechaNacimiento, avatar, direccion);
-			this.perros = perros;
-			this.reservas = reservas;
-			this.cuentaCorriente = cuentaCorriente;
-		}
-
+	
 
 		public List<PerroDTO> getPerros() {
 			return perros;

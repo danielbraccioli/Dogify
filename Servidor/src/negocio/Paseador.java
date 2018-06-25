@@ -13,16 +13,6 @@ public class Paseador extends Usuario {
 		
 		
 		
-		public Paseador(String email2, String password2, String nombre2, String apellido2, String dni2,
-				Date fechaNacimiento2, String avatar2, Direccion direccion2, String numeroRegistro, String perfil,
-				int reputacion, List<Calificacion> calificaciones, List<Paseo> paseos) {
-			super(email2, password2, nombre2, apellido2, dni2, fechaNacimiento2, avatar2, direccion2);
-			this.numeroRegistro = numeroRegistro;
-			this.perfil = perfil;
-			this.reputacion = reputacion;
-			this.calificaciones = calificaciones;
-			this.paseos = paseos;
-		}
 		
 		public String getNumeroRegistro() {
 			return numeroRegistro;

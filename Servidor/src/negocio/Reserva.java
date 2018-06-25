@@ -3,6 +3,9 @@ package negocio;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.ReservaDAO;
+import dto.PaseoDTO;
+
 public class Reserva {
 
 	private int idReserva;
@@ -11,15 +14,7 @@ public class Reserva {
 	private String horaDevolucion;
 	private List<Mensaje> mensajes = new ArrayList<Mensaje>();
 	
-	
-	public Reserva(int idReserva, String estado, String horaRetiro, String horaDevolucion, List<Mensaje> mensajes) {
-		super();
-		this.idReserva = idReserva;
-		this.estado = estado;
-		this.horaRetiro = horaRetiro;
-		this.horaDevolucion = horaDevolucion;
-		this.mensajes = mensajes;
-	}
+
 
 	public int getIdReserva() {
 		return idReserva;
@@ -59,6 +54,11 @@ public class Reserva {
 
 	public void setMensajes(List<Mensaje> mensajes) {
 		this.mensajes = mensajes;
+	}
+
+	public int reservarPaseo() {
+		return ReservaDAO.getInstancia().reservarPaseo(this);
+		
 	}
 	
 	
