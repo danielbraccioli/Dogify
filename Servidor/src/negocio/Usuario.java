@@ -16,22 +16,26 @@ public class Usuario {
 	private String avatar;
 	private Direccion direccion;
 
-	
+	public Usuario(int idUsuario, String email, String password, String nombre, String apellido,
+			String dni, Date fechaNacimiento, String avatar, Direccion direccion) {
+		this.idUsuario = idUsuario;
+		this.email = email;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.fechaNacimiento = fechaNacimiento;
+		this.avatar = avatar;
+		this.direccion = direccion;
+	}
 	
 	public int getIdUsuario() {
 		return idUsuario;
 	}
 
-
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-
-	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
-
 
 	public String getEmail() {
 		return email;
@@ -81,15 +85,4 @@ public class Usuario {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
-
-
-	public UsuarioDTO BuscarUsuarioByEmail(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return UsuarioDAO.getInstancia().loginUsuario(usuario);
-	}
-	
-	
-	
-	
-
 }

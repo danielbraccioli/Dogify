@@ -11,8 +11,36 @@ public class ReservaDTO implements Serializable {
 	private String horaRetiro;
 	private String horaDevolucion;
 	private List<MensajeDTO> mensajes = new ArrayList<MensajeDTO>();
+	private ClienteDTO cliente;
+	private PaseoDTO paseo;
+	private PerroDTO perro;
 	
+	public ReservaDTO() {}
 	
+
+	public ClienteDTO getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+	}
+
+	public PaseoDTO getPaseo() {
+		return paseo;
+	}
+
+	public void setPaseo(PaseoDTO paseo) {
+		this.paseo = paseo;
+	}
+
+	public PerroDTO getPerro() {
+		return perro;
+	}
+
+	public void setPerro(PerroDTO perro) {
+		this.perro = perro;
+	}
 
 	public int getIdReserva() {
 		return idReserva;

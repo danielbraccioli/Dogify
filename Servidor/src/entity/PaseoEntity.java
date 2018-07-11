@@ -5,9 +5,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import negocio.Paseador;
 
 
 @Entity
@@ -18,8 +29,8 @@ public class PaseoEntity implements Serializable{
 		@GeneratedValue	
 		private int idPaseo;
 		
-		@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-		@JoinColumn(name = "idPaseo")
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "paseo")
+		@Fetch(value = FetchMode.SUBSELECT)
 		private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
 		private Date fecha;
 		private String estado;
@@ -32,11 +43,22 @@ public class PaseoEntity implements Serializable{
 		private String barrio;
 		private String ubicacionLatitud;
 		private String ubicacionLongitud;
-	//	private List<String> fotos = new ArrayList<String>();
 		
-
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "paseo")
+		@Fetch(value = FetchMode.SUBSELECT)
+		private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
 		
+		@ManyToOne //(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+		@JoinColumn(name = "idPaseador")
+		private PaseadorEntity paseador;
 		
+		public void setPaseador(PaseadorEntity paseador) {
+			this.paseador = paseador;
+		}
+		
+		public PaseadorEntity getPaseador() {
+			return paseador;
+		}
 
 		public int getIdPaseo() {
 			return idPaseo;
@@ -120,17 +142,14 @@ public class PaseoEntity implements Serializable{
 		public void agregarReserva(ReservaEntity reserva){
 			reservas.add(reserva);
 		}
-		
-//		public List<String> getFotos() {
-//			return fotos;
-	//	}
-//		public void setFotos(List<String> fotos) {
-//			this.fotos = fotos;
-//		}
-		
-		
-		
-		
-	
 
+		public List<FotoEntity> getFotos() {
+			return fotos;
+		}
+
+		public void setFotos(List<FotoEntity> fotos) {
+			this.fotos = fotos;
+		}
+		
+		
 }

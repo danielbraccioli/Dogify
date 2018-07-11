@@ -1,57 +1,135 @@
 package controlador;
 
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import dto.*;
-import negocio.*;
+import javax.imageio.ImageIO;
+
+import dao.PaseoDAO;
+import dao.ReservaDAO;
+import dto.ClienteDTO;
+import dto.PaseoDTO;
+import dto.PerroDTO;
+import dto.ReservaDTO;
+import excepciones.PaseoException;
+import excepciones.ReservaException;
+import excepciones.UsuarioException;
+import maps.java.Geocoding;
+import maps.java.MapsJava;
+import negocio.Cliente;
+import negocio.Paseo;
+import negocio.Perro;
+import negocio.Reserva;
 
 public class ModuloPaseos {
 	
 	private static ModuloPaseos instancia;
-
+ 
 	public static ModuloPaseos getInstancia() {
 		if (instancia == null)
 			instancia = new ModuloPaseos();
 		return instancia;
 	}
 
+	public List<PaseoDTO> buscarPaseosByFechaBarrio(Date fecha, String barrio) throws PaseoException {
+		List<PaseoDTO> paseos = null;
+		paseos = PaseoDAO.getInstancia().buscarPaseosByFechaBarrio(fecha, barrio);
+		return paseos;
+		
+	}
 	
-	public List<PaseoDTO> recuperarPaseos(Date fecha, String barrio) {
-		Paseo paseo = new Paseo();
-		return paseo.recuperarPaseos(fecha,barrio);
-	}
-
-
-	public boolean reservarPaseo(UsuarioDTO usuario, PaseoDTO paseo) {
-		Reserva reserva = new Reserva();
-		reserva.setEstado("No iniciado");
-		reserva.setHoraDevolucion(paseo.getHoraFin());
-		reserva.setHoraRetiro(paseo.getHoraInicio());
-		int idReserva = reserva.reservarPaseo();
-		
-		if (idReserva>0){
-			
-			Cliente cliente = new Cliente();
-			cliente.setIdUsuario(usuario.getIdUsuario());
-			cliente.agregarReserva(idReserva);
-			
-			Paseo paseoN = new Paseo();
-			paseoN.setIdPaseo(paseo.getIdPaseo());
-			paseoN.agregarReserva(idReserva);
-			
-			return true;
-		}
-		else
-			return false;
-		
-	}
-
-
 	public List<ReservaDTO> reservasCliente(ClienteDTO cliente) {
-		Cliente clienteN = new Cliente();
-		clienteN.setIdUsuario(cliente.getIdUsuario());
-		return clienteN.reservasCliente();
+		return ReservaDAO.getInstancia().recuperarReservas(cliente.getIdUsuario());
 	}
 	
+	public Paseo buscarPaseoById(int idPaseo) throws PaseoException {
+		Paseo paseo = null;
+		paseo = PaseoDAO.getInstancia().buscarPaseoById(idPaseo);
+		return paseo;
+	}
+	
+	public void compartirUbicacion(PaseoDTO paseo) throws UnsupportedEncodingException, MalformedURLException, PaseoException {
+		Geocoding ObjGeocod=new Geocoding();
+		MapsJava.setKey("AIzaSyDkBgIxRpAnjSJS4WeovRC4kiriTxrpD6A");
+        Point2D.Double resultadoCD=ObjGeocod.getCoordinates("Buenos Aires, UADE");
+        Paseo paseoAux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+		paseoAux.actualizarUbicacion(String.valueOf(resultadoCD.x), String.valueOf(resultadoCD.y));
+	}
+	
+	public void subirFotoPaseo(PaseoDTO paseo, Date fecha, File file) throws IOException, PaseoException {
+		BufferedImage img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
+		img = ImageIO.read(file);
+		Paseo aux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+		aux.subirFoto(fecha, img);
+	}
+	
+	public void reservarPaseo(PaseoDTO paseo, ClienteDTO cliente, PerroDTO perro) throws PaseoException, ReservaException {
+		Paseo auxPaseo = ModuloPaseos.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+		Cliente auxCliente = ModuloUsuarios.getInstancia().buscarClienteById(cliente.getIdUsuario());
+		Perro auxPerro = null;
+		for(Perro perro1 : auxCliente.getPerros()) {
+			if (perro.getIdPerro() == perro.getIdPerro()) {
+				auxPerro = perro1;
+			}
+		}
+		auxPaseo.altaReserva(auxCliente, auxPerro);
+	}
+	
+	public void cancelarReserva(ReservaDTO reserva) throws ReservaException{
+		try {
+			Reserva reservaAux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
+			reservaAux.cancelarReserva();
+		} catch (SQLException e) {
+			new ReservaException("Error en cancelar reserva en BD, reintente");
+		}
+	}
+	
+	public void retirarPerro(ReservaDTO reserva) throws ReservaException{
+		try {
+			Reserva reservaAux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
+			reservaAux.retirarPerro();
+		} catch (SQLException e) {
+			new ReservaException("Error en cancelar reserva en BD, reintente");
+		}
+	}
+	
+	public void devolverPerro(ReservaDTO reserva) throws ReservaException{
+		try {
+			Reserva reservaAux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
+			reservaAux.devolverPerro();
+		} catch (SQLException e) {
+			new ReservaException("Error en cancelar reserva en BD, reintente");
+		}
+	}
+	
+	public void cancelarPaseo(PaseoDTO paseo) throws PaseoException, ReservaException {
+			Paseo paseoAux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+			paseoAux.cancelarPaseo();
+	}
+	
+	public ReservaDTO buscarReservaById(int idReserva) {
+		ReservaDTO reserva = ReservaDAO.getInstancia().buscarReservaById(idReserva);
+		return reserva;
+	}
+	public void iniciarPaseo(PaseoDTO paseo) throws PaseoException {
+		Paseo paseoAux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+		paseoAux.iniciarPaseo();
+	}
+	
+	public void finalizarPaseo(PaseoDTO paseo) throws PaseoException, ReservaException {
+		Paseo paseoAux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
+		paseoAux.finalizarPaseo();
+	}
+	
+	public void calificarPaseador(ReservaDTO reserva, int puntaje, String observaciones) throws UsuarioException {
+		Reserva reservaAux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
+		reservaAux.getPaseo().getPaseador().calificar(reservaAux, puntaje, observaciones);
+	}
 }

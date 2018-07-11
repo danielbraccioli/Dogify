@@ -1,7 +1,8 @@
 package dto;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaseadorDTO extends UsuarioDTO implements Serializable {
 	
@@ -11,6 +12,7 @@ public class PaseadorDTO extends UsuarioDTO implements Serializable {
 		private List<CalificacionDTO> calificaciones = new ArrayList<CalificacionDTO>();
 		private List<PaseoDTO> paseos = new ArrayList<PaseoDTO>();
 		
+		public PaseadorDTO() {}
 		
 			
 		public String getNumeroRegistro() {

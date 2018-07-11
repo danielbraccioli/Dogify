@@ -4,13 +4,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import negocio.Cliente;
+import negocio.Paseo;
+import negocio.Perro;
 
 
 @Entity
 @Table(name = "Reserva")
 public class ReservaEntity implements Serializable {
 
+	private static final long serialVersionUID = -3763963615523243215L;
+	
 	@Id
 	@GeneratedValue	
 	private int idReserva;
@@ -22,6 +36,43 @@ public class ReservaEntity implements Serializable {
 	@JoinColumn(name = "idReserva")
 	private List<MensajeEntity> mensajes = new ArrayList<MensajeEntity>();
 	
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "idCliente")
+	private ClienteEntity cliente;
+	
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "idPerro")
+	private PerroEntity perro;
+	
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "idPaseo")
+	private PaseoEntity paseo;
+	
+
+	
+	public ClienteEntity getCliente() {
+		return cliente;
+	}
+	
+	public void setCliente(ClienteEntity cliente) {
+		this.cliente = cliente;
+	}
+	
+	public PerroEntity getPerro() {
+		return perro;
+	}
+	
+	public void setPerro(PerroEntity perro) {
+		this.perro = perro;
+	}
+	
+	public void setPaseo(PaseoEntity paseo) {
+		this.paseo = paseo;
+	}
+	
+	public PaseoEntity getPaseo() {
+		return paseo;
+	}
 	
 	
 	public int getIdReserva() {

@@ -1,17 +1,18 @@
 package negocio;
 
-import net.sourceforge.jtds.jdbc.DateTime;
+import java.sql.SQLException;
+import java.util.Date;
 
-public class Pago {
+public abstract class Pago {
 		private int idPago;
-		private DateTime fechaHora;
+		private Date fecha;
 		private Reserva reserva;
 		private Cliente cliente;
 	
-		public Pago(int idPago, DateTime fechaHora, Reserva reserva, Cliente cliente) {
+		public Pago(int idPago, Date fecha, Reserva reserva, Cliente cliente) {
 			super();
 			this.idPago = idPago;
-			this.fechaHora = fechaHora;
+			this.fecha = fecha;
 			this.reserva = reserva;
 			this.cliente = cliente;
 		}
@@ -21,11 +22,11 @@ public class Pago {
 		public void setIdPago(int idPago) {
 			this.idPago = idPago;
 		}
-		public DateTime getFechaHora() {
-			return fechaHora;
+		public Date getFechaHora() {
+			return fecha;
 		}
-		public void setFechaHora(DateTime fechaHora) {
-			this.fechaHora = fechaHora;
+		public void setFecha(Date fecha) {
+			this.fecha = fecha;
 		}
 		public Reserva getReserva() {
 			return reserva;
@@ -40,7 +41,7 @@ public class Pago {
 			this.cliente = cliente;
 		}
 		
-
+		public abstract void save() throws SQLException;
 		
 
 }

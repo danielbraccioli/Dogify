@@ -1,7 +1,9 @@
 package negocio;
 
+import java.sql.SQLException;
 import java.util.Date;
 
+import dao.PagoDAO;
 import net.sourceforge.jtds.jdbc.DateTime;
 
 public class MercadoPago extends Pago {
@@ -11,13 +13,17 @@ public class MercadoPago extends Pago {
 	private String titularNombre;
 	private String dni;
 	
-	public MercadoPago(int idPago, DateTime fechaHora, Reserva reserva, Cliente cliente, String nroTarjeta,
+	public MercadoPago(int idPago, Date fecha, Reserva reserva, Cliente cliente, String nroTarjeta,
 			Date vtoTarjeta, String titularNombre, String dni) {
-		super(idPago, fechaHora, reserva, cliente);
+		super(idPago, fecha, reserva, cliente);
 		this.nroTarjeta = nroTarjeta;
 		this.vtoTarjeta = vtoTarjeta;
 		this.titularNombre = titularNombre;
 		this.dni = dni;
+	}
+	
+	public void save() throws SQLException {
+		PagoDAO.getInstancia().save(this);
 	}
 
 	public String getNroTarjeta() {

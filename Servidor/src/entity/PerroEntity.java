@@ -2,10 +2,16 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import negocio.Cliente;
 
 @Entity
 @Table(name = "Perro")
@@ -23,7 +29,18 @@ public class PerroEntity implements Serializable {
 	private String requiereBozal;
 	private String tamano;
 	
-
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn(name = "idCliente")
+	private ClienteEntity cliente;
+	
+	public ClienteEntity getCliente() {
+		return cliente;
+	}
+	
+	public void setCliente(ClienteEntity cliente) {
+		this.cliente = cliente;
+	}
+	
 	public int getIdPerro() {
 		return idPerro;
 	}

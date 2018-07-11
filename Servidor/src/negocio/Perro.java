@@ -11,9 +11,10 @@ public class Perro {
 	private String dadoDeBaja;
 	private String requiereBozal;
 	private String tamano;
+	private Cliente cliente;
 	
 	public Perro(int idPerro, String nombre, String raza, int edad, String sexo, String observaciones,
-			String dadoDeBaja, String requiereBozal, String tamano) {
+			String dadoDeBaja, String requiereBozal, String tamano, Cliente cliente) {
 		super();
 		this.idPerro = idPerro;
 		this.nombre = nombre;
@@ -24,6 +25,7 @@ public class Perro {
 		this.dadoDeBaja = dadoDeBaja;
 		this.requiereBozal = requiereBozal;
 		this.tamano = tamano;
+		this.setCliente(cliente);
 	}
 
 	public int getIdPerro() {
@@ -96,6 +98,14 @@ public class Perro {
 
 	public void setTamano(String tamano) {
 		this.tamano = tamano;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

@@ -13,21 +13,18 @@ public class PerroDTO implements Serializable {
 	private String dadoDeBaja;
 	private String requiereBozal;
 	private String tamano;
+	private ClienteDTO cliente;
 	
-	public PerroDTO(int idPerro, String nombre, String raza, int edad, String sexo, String observaciones,
-			String dadoDeBaja, String requiereBozal, String tamano) {
-		super();
-		this.idPerro = idPerro;
-		this.nombre = nombre;
-		this.raza = raza;
-		this.edad = edad;
-		this.sexo = sexo;
-		this.observaciones = observaciones;
-		this.dadoDeBaja = dadoDeBaja;
-		this.requiereBozal = requiereBozal;
-		this.tamano = tamano;
+	public PerroDTO() {}
+
+	public ClienteDTO getCliente() {
+		return cliente;
 	}
 
+	public void setCliente(ClienteDTO cliente) {
+		this.cliente = cliente;
+	}
+	
 	public int getIdPerro() {
 		return idPerro;
 	}
@@ -99,9 +96,5 @@ public class PerroDTO implements Serializable {
 	public void setTamano(String tamano) {
 		this.tamano = tamano;
 	}
-	
-	
-	
-	
 
 }

@@ -5,6 +5,9 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @DiscriminatorValue("Paseador")
 public class PaseadorEntity extends UsuarioEntity implements Serializable {
@@ -13,14 +16,15 @@ public class PaseadorEntity extends UsuarioEntity implements Serializable {
 		private String perfil;
 		private int reputacion;
 
-		@OneToMany(cascade = CascadeType.ALL)
-		@JoinColumn(name = "idcliente")
-		private List<CalificacionEntity> calificaciones = new ArrayList<CalificacionEntity>();
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "paseador")
+		@Fetch(value = FetchMode.SUBSELECT)
+		private List<CalificacionEntity> calificaciones;
 		
-		@OneToMany(cascade = CascadeType.ALL)
-		@JoinColumn(name = "idPaseador")
-		private List<PaseoEntity> paseos = new ArrayList<PaseoEntity>();
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "paseador")
+		@Fetch(value = FetchMode.SUBSELECT)
+		private List<PaseoEntity> paseos;
 
+		public PaseadorEntity() {}
 		
 		
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>DOGIFY! Testeo de Plantilla</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+<body>
+
+
+
+
+
+
+
+
+	<div id="wrapper">
+		<div id="contenedor">
+			<div id="cabecera">
+				<h1>Sistema de Gestión de Pedidos - Ventana Principal</h1>
+			</div>
+			<div id="opcionHome"><a href="altaPedido.jsp"><h2>Generar Pedido</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidos" target="_self"><h2>Pedidos Sin Procesar</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosDeposito" target="_self"><h2>Pedidos Deposito</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosEnPreparacion" target="_self"><h2>Pedidos En preparacion</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosEnviados" target="_self"><h2>Pedidos enviados</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCSinProcesar" target="_self"><h2>Ordenes de Compra Sin Procesar</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCAprobadas" target="_self"><h2>Ordenes de Compra APROBADAS</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCCumplidas" target="_self"><h2>Ordenes de Compra CUMPLIDAS</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=reservasCliente" target="_self"><h2>Reservas Cliente</h2></a></div>
+			
+			<br>
+			<center><input type="submit" name="submitButton" id="botonAdelante" value="Salir" /></center>
+			<br>
+			<div id="pie"><b>Copyright - Aplicaciones Distribuidas @2018</b></div>
+		</div>
+	</div>
+
+</body>
+</html>

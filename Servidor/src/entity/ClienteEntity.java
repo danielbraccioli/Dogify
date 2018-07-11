@@ -2,21 +2,31 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+
 
 @Entity
 @DiscriminatorValue("Cliente")
 public class ClienteEntity extends UsuarioEntity implements Serializable {
 	
-		@OneToMany(cascade = CascadeType.ALL)
-		@JoinColumn(name = "idcliente")
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "cliente")
+		@Fetch(value = FetchMode.SUBSELECT)
+		//@JoinColumn(name = "idCliente")
 		private List<PerroEntity> perros = new ArrayList<PerroEntity>();
 		
-		@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-		@JoinColumn(name = "idcliente")
+		@OneToMany(fetch=FetchType.EAGER, mappedBy = "cliente")
+		@Fetch(value = FetchMode.SUBSELECT)
 		private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
 		private float cuentaCorriente ;
 

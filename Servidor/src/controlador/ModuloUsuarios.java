@@ -1,48 +1,35 @@
 package controlador;
 
-import java.rmi.Naming;
-import java.util.Vector;
+import java.sql.SQLException;
 
-import dao.*;
+import dao.UsuarioDAO;
 import dto.UsuarioDTO;
-import entity.*;
-import negocio.Usuario;
+import excepciones.UsuarioException;
+import negocio.Cliente;
 
 
 public class ModuloUsuarios {
-	
-
 	private static ModuloUsuarios instancia;
-	
-	ModuloUsuarios() {
-	
-	}
-	
+
 	public static ModuloUsuarios getInstancia() {
-        if (instancia == null)
-                instancia = new ModuloUsuarios();
-        return instancia;
+		if (instancia == null)
+			instancia = new ModuloUsuarios();
+		return instancia;
 	}
 	
-	public boolean altaCliente(){
-
-		return true;
-			
+	public UsuarioDTO login(String email, String password) throws UsuarioException{
+		UsuarioDTO usuario = null;
+		try {
+			usuario = UsuarioDAO.getInstancia().loginUsuario(email, password);
+		} catch (SQLException e) {
+			new UsuarioException("Error en login de usuario en BD, reintente");
+		}	
+		return usuario;
 	}
 	
-	public boolean altaPaseador(){
-		return true;	
+	public Cliente buscarClienteById(int idCliente) {
+		return UsuarioDAO.getInstancia().buscarClienteById(idCliente);
 	}
 	
-	public UsuarioDTO login(String email, String password){
-
-		Usuario usuario = new Usuario();
-		usuario.setEmail(email);
-		usuario.setPassword(password);
-		
-		return usuario.BuscarUsuarioByEmail(usuario); 		
-	}
-
-
-
+	
 }

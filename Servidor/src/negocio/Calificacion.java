@@ -1,6 +1,10 @@
 package negocio;
 
+import java.sql.SQLException;
 import java.util.Date;
+
+import dao.CalificacionDAO;
+import excepciones.UsuarioException;
 
 public class Calificacion {
 	private int idCalificacion;
@@ -8,17 +12,33 @@ public class Calificacion {
 	private String comentarios;
 	private Date fecha;
 	private Reserva reserva;
+	private Paseador paseador;
 	
 	
-	
-	public Calificacion(int idCalificacion, int puntaje, String comentarios, Date fecha, Reserva reserva) {
-		super();
+	public Calificacion(int idCalificacion, int puntaje, String comentarios, Date fecha, Reserva reserva, Paseador paseador) {
 		this.idCalificacion = idCalificacion;
 		this.puntaje = puntaje;
 		this.comentarios = comentarios;
 		this.fecha = fecha;
 		this.reserva = reserva;
+		this.paseador = paseador;
 	}
+	
+	public void save() throws UsuarioException {
+		CalificacionDAO.getInstancia().save(this);
+	}
+	
+	
+	public Paseador getPaseador() {
+		return paseador;
+	}
+
+
+	public void setPaseador(Paseador paseador) {
+		this.paseador = paseador;
+	}
+
+
 	public int getIdCalificacion() {
 		return idCalificacion;
 	}

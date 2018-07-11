@@ -1,24 +1,19 @@
 package dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
-import net.sourceforge.jtds.jdbc.DateTime;
+
+
 
 public class MensajeDTO  implements Serializable{
 	private int idMensaje;
-	private DateTime fechaHora;
+	private Date fecha;
+	private String hora;
 	private String mensaje;
-	private UsuarioDTO cliente;
-	private UsuarioDTO paseador;
+	private UsuarioDTO usuario;
 	
-	public MensajeDTO(int idMensaje, DateTime fechaHora, String mensaje, UsuarioDTO cliente, UsuarioDTO paseador) {
-		super();
-		this.idMensaje = idMensaje;
-		this.fechaHora = fechaHora;
-		this.mensaje = mensaje;
-		this.cliente = cliente;
-		this.paseador = paseador;
-	}
+	public MensajeDTO() {}
 
 	public int getIdMensaje() {
 		return idMensaje;
@@ -26,14 +21,6 @@ public class MensajeDTO  implements Serializable{
 
 	public void setIdMensaje(int idMensaje) {
 		this.idMensaje = idMensaje;
-	}
-
-	public DateTime getFechaHora() {
-		return fechaHora;
-	}
-
-	public void setFechaHora(DateTime fechaHora) {
-		this.fechaHora = fechaHora;
 	}
 
 	public String getMensaje() {
@@ -44,23 +31,29 @@ public class MensajeDTO  implements Serializable{
 		this.mensaje = mensaje;
 	}
 
-	public UsuarioDTO getCliente() {
-		return cliente;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setCliente(UsuarioDTO cliente) {
-		this.cliente = cliente;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
-	public UsuarioDTO getPaseador() {
-		return paseador;
+	public String getHora() {
+		return hora;
 	}
 
-	public void setPaseador(UsuarioDTO paseador) {
-		this.paseador = paseador;
+	public void setHora(String hora) {
+		this.hora = hora;
 	}
-	
-	
+
+	public UsuarioDTO getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioDTO usuario) {
+		this.usuario = usuario;
+	}
 	
 	
 

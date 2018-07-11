@@ -1,15 +1,19 @@
 package rmi;
 
-import interfaz.InterfazRemota;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
-import controlador.*;
-import dto.*;
+import controlador.ModuloPaseos;
+import controlador.ModuloUsuarios;
+import dto.ClienteDTO;
+import dto.PaseoDTO;
+import dto.ReservaDTO;
+import dto.UsuarioDTO;
+import excepciones.PaseoException;
+import excepciones.UsuarioException;
+import interfaz.InterfazRemota;
 
 public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota {
 
@@ -34,24 +38,26 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 
 		
 		public boolean altaCliente() throws RemoteException {
-			return ModuloUsuarios.getInstancia().altaCliente();
+		//	return ModuloUsuarios.getInstancia().altaCliente();
+			return true;
 		}
 
 		@Override
-		public UsuarioDTO loginUsuario(String email, String password) throws RemoteException {
+		public UsuarioDTO loginUsuario(String email, String password) throws RemoteException, UsuarioException {
 			// TODO Auto-generated method stub
 			return ModuloUsuarios.getInstancia().login(email, password);
 		}
 
 		@Override
-		public List<PaseoDTO> buscarPaseosByFechaBarrio(Date fecha, String barrio) throws RemoteException {
+		public List<PaseoDTO> buscarPaseosByFechaBarrio(Date fecha, String barrio) throws RemoteException, PaseoException {
 			// TODO Auto-generated method stub
-			return ModuloPaseos.getInstancia().recuperarPaseos(fecha, barrio);
+			return ModuloPaseos.getInstancia().buscarPaseosByFechaBarrio(fecha, barrio);
 		}
 
 		@Override
 		public boolean reservarPaseo(UsuarioDTO usuario, PaseoDTO paseo) throws RemoteException {
-			return ModuloPaseos.getInstancia().reservarPaseo(usuario,paseo);
+		//	return ModuloPaseos.getInstancia().reservarPaseo(usuario,paseo);
+			return true;
 			
 		}
 
@@ -61,6 +67,9 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 			return ModuloPaseos.getInstancia().reservasCliente(cliente);
 		}
 		
+		public ReservaDTO reservaCliente(int idReserva) throws RemoteException{
+			return ModuloPaseos.getInstancia().buscarReservaById(idReserva);
+		}
 		
 
 

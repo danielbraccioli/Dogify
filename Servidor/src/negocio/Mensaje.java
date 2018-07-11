@@ -1,22 +1,65 @@
 package negocio;
 
-import net.sourceforge.jtds.jdbc.DateTime;
+import java.sql.SQLException;
+import java.util.Date;
+
+import dao.MensajeDAO;
+import excepciones.PaseoException;
 
 public class Mensaje {
 	private int idMensaje;
-	private DateTime fechaHora;
+	private Date fecha;
+	private String hora;
 	private String mensaje;
-	private Usuario cliente;
-	private Usuario paseador;
+	private Usuario usuario;
 	
-	public Mensaje(int idMensaje, DateTime fechaHora, String mensaje, Usuario cliente, Usuario paseador) {
-		super();
+	public Mensaje(int idMensaje, Date fecha, String hora, String mensaje, Usuario usuario) {
 		this.idMensaje = idMensaje;
-		this.fechaHora = fechaHora;
+		this.fecha = fecha;
+		this.hora = hora;
 		this.mensaje = mensaje;
-		this.cliente = cliente;
-		this.paseador = paseador;
+		this.usuario = usuario;
 	}
+	
+	public void save() throws PaseoException{
+		MensajeDAO.getInstancia().save(this);
+	}
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+
+
+	public String getHora() {
+		return hora;
+	}
+
+
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 
 	public int getIdMensaje() {
 		return idMensaje;
@@ -26,14 +69,6 @@ public class Mensaje {
 		this.idMensaje = idMensaje;
 	}
 
-	public DateTime getFechaHora() {
-		return fechaHora;
-	}
-
-	public void setFechaHora(DateTime fechaHora) {
-		this.fechaHora = fechaHora;
-	}
-
 	public String getMensaje() {
 		return mensaje;
 	}
@@ -41,25 +76,4 @@ public class Mensaje {
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-
-	public Usuario getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Usuario cliente) {
-		this.cliente = cliente;
-	}
-
-	public Usuario getPaseador() {
-		return paseador;
-	}
-
-	public void setPaseador(Usuario paseador) {
-		this.paseador = paseador;
-	}
-	
-	
-	
-	
-
 }

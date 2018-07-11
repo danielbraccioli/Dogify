@@ -1,7 +1,9 @@
 package dto;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class PaseoDTO implements Serializable {
 	
@@ -18,11 +20,19 @@ public class PaseoDTO implements Serializable {
 		private String barrio;
 		private String ubicacionLatitud;
 		private String ubicacionLongitud;
+		private PaseadorDTO paseador;
 //		private List<String> fotos = new ArrayList<String>();
 		
+		public PaseoDTO() {}
 		
 		public int getIdPaseo() {
 			return idPaseo;
+		}
+		public PaseadorDTO getPaseador() {
+			return paseador;
+		}
+		public void setPaseador(PaseadorDTO paseador) {
+			this.paseador = paseador;
 		}
 		public void setIdPaseo(int idPaseo) {
 			this.idPaseo = idPaseo;

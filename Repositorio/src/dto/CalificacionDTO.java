@@ -12,14 +12,8 @@ public class CalificacionDTO implements Serializable {
 	
 	
 	
-	public CalificacionDTO(int idCalificacion, int puntaje, String comentarios, Date fecha, ReservaDTO reserva) {
-		super();
-		this.idCalificacion = idCalificacion;
-		this.puntaje = puntaje;
-		this.comentarios = comentarios;
-		this.fecha = fecha;
-		this.reserva = reserva;
-	}
+	public CalificacionDTO() {}
+	
 	public int getIdCalificacion() {
 		return idCalificacion;
 	}

@@ -26,7 +26,7 @@ public class HibernateUtil {
 			config.addAnnotatedClass(PaseoEntity.class);
 			config.addAnnotatedClass(PerroEntity.class);
 			config.addAnnotatedClass(ReservaEntity.class);
-			
+			config.addAnnotatedClass(FotoEntity.class);
 			
 			sessionFactory = config.buildSessionFactory();
 			session = sessionFactory.openSession();

@@ -1,10 +1,16 @@
 package negocio;
 
+import java.awt.image.BufferedImage;
+import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import dao.PaseoDAO;
-import dto.PaseoDTO;
+import excepciones.PaseoException;
+import excepciones.ReservaException;
 
 public class Paseo {
 	
@@ -21,13 +27,14 @@ public class Paseo {
 		private String barrio;
 		private String ubicacionLatitud;
 		private String ubicacionLongitud;
-		private List<String> fotos = new ArrayList<String>();
+		private List<Foto> fotos = new ArrayList<Foto>();
+		private Paseador paseador;
 		
 		
 		
 		public Paseo(int idPaseo, List<Reserva> reservas, Date fecha, String estado, float tarifa, String horarioInicio,
 				String horarioFin, String horaInicio, String horaFin, int capacidad, String barrio,
-				String ubicacionLatitud, String ubicacionLongitud, List<String> fotos) {
+				String ubicacionLatitud, String ubicacionLongitud, List<Foto> fotos, Paseador paseador) {
 			super();
 			this.idPaseo = idPaseo;
 			this.reservas = reservas;
@@ -43,15 +50,94 @@ public class Paseo {
 			this.ubicacionLatitud = ubicacionLatitud;
 			this.ubicacionLongitud = ubicacionLongitud;
 			this.fotos = fotos;
+			this.setPaseador(paseador);
+		}
+		
+		public void altaReserva(Cliente cliente, Perro perro) throws PaseoException, ReservaException {
+			if(estado.equals("PENDIENTE")) {
+				Reserva reserva = new Reserva(0, "PENDIENTE", null, null, null, cliente, perro, this);
+				reservas.add(reserva);
+				reserva.save();
+			}else {
+				throw new PaseoException("Estado del paseo impide generar reserva");
+			}
+		}
+		
+		public void cancelarPaseo() throws PaseoException, ReservaException {
+			if(estado.equals("PENDIENTE")) {
+				for(Reserva reserva : reservas) {
+					reserva.actualizarEstado("CANCELADO");
+				}
+				this.estado = "CANCELADO";
+				this.update();
+			}else {
+				throw new PaseoException("Estado del paseo impide cancelarlo");
+			}
+		}
+		
+		public void iniciarPaseo() throws PaseoException {
+			if(estado.equals("PENDIENTE")) {
+				this.estado = "EN CURSO";
+				Date date = new Date();
+				DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+				this.horaInicio = hourFormat.format(date);
+				this.update();
+			}else {
+				throw new PaseoException("Estado del paseo impide cancelarlo");
+			}
+		}
+		
+		public void finalizarPaseo() throws PaseoException, ReservaException{
+			if(estado.equals("EN CURSO")) {
+				for(Reserva reserva : reservas) {
+					if(!reserva.getEstado().equals("DEVUELTO")) {
+						throw new ReservaException("Estado de reserva impide finalizar el paseo");
+					}
+				}
+				this.estado = "FINALIZADO";
+				Date date = new Date();
+				DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+				this.horaFin = hourFormat.format(date);
+				this.update();
+			}else {
+				throw new PaseoException("Estado del paseo impide finalizarlo");
+			}
+		}
+		
+		public int lugaresDisponibles() {
+			int ocupados = 0;
+			for(Reserva reserva : reservas) {
+				if(reserva.getEstado().equals("Pendiente")) {
+					ocupados += 1;
+				}
+			}
+			return capacidad - ocupados;
+		}
+		
+		public void actualizarUbicacion(String latitud, String longitud) throws PaseoException {
+			if(estado.equals("EN CURSO")) {
+				this.ubicacionLatitud = latitud;
+				this.ubicacionLongitud = longitud;
+				this.update();
+			}else {
+				throw new PaseoException("Estado del paseo impide actualizar ubicación");
+			}
+		}
+		
+		public void subirFoto(Date fecha, BufferedImage imagen) throws PaseoException{
+			if(estado.equals("EN CURSO")) {
+				Foto foto = new Foto(0, fecha, imagen, this);
+				fotos.add(foto);
+				foto.save();
+			}else {
+				throw new PaseoException("Estado del paseo impide subir foto");
+			}
 		}
 		
 		
-		
-		public Paseo() {
-			// TODO Auto-generated constructor stub
+		public void update() throws PaseoException {
+			PaseoDAO.getInstancia().update(this);
 		}
-
-
 
 		public int getIdPaseo() {
 			return idPaseo;
@@ -131,20 +217,19 @@ public class Paseo {
 		public void setUbicacionLongitud(String ubicacionLongitud) {
 			this.ubicacionLongitud = ubicacionLongitud;
 		}
-		public List<String> getFotos() {
+		public List<Foto> getFotos() {
 			return fotos;
 		}
-		public void setFotos(List<String> fotos) {
+		public void setFotos(List<Foto> fotos) {
 			this.fotos = fotos;
 		}
-		public List<PaseoDTO> recuperarPaseos(Date fecha,String barrio) {
-			return PaseoDAO.getInstancia().listaPaseos(fecha, barrio);
+		
+		public Paseador getPaseador() {
+			return paseador;
 		}
 
-
-		public void agregarReserva(int idReserva) {
-			PaseoDAO.getInstancia().agregarReserva(this.idPaseo,idReserva);
-			
+		public void setPaseador(Paseador paseador) {
+			this.paseador = paseador;
 		}
 		
 		

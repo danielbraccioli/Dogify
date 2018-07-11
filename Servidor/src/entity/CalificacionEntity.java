@@ -16,8 +16,14 @@ public class CalificacionEntity implements Serializable {
 	private Date fecha;
 	
 	@ManyToOne
+	@JoinColumn(name = "idPaseador")
+	private PaseadorEntity paseador;
+	
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name = "idReserva")
 	private ReservaEntity reserva;
+	
+	public CalificacionEntity() {}
 		
 	
 	public int getIdCalificacion() {
@@ -49,6 +55,16 @@ public class CalificacionEntity implements Serializable {
 	}
 	public void setReserva(ReservaEntity reserva) {
 		this.reserva = reserva;
+	}
+
+
+	public PaseadorEntity getPaseador() {
+		return paseador;
+	}
+
+
+	public void setPaseador(PaseadorEntity paseador) {
+		this.paseador = paseador;
 	}
 	
 	

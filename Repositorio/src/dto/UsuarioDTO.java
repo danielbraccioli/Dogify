@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UsuarioDTO implements Serializable {
+	private static final long serialVersionUID = 475882021001201158L;
+	
 	private int idUsuario;
 	private String email;
 	private String password;
@@ -14,8 +16,7 @@ public class UsuarioDTO implements Serializable {
 	private String avatar;
 	private DireccionDTO direccion;
 
-	
-	
+	public UsuarioDTO() {}
 
 
 	public int getIdUsuario() {

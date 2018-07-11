@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
-public class UsuarioEntity implements Serializable {
+public abstract class UsuarioEntity implements Serializable {
 	
 	@Id
 	@GeneratedValue

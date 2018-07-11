@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "Pago")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_pago", discriminatorType = DiscriminatorType.STRING)
-public class PagoEntity implements Serializable{
+public abstract class PagoEntity implements Serializable{
 	
 		@Id
 		@GeneratedValue
