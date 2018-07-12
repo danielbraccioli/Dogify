@@ -1,4 +1,5 @@
-<%@ page import="dto.ReservaDTO"%>
+<%@ page import="dto.PaseadorDTO"%>
+<%@ page import="dto.CalificacionDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
 
@@ -21,7 +22,7 @@
   <link href="http://localhost:8080/ClienteWeb/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="http://localhost:8080/ClienteWeb/css/sb-admin.css" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/styles.css" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -41,11 +42,11 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCuenta" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Mi cuenta</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseCuenta">
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
               <a href="navbar.html">Mis datos</a>
             </li>
@@ -58,15 +59,10 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text" >Reservas </span>
+            <span class="nav-link-text">Reservas</span>
           </a>
-            <ul class="sidenav-second-level collapse" id="collapseReservas">
-            <li>
-              <a href="ServletModuloPaseos?action=reservasCliente&idCliente=1">Ver mis reservas</a>
-            </li>
-          </ul>
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
@@ -101,62 +97,78 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">RESERVAS</li>
+        <li class="breadcrumb-item active">DATOS DEL PASEADOR</li>
       </ol>
-
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
+      
+            <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-bar-chart"></i> Datos generales</div>
+            <div class="card-body">
+              <div class="row">
+             <table class="table table-borderd" id="dataTable" cellspacing="0">
                 <tr>
-                  <th>Fecha</th>
-                  <th>Inicio</th>
-                  <th>Fin</th>
-                  <th>Paseador</th>
-				  <th>Perro</th>
-                  <th>Estado</th>
+                <%PaseadorDTO paseador = (PaseadorDTO) request.getAttribute("paseador"); %> 
+				
+                  <th><table class="table table-borered" id="dataTable"  cellspacing="0"><th><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></th><tr><td align="center"><a class="btn btn-primary" href="#"><%=paseador.getNombre() %></a></td></tr><tr><td align="center"><a class="btn btn-primary"  href="#"> Reputacion: <%=paseador.getReputacion() %></a></td></tr></table></th>
+                  <th><table class="table table-borered" id="dataTable"  cellspacing="0">
+                  <tr><td>Nombre   <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseador.getNombre() %> readonly></td></tr>
+                  <tr><td>Apellido  <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseador.getApellido() %> readonly></td> </tr>
+                  <tr><td><div class="dropdown-message small" width = 50% ><%=paseador.getPerfil() %></div></td></tr>
+                  
+                  </table>
+                  </th>
                 </tr>
-              </thead>
-              <tbody>
-              <%
-				List<ReservaDTO> reservas = (List<ReservaDTO>) request.getAttribute("reservas");
-				ReservaDTO reserva = null;
-			
-				if (reservas != null) {
-					for (Iterator<ReservaDTO> i = reservas.iterator(); i.hasNext();) {
-						reserva = i.next();
-				%>
-                <tr>
-                  <td><%=reserva.getPaseo().getFechaPaseoFormateada() %></td>
-                  <td><%=reserva.getPaseo().getHorarioInicio() %></td>
-                  <td><%=reserva.getPaseo().getHorarioFin() %></td>
-                  <td><%=reserva.getPaseo().getPaseador().getNombre() %></td>
-                  <td><%=reserva.getPerro().getNombre() %></td>
-				  <td><%=reserva.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></th></table></td>
-	
-                </tr>
-                <%
-						}
-						}
-					%>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+                </table>
+               
+              </div>
+            </div> 
+            
+      	</div>
+      	
+      	<div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-bar-chart"></i> Reviews</div>
+            <div class="card-body">
+              <div class="table-responsive">
+              <%List<CalificacionDTO> calificaciones = paseador.getCalificaciones(); %>
+              <% for(CalificacionDTO calificacion : calificaciones){%>
+              <table class="table table-nobordered" id="dataTable" cellspacing="0">
+              
+                  <tr>
+    <td rowspan="2"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td>
+    <td>Fecha   <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getFecha() %> readonly></td>
+    <td witdh="100" rowspan="3"><%=calificacion.getComentarios() %> </td>
+  </tr>
+  <tr>
+    <td>Puntaje  <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getPuntaje() %> readonly></td>
+  </tr>
+  <tr>
+    <td><a class="btn btn-primary" align=center href="login.html"><%=paseador.getNombre() %></a></td>
+    <td>lalala</td>
+  </tr>
+                 
+                  <%} %> 
+                
+                </table>
+                </div>
+               
+            </div> 
+           
+      	</div>
+      	 
+   </div>
+ </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
-        <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+        <div class="text-center"> 
+          <small>Copyright © Dogify! 2018</small>
         </div>
       </div>
     </footer>
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
+    <a class="scroll-to-top rounded" href="#dataTable">
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
@@ -172,7 +184,7 @@
           <div class="modal-body">Click en logout para finalizar tu sesión!</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="ServletModuloUsuarios?action=logoutUsuarios">Logout</a>
+            <a class="btn btn-primary" href="login.html">Logout</a>
           </div>
         </div>
       </div>
@@ -209,6 +221,9 @@
     <!-- Custom scripts for this page-->
     <script src="http://localhost:8080/ClienteWeb/js/sb-admin-datatables.min.js"></script>
     <script src="http://localhost:8080/ClienteWeb/js/sb-admin-charts.min.js"></script>
+    
+	<script src="http://localhost:8080/ClienteWeb/script.js"></script>
+	
   </div>
 </body>
 

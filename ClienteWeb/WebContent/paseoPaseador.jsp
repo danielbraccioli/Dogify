@@ -1,3 +1,4 @@
+<%@ page import="dto.PaseoDTO"%>
 <%@ page import="dto.ReservaDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
@@ -102,41 +103,84 @@
                 <div class="card mb-3">
             <div class="card-header">
               <i class="fa fa-bar-chart"></i> Datos del paseo</div>
-            <div class="card-body">
             <div class="table-responsive">
-              <div class="row">
-               <%ReservaDTO reserva = (ReservaDTO) request.getAttribute("reserva"); %> 
-              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="http://localhost:8080/ClienteWeb/perro1.png" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
-             <table class="table table-borde1red" id="dataTable" cellspacing="0">
+             <table class="table table-bordered" id="datosPaseo"  width="100%" cellspacing="0">
+                <tbody>
                 <tr>
-               
-				
-                  <th></th>
-                  <th><table class="table table-bordered" id="dataTable"  cellspacing="0">
-                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getFecha()%> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getBarrio() %> readonly></td></tr>
-                  <tr><td>Horario Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getHorarioInicio() %> readonly></td><td>Retiro</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraRetiro() %> readonly></td></tr>
-                  <tr><td>Fin Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getPaseo().getHorarioFin() %>" readonly></td><td>Regreso</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraDevolucion() %> readonly></td></tr>
-                  <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getEstado() %>" readonly></td><td></td><td><table class="table table-borered" id="dataTable"  cellspacing="0"><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/camara.png" witdh=50 height=50/></th> <th>    <a href="#map"><img align="center" src="http://localhost:8080/ClienteWeb/ubicacion.png" witdh=50 height=50/>    </th></table> </tr>
+                <%PaseoDTO paseo = (PaseoDTO) request.getAttribute("paseo"); %> 
+                  <table class="table table-borered" id="dataTable"  cellspacing="0" align=center width="100%"><th>    <a href="ServletModuloPaseos?action=iniciarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/iniciarInhab.png" witdh=32 height=32/></th><th>    <a href="ServletModuloPaseos?action=finalizarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/finalizarInhab.png" witdh=32 height=32/></th><th><a data-toggle="modal" data-target="#exampleModal2"><img align="center" src="http://localhost:8080/ClienteWeb/subirFotoInhab.png" witdh=32 height=32/></th> <th>    <a href="ServletModuloPaseos?action=compartirUbicacion&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/compUbicacionInhab.png" witdh=32 height=32/></th></table>
+                  <th><table class="table table-borered" id="dataTable"  cellspacing="0">
+                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getFechaPaseoFormateada() %> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getBarrio() %> readonly></td></tr>
+                  <tr><td>Inicio Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHorarioInicio() %> readonly></td><td>Inicio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHoraInicio() %> readonly></td></tr>
+                  <tr><td>Fin Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=paseo.getHorarioFin() %>" readonly></td><td>Regreso</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHoraFin() %> readonly></td></tr>
+                  <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=paseo.getEstado() %>" readonly></td><td></td></table> </tr>
                   </table>
                   </th>
                 </tr>
-                </table>
+                </tbody>
+            </table>
                
-              </div>
-              </div>
-            </div>
+              </div> 
+           
             
       	</div>
+      	
+      	
+      	   <div class="card mb-3" id="photos">
+      	    <div class="card-header">
+      	   <i class="fa fa-bar-chart"></i> Participantes</div>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Raza</th>
+                  <th>Dueño</th>
+                  <th>Direccion</th>
+				  <th>Estado</th>
+                  <th>Retiro</th>
+                  <th>Devolucion</th>
+                </tr>
+              </thead>
+              <tbody>
+              <%
+				List<ReservaDTO> reservas = paseo.getReservas();
+				ReservaDTO reserva = null;
+			
+				if (reservas != null) {
+					for (Iterator<ReservaDTO> i = reservas.iterator(); i.hasNext();) {
+						reserva = i.next();
+				%>
+                <tr>
+                  <td><%=reserva.getPerro().getNombre() %></td>
+                  <td><%=reserva.getPerro().getRaza() %></td>
+                  <td><%=reserva.getCliente().getNombre() %></td>
+                  <td><%=reserva.getCliente().getDireccion().getDireccionFormateada() %></td>
+                  <td><%=reserva.getEstado() %></td> 
+				  <td><%=reserva.getHoraRetiro() %></td>
+				  <td><%=reserva.getHoraDevolucion() %></td>
+				  <td><table class="table table-"><th><a href="ServletModuloPaseos?action=retirarPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" src="http://localhost:8080/ClienteWeb/retirarInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=devolverPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" src="http://localhost:8080/ClienteWeb/devolverInhab.png" witdh=30 height=30/></th></table></td>
+	
+                </tr>
+                <%
+						}
+						}
+					%>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
           <div class="card mb-3">
             <div class="card-header">
               <i class="fa fa-bar-chart"></i> Ubicacion Actual</div>
             <div class="card-body2" id="map" width="100" height="400"></div>
-<div id="map"></div>
-    <script> 
+              
+    <div id="map"></div>
+    <script>
 
       function initMap() {
-        var myLatLng = {lat: <%=Double.parseDouble(reserva.getPaseo().getUbicacionLatitud())%>, lng: <%=Double.parseDouble(reserva.getPaseo().getUbicacionLongitud())%>};
+        var myLatLng = {lat: <%=Double.parseDouble(paseo.getUbicacionLatitud()) %>, lng: <%=Double.parseDouble(paseo.getUbicacionLongitud()) %>};
 
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 15,
@@ -146,7 +190,7 @@
         var marker = new google.maps.Marker({
           position: myLatLng,
           map: map,
-          title: '<%=reserva.getPerro().getNombre() %>'
+          title: '<%=paseo.getPaseador().getNombre() %>'
         });
       }
     </script>
@@ -165,7 +209,9 @@
         <span id="slider-image-2"></span>
         <span id="slider-image-3"></span>
         <div class="image-holder">
-
+            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
+            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
+            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
         </div>
         <div class="button-holder">
             <a href="#slider-image-1" class="slider-change"></a>
@@ -219,11 +265,16 @@
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <div class="modal-body"><input accept="image/*"  type="file" capture/></div>
+          <form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloPaseos" method="post" id="subirFoto" enctype="multipart/form-data">
+          <div class="modal-body">
+          <input accept="image/*" id="fileFoto" name="fileFoto" type="file" capture/></div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            
+            <input type="hidden" name="action" value="subirFoto">
+            <input type="hidden" id="idPaseo" name ="idPaseo" value="<%=paseo.getIdPaseo() %>">
+            <input type="submit" class="btn btn-primary" align=center name="subirFoto" value="Subir!">
           </div>
+          </form>
         </div>
       </div>
     </div>

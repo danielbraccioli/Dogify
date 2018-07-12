@@ -19,28 +19,21 @@ public class ModuloPagos {
 		return instancia;
 	}
 	
-	public void pagarReservaMP(ReservaDTO reserva, String nroTarjeta, Date vtoTarjeta, String titularNombre, String titularDNI) {
+	public void pagarReservaMP(ReservaDTO reserva, String nroTarjeta, Date vtoTarjeta, String titularNombre, String titularDNI) throws ReservaException {
 		Reserva aux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
 		Date fecha = new Date();
 		MercadoPago mp = new MercadoPago(0, fecha, aux, aux.getCliente(), nroTarjeta, vtoTarjeta, titularNombre, titularDNI);
-		try {
 			mp.save(); 
 			aux.actualizarEstado("Pagada");
-		} catch (SQLException e) {
-			new ReservaException("Error en actualización de pago en BD, reintente");
-		}
+
 	}
 	
-	public void pagarReservaEfe(ReservaDTO reserva) {
+	public void pagarReservaEfe(ReservaDTO reserva) throws ReservaException {
 		Reserva aux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
 		Date fecha = new Date();
 		Efectivo efe = new Efectivo(0, fecha, aux, aux.getCliente());
-		try {
-			efe.save();
-			aux.actualizarEstado("Pagada");
-		} catch (SQLException e) {
-			new ReservaException("Error en actualización de pago en BD, reintente");
-		}
+		efe.save();
+		aux.actualizarEstado("Pagada");
 	}
 	
 }

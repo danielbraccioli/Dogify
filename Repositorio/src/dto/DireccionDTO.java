@@ -44,6 +44,10 @@ public class DireccionDTO implements Serializable {
 		public void setBarrio(String barrio) {
 			this.barrio = barrio;
 		}
+		
+		public String getDireccionFormateada() {
+			return (this.calle + " " + this.numero + " " + this.piso + "-" + this.dpto);
+		}
 
 
 }

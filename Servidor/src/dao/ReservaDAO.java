@@ -141,7 +141,7 @@ public class ReservaDAO {
 		}
 	}
 	
-	public Reserva buscarReservaById(int idReserva) {
+	public Reserva buscarReservaById(int idReserva) throws ReservaException{
 		try {
 			Session session = sf.openSession();
 			session.beginTransaction();
@@ -152,8 +152,23 @@ public class ReservaDAO {
 			session.close();
 			return toNegocio(reserva);
 		} catch (Exception e) {
-			System.out.println(e);
-			System.out.println("Error UsuarioDAO.recuperarReserva");
+			new ReservaException("Error en busqueda de reserva en BD, reintente");
+		}
+		return null;
+	}
+	
+	public ReservaDTO buscarReservaByIdDTO(int idReserva) throws ReservaException{
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			ReservaEntity reserva = (ReservaEntity) session
+					.createQuery("from ReservaEntity r where r.idReserva = :idReserva ")
+					.setParameter("idReserva", idReserva).uniqueResult();
+			session.getTransaction().commit();
+			session.close();
+			return toDTO(reserva);
+		} catch (Exception e) {
+			new ReservaException("Error en busqueda de reserva en BD, reintente");
 		}
 		return null;
 	}
@@ -186,6 +201,20 @@ public class ReservaDAO {
 		reservaDTO.setPaseo(PaseoDAO.getInstancia().toDTOSimple(reserva.getPaseo()));
 		return reservaDTO;
 	}
+	
+	public ReservaDTO toDTOPaseo(ReservaEntity reserva) {
+		ReservaDTO reservaDTO = new ReservaDTO();
+		reservaDTO.setIdReserva(reserva.getIdReserva());
+		reservaDTO.setEstado(reserva.getEstado());
+		reservaDTO.setHoraDevolucion(reserva.getHoraDevolucion());
+		reservaDTO.setHoraRetiro(reserva.getHoraRetiro());
+		reservaDTO.setCliente(UsuarioDAO.getInstancia().toDTOSimple(reserva.getCliente()));
+		reservaDTO.setPerro(PerroDAO.getInstancia().toDTO(reserva.getPerro()));
+		reservaDTO.setPaseo(PaseoDAO.getInstancia().toDTOSimple(reserva.getPaseo()));
+		return reservaDTO;
+	}
+	
+	
 	
 //	public ReservaEntity toEntity(Reserva reserva) {
 //		ReservaEntity reservaEntity = new ReservaEntity();

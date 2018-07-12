@@ -1,7 +1,8 @@
 package negocio;
 
-import java.sql.SQLException;
 import java.util.Date;
+
+import excepciones.ReservaException;
 
 public abstract class Pago {
 		private int idPago;
@@ -41,7 +42,7 @@ public abstract class Pago {
 			this.cliente = cliente;
 		}
 		
-		public abstract void save() throws SQLException;
+		public abstract void save() throws ReservaException;
 		
 
 }

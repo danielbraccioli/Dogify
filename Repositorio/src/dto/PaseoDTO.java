@@ -1,6 +1,7 @@
 package dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +44,12 @@ public class PaseoDTO implements Serializable {
 		public void setReservas(List<ReservaDTO> reservas) {
 			this.reservas = reservas;
 		}
+		
+		public String getFechaPaseoFormateada() {
+			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+			return format.format(this.getFecha());
+		}
+		
 		public Date getFecha() {
 			return fecha;
 		}
@@ -109,16 +116,7 @@ public class PaseoDTO implements Serializable {
 		public void setUbicacionLongitud(String ubicacionLongitud) {
 			this.ubicacionLongitud = ubicacionLongitud;
 		}
-/*		public List<String> getFotos() {
-			return fotos;
-		}
-		public void setFotos(List<String> fotos) {
-			this.fotos = fotos;
-		}
 		
-*/		
-		
-		
-	
+
 
 }

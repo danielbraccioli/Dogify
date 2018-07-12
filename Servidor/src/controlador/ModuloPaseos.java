@@ -4,8 +4,6 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +13,7 @@ import javax.imageio.ImageIO;
 import dao.PaseoDAO;
 import dao.ReservaDAO;
 import dto.ClienteDTO;
+import dto.PaseadorDTO;
 import dto.PaseoDTO;
 import dto.PerroDTO;
 import dto.ReservaDTO;
@@ -37,12 +36,21 @@ public class ModuloPaseos {
 			instancia = new ModuloPaseos();
 		return instancia;
 	}
+	
+	public List<PaseoDTO> buscarPaseosPaseador(PaseadorDTO paseador) throws PaseoException {
+		return PaseoDAO.getInstancia().buscarPaseosByPaseadorId(paseador.getIdUsuario());
+	}
 
 	public List<PaseoDTO> buscarPaseosByFechaBarrio(Date fecha, String barrio) throws PaseoException {
 		List<PaseoDTO> paseos = null;
 		paseos = PaseoDAO.getInstancia().buscarPaseosByFechaBarrio(fecha, barrio);
 		return paseos;
-		
+	}
+	
+	public PaseoDTO paseoPaseador(int idPaseo) throws PaseoException {
+		PaseoDTO paseo = null;
+		paseo = PaseoDAO.getInstancia().buscarPaseoByIdDTO(idPaseo);
+		return paseo;
 	}
 	
 	public List<ReservaDTO> reservasCliente(ClienteDTO cliente) {
@@ -55,19 +63,23 @@ public class ModuloPaseos {
 		return paseo;
 	}
 	
-	public void compartirUbicacion(PaseoDTO paseo) throws UnsupportedEncodingException, MalformedURLException, PaseoException {
+	public void compartirUbicacion(PaseoDTO paseo) throws PaseoException {
+		try {
 		Geocoding ObjGeocod=new Geocoding();
 		MapsJava.setKey("AIzaSyDkBgIxRpAnjSJS4WeovRC4kiriTxrpD6A");
         Point2D.Double resultadoCD=ObjGeocod.getCoordinates("Buenos Aires, UADE");
         Paseo paseoAux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
 		paseoAux.actualizarUbicacion(String.valueOf(resultadoCD.x), String.valueOf(resultadoCD.y));
+		}catch(Exception e) {
+			new PaseoException("Error en compartir ubicación, reintente");
+		}
 	}
 	
-	public void subirFotoPaseo(PaseoDTO paseo, Date fecha, File file) throws IOException, PaseoException {
+	public void subirFotoPaseo(PaseoDTO paseo, File file) throws IOException, PaseoException {
 		BufferedImage img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
 		img = ImageIO.read(file);
 		Paseo aux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
-		aux.subirFoto(fecha, img);
+		aux.subirFoto(img);
 	}
 	
 	public void reservarPaseo(PaseoDTO paseo, ClienteDTO cliente, PerroDTO perro) throws PaseoException, ReservaException {
@@ -114,8 +126,8 @@ public class ModuloPaseos {
 			paseoAux.cancelarPaseo();
 	}
 	
-	public ReservaDTO buscarReservaById(int idReserva) {
-		ReservaDTO reserva = ReservaDAO.getInstancia().buscarReservaById(idReserva);
+	public ReservaDTO buscarReservaById(int idReserva) throws ReservaException {
+		ReservaDTO reserva = ReservaDAO.getInstancia().buscarReservaByIdDTO(idReserva);
 		return reserva;
 	}
 	public void iniciarPaseo(PaseoDTO paseo) throws PaseoException {
@@ -128,7 +140,7 @@ public class ModuloPaseos {
 		paseoAux.finalizarPaseo();
 	}
 	
-	public void calificarPaseador(ReservaDTO reserva, int puntaje, String observaciones) throws UsuarioException {
+	public void calificarPaseador(ReservaDTO reserva, int puntaje, String observaciones) throws UsuarioException, ReservaException {
 		Reserva reservaAux = ReservaDAO.getInstancia().buscarReservaById(reserva.getIdReserva());
 		reservaAux.getPaseo().getPaseador().calificar(reservaAux, puntaje, observaciones);
 	}

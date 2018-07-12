@@ -143,6 +143,19 @@ public class PaseoDAO {
 		return toNegocio(aux1);
 	}	
 	
+	public PaseoDTO buscarPaseoByIdDTO(int idPaseo) throws PaseoException{
+		PaseoEntity aux1 = null;
+		try {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session s = sf.openSession();
+		s.beginTransaction();
+		aux1  = (PaseoEntity)s.createQuery("From PaseoEntity c where c.idPaseo = ?").setInteger(0, idPaseo).uniqueResult();
+		}catch(Exception e) {
+			new PaseoException("Error en busqueda de Paseo en BD, reintente");
+		}
+		return toDTO(aux1);
+	}	
+	
 	public Paseo toNegocio(PaseoEntity paseo) {
 		Paseo aux = new Paseo(paseo.getIdPaseo(), null, paseo.getFecha(), paseo.getEstado(), paseo.getTarifa(), paseo.getHorarioInicio(),
 				paseo.getHorarioFin(), paseo.getHoraInicio(), paseo.getHoraFin(), paseo.getCapacidad(), paseo.getBarrio(), 
@@ -176,7 +189,7 @@ public class PaseoDAO {
 		paseoDTO.setPaseador(UsuarioDAO.getInstancia().toDTOSimple(paseo.getPaseador()));
 		List<ReservaDTO> reservasDTO = new ArrayList<ReservaDTO>();
 		for(ReservaEntity reserva : paseo.getReservas())
-			reservasDTO.add(ReservaDAO.getInstancia().toDTO(reserva));
+			reservasDTO.add(ReservaDAO.getInstancia().toDTOPaseo(reserva));
 		paseoDTO.setReservas(reservasDTO);
 		paseoDTO.setTarifa(paseo.getTarifa());
 		paseoDTO.setUbicacionLatitud(paseo.getUbicacionLatitud());
@@ -201,5 +214,23 @@ public class PaseoDAO {
 		paseoDTO.setUbicacionLongitud(paseo.getUbicacionLongitud());
 		return paseoDTO;
 	}
+
+	public List<PaseoDTO> buscarPaseosByPaseadorId(int idPaseador) throws PaseoException {
+		List<PaseoEntity> aux1 = null;
+		List<PaseoDTO> aux2 = new ArrayList<PaseoDTO>();
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			aux1 = session.createQuery("From PaseoEntity r where r.paseador = ?").setInteger(0, idPaseador).list();
+			session.getTransaction().commit();
+			session.close();
+		for(PaseoEntity paseo : aux1) {
+			aux2.add(this.toDTO(paseo));
+		}
+		}catch(Exception e) {
+			new PaseoException("Error en busqueda de Paseos paseador en BD, reintente");
+		}
+		return aux2;
+	}	
 
 }

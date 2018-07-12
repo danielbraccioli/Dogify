@@ -3,6 +3,7 @@ package controlador;
 import java.sql.SQLException;
 
 import dao.UsuarioDAO;
+import dto.PaseadorDTO;
 import dto.UsuarioDTO;
 import excepciones.UsuarioException;
 import negocio.Cliente;
@@ -29,6 +30,10 @@ public class ModuloUsuarios {
 	
 	public Cliente buscarClienteById(int idCliente) {
 		return UsuarioDAO.getInstancia().buscarClienteById(idCliente);
+	}
+	
+	public PaseadorDTO perfilPaseador(int idPaseador) throws UsuarioException {
+		return UsuarioDAO.getInstancia().buscarPaseadorById(idPaseador);
 	}
 	
 	

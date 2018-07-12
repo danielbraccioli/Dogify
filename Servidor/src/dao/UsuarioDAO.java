@@ -2,7 +2,6 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -13,18 +12,18 @@ import dto.ClienteDTO;
 import dto.PaseadorDTO;
 import dto.PerroDTO;
 import dto.ReservaDTO;
+import dto.UsuarioDTO;
 import entity.CalificacionEntity;
 import entity.ClienteEntity;
 import entity.PaseadorEntity;
 import entity.PerroEntity;
 import entity.ReservaEntity;
 import entity.UsuarioEntity;
+import excepciones.UsuarioException;
 import hibernate.HibernateUtil;
 import negocio.Calificacion;
 import negocio.Cliente;
-import negocio.Direccion;
 import negocio.Paseador;
-import negocio.Paseo;
 import negocio.Perro;
 import negocio.Reserva;
 
@@ -45,8 +44,8 @@ public class UsuarioDAO {
 		return instancia;
 	}
 
-	public ClienteDTO loginUsuario(String email, String password) throws SQLException{
-		ClienteDTO usuarioD = new ClienteDTO();
+	public UsuarioDTO loginUsuario(String email, String password) throws SQLException{
+		UsuarioDTO usuarioD = new UsuarioDTO();
 			Session session = sf.openSession();
 			session.beginTransaction();
 			UsuarioEntity usuarioE = (UsuarioEntity) session
@@ -56,10 +55,10 @@ public class UsuarioDAO {
 			session.getTransaction().commit();
 			session.close();
 			if (usuarioE instanceof ClienteEntity){
-			//	System.out.println(((ClienteEntity) usuarioE).getPerros().get(0).getNombre());
-			//	System.out.println(((ClienteEntity) usuarioE).getReservas().get(0).getPaseo().getPaseador().getNombre());
+				return toDTO((ClienteEntity) usuarioE);
+			}else {
+				return toDTO((PaseadorEntity) usuarioE);
 			}
-			return toDTO((ClienteEntity) usuarioE);
 	}
 	
 	public Cliente buscarClienteById(int idCliente) {
@@ -189,6 +188,29 @@ public class UsuarioDAO {
 		return clienteDTO;
 	}
 	
+	public PaseadorDTO toDTO(PaseadorEntity paseador) {
+		PaseadorDTO paseadorE = new PaseadorDTO();
+		paseadorE.setApellido(paseador.getApellido());
+		paseadorE.setAvatar(paseador.getAvatar());
+		paseadorE.setDireccion(DireccionDAO.getInstancia().toDTO(paseador.getDireccion()));
+		paseadorE.setDni(paseador.getDni());
+		paseadorE.setEmail(paseador.getEmail());
+		paseadorE.setFechaNacimiento(paseador.getFechaNacimiento());
+		paseadorE.setIdUsuario(paseador.getIdUsuario());
+		paseadorE.setNombre(paseador.getNombre());
+		paseadorE.setNumeroRegistro(paseador.getNumeroRegistro());
+		paseadorE.setPassword(paseador.getPassword());
+		paseadorE.setPerfil(paseador.getPerfil());
+		paseadorE.setReputacion(paseador.getReputacion());
+		List<PerroDTO> perrosDTO = new ArrayList<PerroDTO>();
+		List<CalificacionDTO> calificacionesAux = new ArrayList<CalificacionDTO>();
+		for(CalificacionEntity calificacion : paseador.getCalificaciones()) {
+			calificacionesAux.add(CalificacionDAO.getInstancia().toDTO(calificacion));
+		}
+		paseadorE.setCalificaciones(calificacionesAux);
+		return paseadorE;
+	}
+	
 	public ClienteDTO toDTOSimple(ClienteEntity cliente) {
 		ClienteDTO clienteDTO = new ClienteDTO();
 		clienteDTO.setApellido(cliente.getApellido());
@@ -255,6 +277,22 @@ public class UsuarioDAO {
 		clienteEntity.setNombre(cliente.getNombre());
 		clienteEntity.setPassword(cliente.getPassword());
 		return clienteEntity;
+	}
+
+	public PaseadorDTO buscarPaseadorById(int idPaseador) throws UsuarioException{
+		PaseadorEntity paseador = null;
+		try {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		paseador = (PaseadorEntity) session
+				.createQuery("from PaseadorEntity c where c.idUsuario = :idPaseador ")
+				.setParameter("idPaseador", idPaseador).uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		}catch(Exception e) {
+			new UsuarioException("Error en buscar paseador en BD, reintente");
+		}
+		return toDTO(paseador);
 	}
 
 }

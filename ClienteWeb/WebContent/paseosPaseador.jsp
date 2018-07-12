@@ -1,4 +1,4 @@
-<%@ page import="dto.ReservaDTO"%>
+<%@ page import="dto.PaseoDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
 
@@ -101,39 +101,39 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">RESERVAS</li>
+        <li class="breadcrumb-item active">MIS PASEOS</li>
       </ol>
 
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
               <thead>
                 <tr>
                   <th>Fecha</th>
                   <th>Inicio</th>
                   <th>Fin</th>
-                  <th>Paseador</th>
-				  <th>Perro</th>
+                  <th>Capacidad</th>
+				  <th>Participantes</th>
                   <th>Estado</th>
                 </tr>
               </thead>
               <tbody>
               <%
-				List<ReservaDTO> reservas = (List<ReservaDTO>) request.getAttribute("reservas");
-				ReservaDTO reserva = null;
+				List<PaseoDTO> paseos = (List<PaseoDTO>) request.getAttribute("paseos");
+				PaseoDTO paseo = null;
 			
-				if (reservas != null) {
-					for (Iterator<ReservaDTO> i = reservas.iterator(); i.hasNext();) {
-						reserva = i.next();
+				if (paseos != null) {
+					for (Iterator<PaseoDTO> i = paseos.iterator(); i.hasNext();) {
+						paseo = i.next();
 				%>
                 <tr>
-                  <td><%=reserva.getPaseo().getFechaPaseoFormateada() %></td>
-                  <td><%=reserva.getPaseo().getHorarioInicio() %></td>
-                  <td><%=reserva.getPaseo().getHorarioFin() %></td>
-                  <td><%=reserva.getPaseo().getPaseador().getNombre() %></td>
-                  <td><%=reserva.getPerro().getNombre() %></td>
-				  <td><%=reserva.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></th></table></td>
+                  <td><%=paseo.getFechaPaseoFormateada() %></td>
+                  <td><%=paseo.getHorarioInicio() %></td>
+                  <td><%=paseo.getHorarioFin() %></td>
+                  <td><%=paseo.getCapacidad() %></td>
+                  <td>5</td>
+				  <td><%=paseo.getEstado() %></td>
+				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th></table></td>
 	
                 </tr>
                 <%
@@ -172,7 +172,7 @@
           <div class="modal-body">Click en logout para finalizar tu sesión!</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="ServletModuloUsuarios?action=logoutUsuarios">Logout</a>
+            <a class="btn btn-primary" href="login.html">Logout</a>
           </div>
         </div>
       </div>

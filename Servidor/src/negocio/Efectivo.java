@@ -1,9 +1,9 @@
 package negocio;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import dao.PagoDAO;
+import excepciones.ReservaException;
 
 public class Efectivo extends Pago {
 
@@ -12,7 +12,7 @@ public class Efectivo extends Pago {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void save() throws SQLException {
+	public void save() throws ReservaException {
 		PagoDAO.getInstancia().save(this);
 	}
 	

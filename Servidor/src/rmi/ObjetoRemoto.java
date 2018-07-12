@@ -1,17 +1,22 @@
 package rmi;
 
+import java.io.File;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Date;
 import java.util.List;
-
+import controlador.ModuloPagos;
 import controlador.ModuloPaseos;
 import controlador.ModuloUsuarios;
 import dto.ClienteDTO;
+import dto.PaseadorDTO;
 import dto.PaseoDTO;
+import dto.PerroDTO;
 import dto.ReservaDTO;
 import dto.UsuarioDTO;
 import excepciones.PaseoException;
+import excepciones.ReservaException;
 import excepciones.UsuarioException;
 import interfaz.InterfazRemota;
 
@@ -35,43 +40,57 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 			}
 		return instancia;
 		}
-
-		
-		public boolean altaCliente() throws RemoteException {
-		//	return ModuloUsuarios.getInstancia().altaCliente();
-			return true;
-		}
-
-		@Override
 		public UsuarioDTO loginUsuario(String email, String password) throws RemoteException, UsuarioException {
-			// TODO Auto-generated method stub
 			return ModuloUsuarios.getInstancia().login(email, password);
 		}
-
-		@Override
 		public List<PaseoDTO> buscarPaseosByFechaBarrio(Date fecha, String barrio) throws RemoteException, PaseoException {
-			// TODO Auto-generated method stub
 			return ModuloPaseos.getInstancia().buscarPaseosByFechaBarrio(fecha, barrio);
 		}
-
-		@Override
-		public boolean reservarPaseo(UsuarioDTO usuario, PaseoDTO paseo) throws RemoteException {
-		//	return ModuloPaseos.getInstancia().reservarPaseo(usuario,paseo);
-			return true;
-			
+		public void reservarPaseo(PaseoDTO paseo, ClienteDTO cliente, PerroDTO perro) throws RemoteException, PaseoException, ReservaException {
+			ModuloPaseos.getInstancia().reservarPaseo(paseo, cliente, perro);
 		}
-
-		@Override
 		public List<ReservaDTO> reservasCliente(ClienteDTO cliente) throws RemoteException {
-			// TODO Auto-generated method stub
-			return ModuloPaseos.getInstancia().reservasCliente(cliente);
+			return ModuloPaseos.getInstancia().reservasCliente(cliente); 
 		}
-		
-		public ReservaDTO reservaCliente(int idReserva) throws RemoteException{
+		public ReservaDTO reservaCliente(int idReserva) throws RemoteException, ReservaException{
 			return ModuloPaseos.getInstancia().buscarReservaById(idReserva);
 		}
-		
-
-
-
+		public List<PaseoDTO> paseosPaseador(PaseadorDTO paseador) throws RemoteException, PaseoException {
+			return ModuloPaseos.getInstancia().buscarPaseosPaseador(paseador);
+		}
+		public void iniciarPaseo(PaseoDTO paseo) throws RemoteException, PaseoException {
+			ModuloPaseos.getInstancia().iniciarPaseo(paseo);
+		}
+		public void finalizarPaseo(PaseoDTO paseo) throws RemoteException, PaseoException, ReservaException {
+			ModuloPaseos.getInstancia().finalizarPaseo(paseo);
+		}
+		public void compartirUbicacion(PaseoDTO paseo) throws RemoteException, PaseoException {
+			ModuloPaseos.getInstancia().compartirUbicacion(paseo);
+		}
+		public void subirFoto(PaseoDTO paseo, File imagen) throws IOException, PaseoException {
+			ModuloPaseos.getInstancia().subirFotoPaseo(paseo, imagen); 
+		}
+		public void retirarPerro(ReservaDTO reserva) throws RemoteException, ReservaException {
+			ModuloPaseos.getInstancia().retirarPerro(reserva);
+		}
+		public void devolverPerro(ReservaDTO reserva) throws RemoteException, ReservaException {
+			ModuloPaseos.getInstancia().devolverPerro(reserva);
+		}
+		public PaseadorDTO perfilPaseador(int idPaseador) throws RemoteException, UsuarioException {
+			return ModuloUsuarios.getInstancia().perfilPaseador(idPaseador);
+		}
+		public void calificarPaseador(ReservaDTO reserva, int puntaje, String observaciones)
+				throws RemoteException, UsuarioException, ReservaException {
+			ModuloPaseos.getInstancia().calificarPaseador(reserva, puntaje, observaciones);
+		}
+		public void pagarReservaEfectivo(ReservaDTO reserva) throws RemoteException, ReservaException {
+			ModuloPagos.getInstancia().pagarReservaEfe(reserva);
+		}
+		public void pagarReservaMercadoPago(ReservaDTO reserva, String nroTarjeta, Date vtoTarjeta,
+				String titularNombre, String titularDNI) throws RemoteException, ReservaException {
+			ModuloPagos.getInstancia().pagarReservaMP(reserva, nroTarjeta, vtoTarjeta, titularNombre, titularDNI);
+		}
+		public PaseoDTO paseoPaseador(int idPaseo) throws RemoteException,PaseoException {
+			return ModuloPaseos.getInstancia().paseoPaseador(idPaseo);
+		}
 }

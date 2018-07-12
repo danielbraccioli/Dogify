@@ -33,14 +33,11 @@
 				<h1>Sistema de Gestión de Pedidos - Ventana Principal</h1>
 			</div>
 			<div id="opcionHome"><a href="altaPedido.jsp"><h2>Generar Pedido</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidos" target="_self"><h2>Pedidos Sin Procesar</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosDeposito" target="_self"><h2>Pedidos Deposito</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosEnPreparacion" target="_self"><h2>Pedidos En preparacion</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloDespacho?action=mostrarPedidosEnviados" target="_self"><h2>Pedidos enviados</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCSinProcesar" target="_self"><h2>Ordenes de Compra Sin Procesar</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCAprobadas" target="_self"><h2>Ordenes de Compra APROBADAS</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloCompras?action=mostrarOCCumplidas" target="_self"><h2>Ordenes de Compra CUMPLIDAS</h2></a></div>
-			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=reservasCliente" target="_self"><h2>Reservas Cliente</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=reservasCliente&idCliente=1" target="_self"><h2>Reservas Cliente</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=paseosPaseador&idPaseador=2" target="_self"><h2>Paseos paseador</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=paseoCliente&idReserva=3" target="_self"><h2>Paseo cliente</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloPaseos?action=paseoPaseador&idPaseo=1" target="_self"><h2>Paseo paseador</h2></a></div>
+			<div id="opcionHome"><a href="servlets/ServletModuloUsuarios?action=perfilPaseador&idPaseador=2" target="_self"><h2>Perfil paseador</h2></a></div>
 			
 			<br>
 			<center><input type="submit" name="submitButton" id="botonAdelante" value="Salir" /></center>

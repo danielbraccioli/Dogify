@@ -1702,6 +1702,10 @@ pre code {
   border: 1px solid #dee2e6;
 }
 
+.table-nobordered {
+  border: 0px solid #dee2e6;
+}
+
 .table-bordered th,
 .table-bordered td {
   border: 1px solid #dee2e6;
@@ -1710,6 +1714,11 @@ pre code {
 .table-bordered thead th,
 .table-bordered thead td {
   border-bottom-width: 2px;
+}
+
+.table-nobordered thead th,
+.table-nobordered thead td {
+  border-bottom-width: 0px;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -2504,6 +2513,12 @@ fieldset:disabled a.btn {
 .btn-primary {
   color: #fff;
   background-color: #49D658;
+  border-color: #49D658;
+}
+
+.btn-reputacion {
+  color: #fff;
+  background-color: #ffff00;
   border-color: #49D658;
 }
 

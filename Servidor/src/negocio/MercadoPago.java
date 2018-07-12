@@ -1,10 +1,9 @@
 package negocio;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import dao.PagoDAO;
-import net.sourceforge.jtds.jdbc.DateTime;
+import excepciones.ReservaException;
 
 public class MercadoPago extends Pago {
 	
@@ -22,7 +21,7 @@ public class MercadoPago extends Pago {
 		this.dni = dni;
 	}
 	
-	public void save() throws SQLException {
+	public void save() throws ReservaException{
 		PagoDAO.getInstancia().save(this);
 	}
 

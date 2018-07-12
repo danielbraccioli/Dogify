@@ -1,12 +1,11 @@
 package dao;
 
-import java.sql.SQLException;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
 import entity.EfectivoEntity;
 import entity.MercadoPagoEntity;
+import excepciones.ReservaException;
 import hibernate.HibernateUtil;
 import negocio.Efectivo;
 import negocio.MercadoPago;
@@ -27,7 +26,8 @@ public class PagoDAO {
 		return instancia;
 	}
 	
-	public void save(Pago pago) throws SQLException{
+	public void save(Pago pago) throws ReservaException{
+		try {
 		if(pago instanceof Efectivo) {
 			EfectivoEntity aux = toEntity((Efectivo) pago);
 			SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -46,6 +46,9 @@ public class PagoDAO {
 				s.getTransaction().commit();
 				s.close();
 			}
+		}
+		}catch(Exception e) {
+			new ReservaException("Error en grabar pago en BD, reintente");
 		}
 	}
 	

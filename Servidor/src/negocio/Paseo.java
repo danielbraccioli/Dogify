@@ -83,14 +83,14 @@ public class Paseo {
 				this.horaInicio = hourFormat.format(date);
 				this.update();
 			}else {
-				throw new PaseoException("Estado del paseo impide cancelarlo");
+				throw new PaseoException("Estado del paseo impide iniciarlo");
 			}
 		}
 		
 		public void finalizarPaseo() throws PaseoException, ReservaException{
 			if(estado.equals("EN CURSO")) {
 				for(Reserva reserva : reservas) {
-					if(!reserva.getEstado().equals("DEVUELTO")) {
+					if(reserva.getEstado().equals("RETIRADO")) {
 						throw new ReservaException("Estado de reserva impide finalizar el paseo");
 					}
 				}
@@ -124,8 +124,9 @@ public class Paseo {
 			}
 		}
 		
-		public void subirFoto(Date fecha, BufferedImage imagen) throws PaseoException{
+		public void subirFoto(BufferedImage imagen) throws PaseoException{
 			if(estado.equals("EN CURSO")) {
+				Date fecha = new Date();
 				Foto foto = new Foto(0, fecha, imagen, this);
 				fotos.add(foto);
 				foto.save();
