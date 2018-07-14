@@ -24,7 +24,7 @@ public class PerroDAO {
 	}
 	
 	public Perro toNegocio(PerroEntity perro) {
-		Perro aux = new Perro(perro.getIdPerro(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getSexo(), perro.getObservaciones(), perro.getDadoDeBaja(), perro.getRequiereBozal(), perro.getTamano(), null);
+		Perro aux = new Perro(perro.getIdPerro(), perro.getNombre(), perro.getRaza(), perro.getEdad(), perro.getSexo(), perro.getObservaciones(), perro.getDadoDeBaja(), perro.getRequiereBozal(), perro.getTamano(), perro.getAvatar(), null);
 		return aux;
 	}  
 	
@@ -40,6 +40,7 @@ public class PerroDAO {
 		perroDTO.setRequiereBozal(perro.getRequiereBozal());
 		perroDTO.setSexo(perro.getSexo());
 		perroDTO.setTamano(perro.getTamano());
+		perroDTO.setAvatar(perro.getAvatar());
 		return perroDTO;
 	}
 
@@ -54,6 +55,7 @@ public class PerroDAO {
 		perroAux.setRequiereBozal(perro.getRequiereBozal());
 		perroAux.setSexo(perro.getSexo());
 		perroAux.setTamano(perro.getTamano());
+		perroAux.setAvatar(perro.getAvatar());
 		return perroAux;
 	}
 

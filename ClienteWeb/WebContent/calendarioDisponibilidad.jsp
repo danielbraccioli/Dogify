@@ -1,6 +1,9 @@
-<%@ page import="dto.PaseadorDTO"%>
-<%@ page import="dto.CalificacionDTO"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.Date"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="dto.PaseoDTO"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="java.util.Iterator"%>
 
 <!DOCTYPE html>
@@ -22,7 +25,110 @@
   <link href="http://localhost:8080/ClienteWeb/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="http://localhost:8080/ClienteWeb/css/sb-admin.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/styles.css" />
+<style>
+* {box-sizing: border-box;}
+ul {list-style-type: none;}
+
+
+.month {
+    padding: 50px 10px;
+    padding-top: 0px;
+    width: 100%;
+    height: 10px;
+    background: #49D658;
+    text-align: center;
+}
+
+.month ul {
+    margin: 0;
+    padding: 0;
+}
+
+.month ul li {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 10px;
+    padding-top: 10px;
+}
+
+.month .prev {
+    float: left;
+    padding-top: 10px;
+}
+
+.month .next {
+    float: right;
+    padding-top: 10px;
+}
+
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: #ddd;
+}
+
+.weekdays li {
+    display: inline-block;
+    width: 13.6%;
+    color: #666;
+    text-align: center;
+}
+
+.days {
+    padding: 10px 0;
+    background: #eee;
+    margin: 0;
+}
+
+.days li {
+    list-style-type: none;
+    display: inline-block;
+    width: 13.6%;
+    text-align: center;
+    margin-bottom: 5px;
+    font-size:12px;
+    color: #777;
+}
+
+.days li .active {
+    padding: 5px;
+    background: #49D658;
+    color: white !important
+
+}
+
+ 	a:visited {
+	
+	color:#FFFFFF;
+	}
+	a:link {
+	
+	color:#FFFFFF;
+	}
+	a:active {
+	
+	color:#FFFFFF;
+	}
+	a:hover {
+	font-size:20px;
+	color:#FFFFFF;
+	}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+    .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+    .weekdays li, .days li {width: 12.5%;}
+    .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+    .weekdays li, .days li {width: 12.2%;}
+}
+</style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -42,11 +148,11 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCuenta" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Mi cuenta</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+          <ul class="sidenav-second-level collapse" id="collapseCuenta">
             <li>
               <a href="navbar.html">Mis datos</a>
             </li>
@@ -59,10 +165,15 @@
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Reservas</span>
+            <span class="nav-link-text" >Reservas </span>
           </a>
+            <ul class="sidenav-second-level collapse" id="collapseReservas">
+            <li>
+              <a href="ServletModuloPaseos?action=reservasCliente&idCliente=1">Ver mis reservas</a>
+            </li>
+          </ul>
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
@@ -97,79 +208,131 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">DATOS DEL PASEADOR</li>
+        <li class="breadcrumb-item active">RESERVAR UN PASEO</li>
       </ol>
-      
-            <div class="card mb-3">
+
+        <div class="card-body">
+          
+
+<div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-bar-chart"></i> Datos generales</div>
-            <div class="card-body">
-              O<div class="table-responsive">
-             <table class="table table-borderd" id="dataTable" cellspacing="0">
-                <tr>
-                <%PaseadorDTO paseador = (PaseadorDTO) request.getAttribute("paseador"); %> 
-				
-                  <th><table class="table table-borered" id="dataTable"  cellspacing="0"><tr><td align=center><img src="<%=paseador.getAvatar()%>"/></td></tr><tr><td align="center"><a class="btn btn-primary" href="#"><%=paseador.getNombre() %></a></td></tr><tr><td align="center"><a class="btn btn-primary"  href="#"> Reputacion: <%=paseador.getReputacion() %></a></td></tr></table></th>
-                  <th><table class="table table-borered" id="dataTable"  cellspacing="0">
-                  <tr><td>Nombre   <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseador.getNombre() %> readonly></td></tr>
-                  <tr><td>Apellido  <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseador.getApellido() %> readonly></td> </tr>
-                  <tr><td><textarea readonly name="message" rows="10" cols="60">
-<%=paseador.getPerfil() %>
-</textarea></td></tr>
-                  
-                  </table>
-                  </th>
-                </tr>
-                </table>
-               
-              </div>
-            </div> 
+              <i class="fa fa-bar-chart"></i> Calendario de Disponibilidad</div>
             
-      	</div>
-      	
-      	<div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-bar-chart"></i> Reviews</div>
-            <div class="card-body">
-              <div class="table-responsive">
-              <%List<CalificacionDTO> calificaciones = paseador.getCalificaciones(); %>
-              <% for(CalificacionDTO calificacion : calificaciones){%>
-              <table class="table table-nobordered" id="dataTable" cellspacing="0">
-              <tr>
-               
-                  <th><table class="table table-borered" id="dataTable"  cellspacing="0"><tr><td align=center><img src="<%=calificacion.getReserva().getCliente().getAvatar() %>"/></td></tr><tr><td align="center"><a class="btn btn-primary" href="#"><%=calificacion.getReserva().getCliente().getNombre() %></a></td></tr><tr><td align="center"><a class="btn btn-primary"  href="#"> Puntuacion: <%=calificacion.getPuntaje() %></a></td></tr></table></th>
-                  <th><table class="table table-borered" id="dataTable"  cellspacing="0">
-                  <tr><td>Fecha   <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getFecha() %> readonly></td></tr>
-                  <tr><td>Perro  <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getReserva().getPerro().getNombre() %> readonly></td> </tr>
-                  <tr><td><textarea readonly name="mes1sage" rows="10" cols="60">
-					<%=calificacion.getComentarios() %>
-					</textarea></td>
-					</table>
-					</tr>
-                  <%} %>
-                  
-                  </th>
-                </tr>
-                </table>
-                </div>
-               
-            </div> 
-           
-      	</div>
-      	 
-   </div>
- </div>
+<div class="month">      
+  <ul>
+  
+    <li class="prev" >&#10094; </li>
+    <li class="next">&#10095;</li>
+    <li>
+      Julio - 
+      <span style="font-size:18px">2018</span>
+    </li>
+  </ul>
+</div>
+
+<ul class="weekdays">
+  <li>Do </li>
+  <li>Lu</li>
+  <li>Ma</li>
+  <li>Mi</li>
+  <li>Ju</li>
+  <li>Vi</li>
+  <li>Sa</li>
+  
+</ul>
+
+<ul class="days">  
+	<%Calendar cal = Calendar.getInstance();
+	// 1 de septiembre
+//int mes = Integer.parseInt((String)request.getAttribute("mes"));
+	//mes -=1;
+	//int year = Integer.parseInt((String)request.getAttribute("anio"));
+	cal.set(Calendar.DATE, 1);
+	cal.set(Calendar.MONTH, 6);
+	cal.set(Calendar.YEAR, 2018);
+	%>
+ <%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 0){ %>
+
+ <%}else{%>
+ 	<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 1){ %>
+ 		<li></li>
+ 	<%}else{%>
+ 		<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 2){ %>
+ 			<li></li>
+ 			<li></li>
+ 		<%}else{%>
+ 			<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 3){ %>
+ 				<li></li>
+ 				<li></li>
+ 				<li></li>
+ 			<%}else{%>
+ 				<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 4){ %>
+ 					<li></li>
+ 					<li></li>
+ 					<li></li>
+ 					<li></li>
+ 				<%}else{%>
+ 					<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 5){ %>
+ 						<li></li>
+ 						<li></li>
+ 						<li></li>
+ 						<li></li>
+ 						<li></li>
+ 					<%}else{%>
+ 						<%if ((cal.get(Calendar.DAY_OF_WEEK) -1) == 6){ %>
+  							<li></li>
+ 							<li></li>
+ 							<li></li>
+ 							<li></li>
+ 							<li></li>
+ 							<li></li>
+ 						<%} %>
+ 					<%} %>
+ 				<%} %>
+ 			<%} %>
+ 		<%} %>
+ 	<%} %>
+ <%} %>
+ 
+
+ <%for(int i = 1; i <= cal.getActualMaximum(Calendar.DAY_OF_MONTH); i++){ 
+ 	boolean hay = false;
+ 	List<PaseoDTO> paseos = (List<PaseoDTO>) request.getAttribute("paseos");
+ 	PaseoDTO aux = null;
+	 PaseoDTO paseo = null;
+	 for (Iterator<PaseoDTO> j = paseos.iterator(); j.hasNext();) {
+		paseo = j.next();
+ 		if(paseo.getFecha().getDate() == i){ 
+ 			hay = true;
+ 			aux = paseo;
+ 		}else{
+ 			
+ 		}
+ 	}
+ 	if (hay==true){ %>
+ 		<li><span class="active"><a href="ServletModuloPaseos?action=paseosFecha&fecha=<%=aux.getFecha() %>"><%=i%></a> </span></li>
+ 	<%}else{%>
+ 		<li><%=i%></li>
+ 	<%}
+}%>
+
+</ul>
+        </div>
+      </div>
+    </div>
+    </div>
+    
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
-        <div class="text-center"> 
-          <small>Copyright © Dogify! 2018</small>
+        <div class="text-center">
+          <small>Copyright © Your Website 2018</small>
         </div>
       </div>
     </footer>
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#dataTable">
+    <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
     <!-- Logout Modal-->
@@ -185,7 +348,7 @@
           <div class="modal-body">Click en logout para finalizar tu sesión!</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="ServletModuloUsuarios?action=logoutUsuarios">Logout</a>
           </div>
         </div>
       </div>
@@ -222,9 +385,6 @@
     <!-- Custom scripts for this page-->
     <script src="http://localhost:8080/ClienteWeb/js/sb-admin-datatables.min.js"></script>
     <script src="http://localhost:8080/ClienteWeb/js/sb-admin-charts.min.js"></script>
-    
-	<script src="http://localhost:8080/ClienteWeb/script.js"></script>
-	
   </div>
 </body>
 

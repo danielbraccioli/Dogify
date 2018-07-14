@@ -79,7 +79,7 @@
             Password:
             </td>
             <td>
-            <input class="form-control" id="password" name="password" type="text" aria-describedby="nameHelp">
+            <input class="form-control" id="password" name="password" type="password" aria-describedby="nameHelp">
             </td>
             </tr>
             

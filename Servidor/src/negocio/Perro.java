@@ -11,10 +11,11 @@ public class Perro {
 	private String dadoDeBaja;
 	private String requiereBozal;
 	private String tamano;
+	private String avatar;
 	private Cliente cliente;
 	
 	public Perro(int idPerro, String nombre, String raza, int edad, String sexo, String observaciones,
-			String dadoDeBaja, String requiereBozal, String tamano, Cliente cliente) {
+			String dadoDeBaja, String requiereBozal, String tamano, String avatar, Cliente cliente) {
 		super();
 		this.idPerro = idPerro;
 		this.nombre = nombre;
@@ -25,6 +26,7 @@ public class Perro {
 		this.dadoDeBaja = dadoDeBaja;
 		this.requiereBozal = requiereBozal;
 		this.tamano = tamano;
+		this.avatar = avatar;
 		this.setCliente(cliente);
 	}
 
@@ -107,6 +109,16 @@ public class Perro {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+	
+	
 	
 	
 	

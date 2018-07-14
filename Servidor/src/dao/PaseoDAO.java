@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
+import dto.FotoDTO;
 import dto.PaseoDTO;
 import dto.ReservaDTO;
 import entity.FotoEntity;
@@ -194,6 +195,11 @@ public class PaseoDAO {
 		paseoDTO.setTarifa(paseo.getTarifa());
 		paseoDTO.setUbicacionLatitud(paseo.getUbicacionLatitud());
 		paseoDTO.setUbicacionLongitud(paseo.getUbicacionLongitud());
+		List<FotoDTO> fotosDTO = new ArrayList<FotoDTO>();
+		for(FotoEntity foto : paseo.getFotos()) {
+			fotosDTO.add(FotoDAO.getInstancia().toDTO(foto));
+		}
+		paseoDTO.setFotos(fotosDTO);
 		return paseoDTO;
 	}
 
@@ -212,6 +218,11 @@ public class PaseoDAO {
 		paseoDTO.setTarifa(paseo.getTarifa());
 		paseoDTO.setUbicacionLatitud(paseo.getUbicacionLatitud());
 		paseoDTO.setUbicacionLongitud(paseo.getUbicacionLongitud());
+		List<FotoDTO> fotosDTO = new ArrayList<FotoDTO>();
+		for(FotoEntity foto : paseo.getFotos()) {
+			fotosDTO.add(FotoDAO.getInstancia().toDTO(foto));
+		}
+		paseoDTO.setFotos(fotosDTO);
 		return paseoDTO;
 	}
 
@@ -222,6 +233,42 @@ public class PaseoDAO {
 			Session session = sf.openSession();
 			session.beginTransaction();
 			aux1 = session.createQuery("From PaseoEntity r where r.paseador = ?").setInteger(0, idPaseador).list();
+			session.getTransaction().commit();
+			session.close();
+		for(PaseoEntity paseo : aux1) {
+			aux2.add(this.toDTO(paseo));
+		}
+		}catch(Exception e) {
+			new PaseoException("Error en busqueda de Paseos paseador en BD, reintente");
+		}
+		return aux2;
+	}	
+	
+	public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws PaseoException {
+		List<PaseoEntity> aux1 = null;
+		List<PaseoDTO> aux2 = new ArrayList<PaseoDTO>();
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			aux1 = session.createQuery("From PaseoEntity r where month(r.fecha)=? and year(r.fecha)=?").setInteger(0, mes).setInteger(1, anio).list();
+			session.getTransaction().commit();
+			session.close();
+		for(PaseoEntity paseo : aux1) {
+			aux2.add(this.toDTO(paseo));
+		}
+		}catch(Exception e) {
+			new PaseoException("Error en busqueda de Paseos paseador en BD, reintente");
+		}
+		return aux2;
+	}	
+	
+	public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws PaseoException {
+		List<PaseoEntity> aux1 = null;
+		List<PaseoDTO> aux2 = new ArrayList<PaseoDTO>();
+		try {
+			Session session = sf.openSession();
+			session.beginTransaction();
+			aux1 = session.createQuery("From PaseoEntity r where r.fecha = ?").setDate(0, fecha).list();
 			session.getTransaction().commit();
 			session.close();
 		for(PaseoEntity paseo : aux1) {

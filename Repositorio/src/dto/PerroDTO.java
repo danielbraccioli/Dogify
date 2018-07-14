@@ -13,6 +13,15 @@ public class PerroDTO implements Serializable {
 	private String dadoDeBaja;
 	private String requiereBozal;
 	private String tamano;
+	private String avatar;
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	private ClienteDTO cliente;
 	
 	public PerroDTO() {}

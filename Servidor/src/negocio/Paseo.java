@@ -124,7 +124,7 @@ public class Paseo {
 			}
 		}
 		
-		public void subirFoto(BufferedImage imagen) throws PaseoException{
+		public void subirFoto(String imagen) throws PaseoException{
 			if(estado.equals("EN CURSO")) {
 				Date fecha = new Date();
 				Foto foto = new Foto(0, fecha, imagen, this);

@@ -70,10 +70,15 @@
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePaseos" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Buscar Paseo</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapsePaseos">
+            <li>
+              <a href="ServletModuloPaseos?action=disponibilidadPaseos">Ver paseos</a>
+            </li>
+          </ul>
             </li>
           </ul>
         </li>
@@ -133,7 +138,7 @@
                   <td><%=reserva.getPaseo().getPaseador().getNombre() %></td>
                   <td><%=reserva.getPerro().getNombre() %></td>
 				  <td><%=reserva.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></th><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></th></table></td>
+				  <td><table class="table table-bordered" ><td bgcolor="#49D658"><a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="ServletModuloUsuarios?action=calificarPaseador&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></td></table></td>
 	
                 </tr>
                 <%

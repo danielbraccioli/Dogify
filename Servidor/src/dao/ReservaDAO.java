@@ -196,12 +196,13 @@ public class ReservaDAO {
 		reservaDTO.setEstado(reserva.getEstado());
 		reservaDTO.setHoraDevolucion(reserva.getHoraDevolucion());
 		reservaDTO.setHoraRetiro(reserva.getHoraRetiro());
-		//reservaDTO.setCliente(UsuarioDAO.getInstancia().toDTO(reserva.getCliente()));
+		reservaDTO.setCliente(UsuarioDAO.getInstancia().toDTOReserva(reserva.getCliente()));
 		reservaDTO.setPerro(PerroDAO.getInstancia().toDTO(reserva.getPerro()));
 		reservaDTO.setPaseo(PaseoDAO.getInstancia().toDTOSimple(reserva.getPaseo()));
 		return reservaDTO;
 	}
 	
+
 	public ReservaDTO toDTOPaseo(ReservaEntity reserva) {
 		ReservaDTO reservaDTO = new ReservaDTO();
 		reservaDTO.setIdReserva(reserva.getIdReserva());

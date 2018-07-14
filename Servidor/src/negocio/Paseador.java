@@ -29,6 +29,12 @@ public class Paseador extends Usuario {
 			Calificacion calificacion = new Calificacion(0, puntaje, observaciones, fecha, reserva, this);
 			calificaciones.add(calificacion);
 			calificacion.save();
+			if (this.getReputacion() != 0) {
+				this.reputacion = Math.round(this.reputacion + puntaje)/2;
+			}else {
+				this.reputacion = puntaje;
+			}
+			
 		}
 		
 		public String getNumeroRegistro() {

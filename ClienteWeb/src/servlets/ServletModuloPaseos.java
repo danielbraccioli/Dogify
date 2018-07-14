@@ -1,8 +1,13 @@
 package servlets;
 import java.io.File;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -164,12 +169,8 @@ public class ServletModuloPaseos extends HttpServlet{
 												int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 									    		PaseoDTO paseo = new PaseoDTO();
 									    		paseo.setIdPaseo(nroPaseo);
-									    		String archivo = (String)request.getParameter("fileFoto");
-									    		File imagen = new File("C:/Users/fpotilinski/Desktop/TestBoot/startbootstrap-sb-admin-gh-pages/"+archivo);
-									    		Collection<Part> parts = (Collection<Part>)request.getParts();
-									    		for(Part part : parts) {
-									    	part.getSubmittedFileName();
-									    		}
+									    		String imagen = (String)request.getParameter("fileFoto");
+									    		
 									    		
 									    		try {
 													BusinessDelegate.getInstancia().subirFoto(paseo, imagen);
@@ -209,6 +210,50 @@ public class ServletModuloPaseos extends HttpServlet{
 										
 														}catch (Exception e) {
 															e.printStackTrace();
+														}
+													}else {
+														if(request.getParameter("action").equalsIgnoreCase("disponibilidadPaseos")){
+															RequestDispatcher dispatcher;
+															Calendar calendario = Calendar.getInstance();
+															int mes = calendario.get(Calendar.MONTH) + 1;
+															int anio = calendario.get(Calendar.YEAR);
+															List<PaseoDTO> paseos = null;
+												    		try {
+																paseos = BusinessDelegate.getInstancia().buscarPaseosByMesAnio(mes, anio);
+																request.setAttribute("paseos", paseos);
+																request.setAttribute("anio", anio);
+																request.setAttribute("mes", mes);
+																dispatcher=request.getRequestDispatcher("/calendarioDisponibilidad.jsp");
+													    		dispatcher.forward(request, response);
+											
+															}catch (Exception e) {
+																e.printStackTrace();
+															}
+														}else {
+															if(request.getParameter("action").equalsIgnoreCase("paseosFecha")){
+																RequestDispatcher dispatcher;
+																String fechaStr= (String)request.getParameter("fecha");
+																DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+																Date fecha = new Date();
+																try {
+																	fecha = dateFormat.parse(fechaStr);
+																} catch (ParseException e1) {
+																	// TODO Auto-generated catch block
+																	e1.printStackTrace();
+																}
+												
+																
+																List<PaseoDTO> paseos = null;
+													    		try {
+																	paseos = BusinessDelegate.getInstancia().buscarPaseosByFecha(fecha);
+																	request.setAttribute("paseos", paseos);
+																	dispatcher=request.getRequestDispatcher("/paseosDia.jsp");
+														    		dispatcher.forward(request, response);
+												
+																}catch (Exception e) {
+																	e.printStackTrace();
+																}
+															}
 														}
 													}
 												}

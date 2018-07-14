@@ -22,8 +22,16 @@ public class PaseoDTO implements Serializable {
 		private String ubicacionLatitud;
 		private String ubicacionLongitud;
 		private PaseadorDTO paseador;
-//		private List<String> fotos = new ArrayList<String>();
+		private List<FotoDTO> fotos;
 		
+		public List<FotoDTO> getFotos() {
+			return fotos;
+		}
+
+		public void setFotos(List<FotoDTO> fotos) {
+			this.fotos = fotos;
+		}
+
 		public PaseoDTO() {}
 		
 		public int getIdPaseo() {

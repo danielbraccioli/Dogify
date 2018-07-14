@@ -52,7 +52,7 @@ public class BusinessDelegate {
 	public void compartirUbicacion(PaseoDTO paseo) throws RemoteException, PaseoException{
 		ir.compartirUbicacion(paseo);
 	}
-	public void subirFoto(PaseoDTO paseo, File imagen) throws RemoteException, IOException, PaseoException{
+	public void subirFoto(PaseoDTO paseo, String imagen) throws RemoteException, IOException, PaseoException{
 		ir.subirFoto(paseo, imagen);
 	}
 	public void retirarPerro(ReservaDTO reserva) throws RemoteException, ReservaException{
@@ -89,6 +89,12 @@ public class BusinessDelegate {
 	}
 	public List<ReservaDTO> reservasCliente(ClienteDTO cliente) throws RemoteException, ReservaException{
 		return ir.reservasCliente(cliente);
+	}
+	public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws RemoteException, PaseoException{
+		return ir.buscarPaseosByMesAnio(mes, anio);
+	}
+	public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws RemoteException, PaseoException{
+		return ir.buscarPaseosByFecha(fecha);
 	}
 	
 	// Ambos

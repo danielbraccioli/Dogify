@@ -47,6 +47,15 @@ public class ModuloPaseos {
 		return paseos;
 	}
 	
+	public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws PaseoException {
+		return PaseoDAO.getInstancia().buscarPaseosByMesAnio(mes, anio);
+	}
+	
+	public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws PaseoException {
+		return PaseoDAO.getInstancia().buscarPaseosByFecha(fecha);
+	}
+
+	
 	public PaseoDTO paseoPaseador(int idPaseo) throws PaseoException {
 		PaseoDTO paseo = null;
 		paseo = PaseoDAO.getInstancia().buscarPaseoByIdDTO(idPaseo);
@@ -75,9 +84,7 @@ public class ModuloPaseos {
 		}
 	}
 	
-	public void subirFotoPaseo(PaseoDTO paseo, File file) throws IOException, PaseoException {
-		BufferedImage img = new BufferedImage(256, 256, BufferedImage.TYPE_INT_RGB);
-		img = ImageIO.read(file);
+	public void subirFotoPaseo(PaseoDTO paseo, String img) throws IOException, PaseoException {
 		Paseo aux = PaseoDAO.getInstancia().buscarPaseoById(paseo.getIdPaseo());
 		aux.subirFoto(img);
 	}

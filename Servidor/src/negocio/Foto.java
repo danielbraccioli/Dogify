@@ -10,10 +10,10 @@ import excepciones.PaseoException;
 public class Foto {
 	private int idFoto;
 	private Date fechaCarga;
-	private BufferedImage imagen;
+	private String imagen;
 	private Paseo paseo;
 
-	public Foto(int idFoto, Date fechaCarga, BufferedImage imagen, Paseo paseo) {
+	public Foto(int idFoto, Date fechaCarga, String imagen, Paseo paseo) {
 		this.idFoto = idFoto;
 		this.fechaCarga = fechaCarga;
 		this.imagen = imagen;
@@ -36,11 +36,11 @@ public class Foto {
 		this.fechaCarga = fechaCarga;
 	}
 
-	public BufferedImage getImagen() {
+	public String getImagen() {
 		return imagen;
 	}
 
-	public void setImagen(BufferedImage imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 

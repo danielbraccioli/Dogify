@@ -1,4 +1,5 @@
 <%@ page import="dto.ReservaDTO"%>
+<%@ page import="dto.FotoDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
 
@@ -21,7 +22,7 @@
   <link href="http://localhost:8080/ClienteWeb/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="http://localhost:8080/ClienteWeb/css/sb-admin.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/stylesSlider.css" />
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -106,14 +107,14 @@
             <div class="table-responsive">
               <div class="row">
                <%ReservaDTO reserva = (ReservaDTO) request.getAttribute("reserva"); %> 
-              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="http://localhost:8080/ClienteWeb/perro1.png" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
+              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="<%=reserva.getPerro().getAvatar() %>>" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
              <table class="table table-borde1red" id="dataTable" cellspacing="0">
                 <tr>
                
 				
                   <th></th>
                   <th><table class="table table-bordered" id="dataTable"  cellspacing="0">
-                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getFecha()%> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getBarrio() %> readonly></td></tr>
+                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getFecha()%> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getPaseo().getBarrio()%>" readonly></td></tr>
                   <tr><td>Horario Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getHorarioInicio() %> readonly></td><td>Retiro</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraRetiro() %> readonly></td></tr>
                   <tr><td>Fin Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getPaseo().getHorarioFin() %>" readonly></td><td>Regreso</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraDevolucion() %> readonly></td></tr>
                   <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getEstado() %>" readonly></td><td></td><td><table class="table table-borered" id="dataTable"  cellspacing="0"><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/camara.png" witdh=50 height=50/></th> <th>    <a href="#map"><img align="center" src="http://localhost:8080/ClienteWeb/ubicacion.png" witdh=50 height=50/>    </th></table> </tr>
@@ -159,12 +160,18 @@
             <div class="card mb-3" id="photos">
             <div class="card-header"id="photos">
               <i class="fa fa-bar-chart"></i> Fotos del paseo</div>
+              <div class="card-body">
+            <div class="table-responsive">
             
         <div class="slider-holder">
         <span id="slider-image-1"></span>
         <span id="slider-image-2"></span>
         <span id="slider-image-3"></span>
         <div class="image-holder">
+        
+        	<img src="http://localhost:8080/ClienteWeb/paseo1.jpg" class="slider-image" />
+        	<img src="http://localhost:8080/ClienteWeb/paseo2.jpg" class="slider-image" />
+        	<img src="http://localhost:8080/ClienteWeb/paseo3.jpg" class="slider-image" />
 
         </div>
         <div class="button-holder">
@@ -172,6 +179,8 @@
             <a href="#slider-image-2" class="slider-change"></a>
             <a href="#slider-image-3" class="slider-change"></a>
         </div>
+    </div>
+    </div>
     </div>
 
             

@@ -188,6 +188,27 @@ public class UsuarioDAO {
 		return clienteDTO;
 	}
 	
+	public ClienteDTO toDTOReserva(ClienteEntity cliente) {
+		ClienteDTO clienteDTO = new ClienteDTO();
+		clienteDTO.setApellido(cliente.getApellido());
+		clienteDTO.setAvatar(cliente.getAvatar());
+		clienteDTO.setCuentaCorriente(cliente.getCuentaCorriente());
+		clienteDTO.setDireccion(DireccionDAO.getInstancia().toDTO(cliente.getDireccion()));
+		clienteDTO.setDni(cliente.getDni());
+		clienteDTO.setEmail(cliente.getEmail());
+		clienteDTO.setFechaNacimiento(cliente.getFechaNacimiento());
+		clienteDTO.setIdUsuario(cliente.getIdUsuario());
+		clienteDTO.setNombre(cliente.getNombre());
+		clienteDTO.setPassword(cliente.getPassword());
+		List<PerroDTO> perrosDTO = new ArrayList<PerroDTO>();
+		for(PerroEntity perro : cliente.getPerros()) {
+			
+			perrosDTO.add(PerroDAO.getInstancia().toDTO(perro));
+		}
+		List<ReservaDTO> reservasDTO = null;
+		return clienteDTO;
+	}
+	
 	public PaseadorDTO toDTO(PaseadorEntity paseador) {
 		PaseadorDTO paseadorE = new PaseadorDTO();
 		paseadorE.setApellido(paseador.getApellido());

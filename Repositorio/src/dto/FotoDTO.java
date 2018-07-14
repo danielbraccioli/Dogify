@@ -1,30 +1,15 @@
-package entity;
+package dto;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "Foto")
-public class FotoEntity implements Serializable {
-	@Id
-	@GeneratedValue	
+public class FotoDTO  implements Serializable{
 	private int idFoto;
 	private Date fechaCarga;
 	private String imagen;
-	
-	@ManyToOne
-	@JoinColumn(name = "idPaseo")
-	private PaseoEntity paseo;
-	
-	public FotoEntity() {}
+	private PaseoDTO paseo;
+
+	public FotoDTO() {}
 
 	public int getIdFoto() {
 		return idFoto;
@@ -50,12 +35,14 @@ public class FotoEntity implements Serializable {
 		this.imagen = imagen;
 	}
 
-	public PaseoEntity getPaseo() {
+	public PaseoDTO getPaseo() {
 		return paseo;
 	}
 
-	public void setPaseo(PaseoEntity paseo) {
+	public void setPaseo(PaseoDTO paseo) {
 		this.paseo = paseo;
 	}
 	
+	
 }
+	

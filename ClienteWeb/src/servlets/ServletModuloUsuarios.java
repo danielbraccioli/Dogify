@@ -100,6 +100,42 @@ public class ServletModuloUsuarios extends HttpServlet{
 			    		}catch (Exception e) {
 							e.printStackTrace();
 						}
+					}else {
+						if(request.getParameter("action").equalsIgnoreCase("calificarPaseador")){
+							RequestDispatcher dispatcher;
+							int nroReserva = Integer.parseInt((String)request.getParameter("idReserva"));
+				    		ReservaDTO reserva = null;
+				    		try {
+				    			reserva = BusinessDelegate.getInstancia().reservaCliente(nroReserva);
+				    			request.setAttribute("reserva", reserva);
+				    			dispatcher=request.getRequestDispatcher("/calificarPaseador.jsp");
+					    		dispatcher.forward(request, response);
+				    		}catch (Exception e) {
+								e.printStackTrace();
+							}
+						}else {
+							if(request.getParameter("action").equalsIgnoreCase("procesarCalificacion")){
+								RequestDispatcher dispatcher;
+								int nroReserva = Integer.parseInt((String)request.getParameter("idReserva"));
+								int nroCliente = Integer.parseInt((String)request.getParameter("idCliente"));
+								int puntaje = Integer.parseInt((String)request.getParameter("puntaje"));
+								String observaciones = (String)request.getParameter("comentarios");
+					    		ReservaDTO reserva = new ReservaDTO();
+					    		reserva.setIdReserva(nroReserva);
+					    		ClienteDTO cliente = new ClienteDTO();
+					    		cliente.setIdUsuario(nroCliente);
+					    		try {
+					    			BusinessDelegate.getInstancia().calificarPaseador(reserva, puntaje, observaciones);
+					    			List<ReservaDTO> reservAux = null;
+					    			reservAux = BusinessDelegate.getInstancia().reservasCliente(cliente);
+					    			request.setAttribute("reservas", reservAux);
+					    			dispatcher=request.getRequestDispatcher("/reservasCliente.jsp");
+						    		dispatcher.forward(request, response);
+					    		}catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
 					}
 				}
 			}

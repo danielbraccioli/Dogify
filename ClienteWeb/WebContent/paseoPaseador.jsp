@@ -106,16 +106,16 @@
             <div class="table-responsive">
              <table class="table table-bordered" id="datosPaseo"  width="100%" cellspacing="0">
                 <tbody>
-                <tr>
                 <%PaseoDTO paseo = (PaseoDTO) request.getAttribute("paseo"); %> 
-                  <table class="table table-borered" id="dataTable"  cellspacing="0" align=center width="100%"><th>    <a href="ServletModuloPaseos?action=iniciarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/iniciarInhab.png" witdh=32 height=32/></th><th>    <a href="ServletModuloPaseos?action=finalizarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/finalizarInhab.png" witdh=32 height=32/></th><th><a data-toggle="modal" data-target="#exampleModal2"><img align="center" src="http://localhost:8080/ClienteWeb/subirFotoInhab.png" witdh=32 height=32/></th> <th>    <a href="ServletModuloPaseos?action=compartirUbicacion&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/compUbicacionInhab.png" witdh=32 height=32/></th></table>
-                  <th><table class="table table-borered" id="dataTable"  cellspacing="0">
-                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getFechaPaseoFormateada() %> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getBarrio() %> readonly></td></tr>
+                <tr bgcolor="#49D658"><td align=center><a href="ServletModuloPaseos?action=iniciarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/iniciarInhab.png" witdh=32 height=32/></td><td align=center>    <a href="ServletModuloPaseos?action=finalizarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/finalizarInhab.png" witdh=32 height=32/></td><td align=center><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/subirFotoInhab.png" witdh=32 height=32/></td> <td align =center>    <a href="ServletModuloPaseos?action=compartirUbicacion&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/compUbicacionInhab.png" witdh=32 height=32/></tr>
+                
+                <tr>
+                  <table class="table table-borered" id="dataTable"  cellspacing="0" align=center width="100%">
+                  <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getFecha()%> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInptName" type="text"  placeholder="<%=paseo.getBarrio()%>" readonly></td></tr>
                   <tr><td>Inicio Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHorarioInicio() %> readonly></td><td>Inicio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHoraInicio() %> readonly></td></tr>
                   <tr><td>Fin Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=paseo.getHorarioFin() %>" readonly></td><td>Regreso</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=paseo.getHoraFin() %> readonly></td></tr>
-                  <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=paseo.getEstado() %>" readonly></td><td></td></table> </tr>
+                  <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=paseo.getEstado() %>" readonly></td></tr>
                   </table>
-                  </th>
                 </tr>
                 </tbody>
             </table>

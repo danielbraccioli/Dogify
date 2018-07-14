@@ -28,7 +28,16 @@ public class PerroEntity implements Serializable {
 	private String dadoDeBaja;
 	private String requiereBozal;
 	private String tamano;
+	private String avatar;
 	
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	@JoinColumn(name = "idCliente")
 	private ClienteEntity cliente;

@@ -58,6 +58,12 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 		public List<PaseoDTO> paseosPaseador(PaseadorDTO paseador) throws RemoteException, PaseoException {
 			return ModuloPaseos.getInstancia().buscarPaseosPaseador(paseador);
 		}
+		public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws RemoteException, PaseoException {
+			return ModuloPaseos.getInstancia().buscarPaseosByMesAnio(mes, anio);
+		}
+		public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws RemoteException, PaseoException {
+			return ModuloPaseos.getInstancia().buscarPaseosByFecha(fecha);
+		}
 		public void iniciarPaseo(PaseoDTO paseo) throws RemoteException, PaseoException {
 			ModuloPaseos.getInstancia().iniciarPaseo(paseo);
 		}
@@ -67,7 +73,7 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 		public void compartirUbicacion(PaseoDTO paseo) throws RemoteException, PaseoException {
 			ModuloPaseos.getInstancia().compartirUbicacion(paseo);
 		}
-		public void subirFoto(PaseoDTO paseo, File imagen) throws IOException, PaseoException {
+		public void subirFoto(PaseoDTO paseo, String imagen) throws IOException, PaseoException {
 			ModuloPaseos.getInstancia().subirFotoPaseo(paseo, imagen); 
 		}
 		public void retirarPerro(ReservaDTO reserva) throws RemoteException, ReservaException {

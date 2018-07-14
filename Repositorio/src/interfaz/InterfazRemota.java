@@ -24,13 +24,13 @@ public interface InterfazRemota extends Remote{
 	
 	// Ambos
 	public UsuarioDTO loginUsuario(String email,String password) throws RemoteException, UsuarioException;
-
+	
 	// Paseador
 	public List<PaseoDTO> paseosPaseador(PaseadorDTO paseador) throws RemoteException, PaseoException;
 	public void iniciarPaseo(PaseoDTO paseo) throws RemoteException, PaseoException;
 	public void finalizarPaseo(PaseoDTO paseo) throws RemoteException, PaseoException, ReservaException;
 	public void compartirUbicacion(PaseoDTO paseo) throws RemoteException, PaseoException;
-	public void subirFoto(PaseoDTO paseo, File imagen) throws RemoteException, IOException, PaseoException;
+	public void subirFoto(PaseoDTO paseo, String imagen) throws RemoteException, IOException, PaseoException;
 	public void retirarPerro(ReservaDTO reserva) throws RemoteException, ReservaException;
 	public void devolverPerro(ReservaDTO reserva) throws RemoteException, ReservaException;
 	public PaseadorDTO perfilPaseador(int idPaseador) throws RemoteException, UsuarioException;
@@ -44,5 +44,6 @@ public interface InterfazRemota extends Remote{
 	public void pagarReservaMercadoPago(ReservaDTO reserva, String nroTarjeta, Date vtoTarjeta, String titularNombre, String titularDNI) throws RemoteException, ReservaException;
 	public ReservaDTO reservaCliente(int idReserva) throws RemoteException, ReservaException;
 	public List<ReservaDTO> reservasCliente(ClienteDTO cliente) throws RemoteException, ReservaException;
-
+	public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws RemoteException, PaseoException;
+	public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws RemoteException, PaseoException;
 }

@@ -11,6 +11,7 @@ import javax.sql.rowset.serial.SerialException;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 
+import dto.FotoDTO;
 import entity.FotoEntity;
 import excepciones.PaseoException;
 import hibernate.HibernateUtil;
@@ -46,32 +47,24 @@ public class FotoDAO {
 	}
 	
 	public Foto toNegocio(FotoEntity foto) {
-		Foto aux = new Foto(foto.getIdFoto(), foto.getFechaCarga(), null, null);
+		Foto aux = new Foto(foto.getIdFoto(), foto.getFechaCarga(), foto.getImagen(), null);
 		return aux;
+	}
+	
+	public FotoDTO toDTO(FotoEntity foto) {
+		FotoDTO fotoAux = new FotoDTO();
+		fotoAux.setFechaCarga(foto.getFechaCarga());
+		fotoAux.setIdFoto(foto.getIdFoto());
+		fotoAux.setImagen(foto.getImagen());
+		fotoAux.setPaseo(null);
+		return fotoAux;
 	}
 	
 	public FotoEntity toEntity(Foto foto) {
 		FotoEntity fotoEntity = new FotoEntity();
 		fotoEntity.setFechaCarga(foto.getFechaCarga());
 		fotoEntity.setIdFoto(foto.getIdFoto());
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		try {
-			ImageIO.write(foto.getImagen(), "png", baos);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Blob blFile = null;
-		try {
-			blFile = new javax.sql.rowset.serial.SerialBlob(baos.toByteArray());
-		} catch (SerialException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		fotoEntity.setImagen(blFile);
+		fotoEntity.setImagen(foto.getImagen());
 		fotoEntity.setPaseo(PaseoDAO.getInstancia().toEntity(foto.getPaseo()));
 		return fotoEntity;
 	}
