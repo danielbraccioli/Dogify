@@ -95,7 +95,7 @@
 
       <div class="card mb-3" id="photos">
 			<div class="card-header">
-      	   <i class="fa fa-bar-chart"></i>Paseos disponibles del dia DD.MM.YYYY</div>
+      	   <i class="fa fa-bar-chart"></i>Paseos disponibles</div>
           
        
           <div class="table-responsive">
@@ -126,7 +126,7 @@
                   <td><%=paseo.getCapacidad() %></td>
                   <td>5</td>
 				  <td><%=paseo.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th></table></td>
+				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/reservar.png" witdh=30 height=30/></th></table></td>
 	
                 </tr>
                 <%

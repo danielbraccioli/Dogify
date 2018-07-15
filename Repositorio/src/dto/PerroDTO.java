@@ -19,7 +19,7 @@ public class PerroDTO implements Serializable {
 		if (this.avatar != null) {
 		return avatar;
 		}else {
-			return "http://localhost:8080/ClienteWeb/sinFoto.png";
+			return "http://localhost:8080/ClienteWeb/perro1.png";
 		}
 	}
 

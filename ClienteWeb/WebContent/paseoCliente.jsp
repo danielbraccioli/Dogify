@@ -101,7 +101,7 @@
             <div class="table-responsive">
               <div class="row">
                <%ReservaDTO reserva = (ReservaDTO) request.getAttribute("reserva"); %> 
-              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="<%=reserva.getPerro().getAvatar() %>" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
+              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="http://localhost:8080/ClienteWeb/perro1.png" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
              <table class="table table-borde1red" id="dataTable" cellspacing="0">
                 <tr>
                
