@@ -11,6 +11,8 @@ import dto.ClienteDTO;
 import dto.PaseoDTO;
 import dto.ReservaDTO;
 import dto.UsuarioDTO;
+import excepciones.PaseoException;
+import excepciones.UsuarioException;
 import maps.java.Geocoding;
 import maps.java.MapsJava;
 import maps.java.Route;
@@ -87,7 +89,7 @@ public class test {
 			else
 				System.out.println("Encontro el usuario");
 				
-		} catch (RemoteException e) {
+		} catch (RemoteException | UsuarioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -112,17 +114,17 @@ public class test {
 				
 				UsuarioDTO usuario = new UsuarioDTO();
 				usuario.setIdUsuario(1);
-				if (ObjetoRemoto.getInstance().reservarPaseo(usuario, pas)== true){
+	/*			if (ObjetoRemoto.getInstance().reservarPaseo(usuario, pas)== true){
 					System.out.println("Reserva OK");
 				}
-
+*/
 			
 				
 				
 			}
 			
 		
-		} catch (RemoteException e) {
+		} catch (RemoteException | PaseoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

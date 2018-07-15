@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import delegado.BusinessDelegate;
 import dto.ClienteDTO;
@@ -23,6 +24,8 @@ public class ServletModuloUsuarios extends HttpServlet{
 	public ServletModuloUsuarios() {
 	}
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			HttpSession session = request.getSession();
+			
 			if(request.getParameter("action").equalsIgnoreCase("loginUsuarios")){
 				RequestDispatcher dispatcher;
 	    		UsuarioDTO usuario = null;
@@ -34,6 +37,8 @@ public class ServletModuloUsuarios extends HttpServlet{
 						if (usuario instanceof ClienteDTO) {
 							ClienteDTO cliente = (ClienteDTO) usuario;
 							List<ReservaDTO> reservas = null;
+							session.setAttribute("user",cliente.getIdUsuario());
+							
 							try {
 								reservas = BusinessDelegate.getInstancia().reservasCliente(cliente);
 								request.setAttribute("reservas", reservas);
@@ -45,6 +50,7 @@ public class ServletModuloUsuarios extends HttpServlet{
 						}else {
 							PaseadorDTO paseador = (PaseadorDTO) usuario;
 				    		List<PaseoDTO> paseos = null;
+							session.setAttribute("user",paseador.getIdUsuario());
 				    		try {
 								paseos = BusinessDelegate.getInstancia().paseosPaseador(paseador);
 								request.setAttribute("paseos", paseos);
@@ -55,6 +61,11 @@ public class ServletModuloUsuarios extends HttpServlet{
 							}
 						}
 					}else {
+						
+						request.setAttribute("error", "Usuario o password invalido");
+						
+						dispatcher=request.getRequestDispatcher("/login.jsp");
+			    		dispatcher.forward(request, response);
 						
 					}
 				}catch (Exception e) {

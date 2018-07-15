@@ -147,23 +147,7 @@ ul {list-style-type: none;}
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCuenta" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Mi cuenta</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseCuenta">
-            <li>
-              <a href="navbar.html">Mis datos</a>
-            </li>
-            <li>
-              <a href="cards.html">Mis perros</a>
-            </li>
-			<li>
-              <a href="cards.html">Facturación</a>
-            </li>
-          </ul>
-        </li>
+
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>

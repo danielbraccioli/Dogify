@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import delegado.BusinessDelegate;
@@ -31,10 +32,12 @@ public class ServletModuloPaseos extends HttpServlet{
 	public ServletModuloPaseos() {
 	}
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+			HttpSession session = request.getSession();
 			
 			if(request.getParameter("action").equalsIgnoreCase("reservasCliente")){
 				RequestDispatcher dispatcher;
-				int nroCliente = Integer.parseInt((String)request.getParameter("idCliente"));
+				int nroCliente = (int) request.getSession().getAttribute("user");
+			//	int nroCliente = Integer.parseInt((String)request.getParameter("idCliente"));
 	    		ClienteDTO cliente = new ClienteDTO();
 	    		cliente.setIdUsuario(nroCliente);
 	    		List<ReservaDTO> reservas = null;

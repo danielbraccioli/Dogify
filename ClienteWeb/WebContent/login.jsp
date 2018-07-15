@@ -29,7 +29,31 @@
   </head>
 
   <body>
-	
+  
+  <%
+				if (request.getAttribute("error") != null) {
+			%>
+			<div class="col-md-12">
+				<div class="alert alert-danger">
+					<p><%=request.getAttribute("error")%></p>
+				</div>
+			</div>
+			<%
+				}
+			%>
+			<%
+				if (request.getAttribute("mensaje") != null) {
+			%>
+			<div class="col-md-12">
+				<div class="alert alert-info">
+					<p><%=request.getAttribute("mensaje")%></p>
+				</div>
+			</div>
+			<%
+				}
+			%>
+  
+  	     	
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
@@ -72,14 +96,14 @@
             Email:
             </td>
             <td>
-            <input class="form-control" id="email" name="email" type="text" aria-describedby="nameHelp">
+            <input class="form-control" id="email" name="email" type="text">
             </td>
             <tr>
             <td>
             Password:
             </td>
             <td>
-            <input class="form-control" id="password" name="password" type="password" aria-describedby="nameHelp">
+            <input class="form-control" id="password" name="password" type="password">
             </td>
             </tr>
             
@@ -101,6 +125,7 @@
       </div>
     </div>
 
+ 
     <!-- Bootstrap core JavaScript -->
     <script src="http://localhost:8080/ClienteWeb/vendor/jquery/jquery.min.js"></script>
     <script src="http://localhost:8080/ClienteWeb/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -54,6 +54,9 @@ public class UsuarioDAO {
 					.setParameter("password",password).uniqueResult();
 			session.getTransaction().commit();
 			session.close();
+			if (usuarioE == null){
+				return null;
+			}
 			if (usuarioE instanceof ClienteEntity){
 				return toDTO((ClienteEntity) usuarioE);
 			}else {
