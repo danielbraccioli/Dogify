@@ -1,8 +1,9 @@
-<%@ page import="dto.PaseoDTO"%>
-<%@ page import="java.util.List"%>
+<%@ page import="dto.*"%>
+<%@ page import="java.util.*"%>
 <%@ page import="java.util.Iterator"%>
 
 <%PaseoDTO paseo = (PaseoDTO) request.getAttribute("paseo"); %> 
+<%ClienteDTO cliente = (ClienteDTO) request.getAttribute("cliente"); %> 
 
 
 <!DOCTYPE html>
@@ -102,31 +103,31 @@
             Paseador:
             </td>
             <td>
-            <input class="form-control" id="paseador" name="paseador" type="text" readOnly><% paseo.getPaseador().getNombre(); %>
+            <input class="form-control" id="paseador" name="paseador" type="text" value="<%= paseo.getPaseador().getNombre() %>" readOnly>
             </td>
             <tr>
             <td>
             Barrio:
             </td>
             <td>
-            <input class="form-control" id="Barrio" name="Barrio" type="text" value="<% paseo.getBarrio(); %>" readOnly>
+            <input class="form-control" id="Barrio" name="Barrio" type="text" value="<%= paseo.getBarrio() %>" readOnly>
             </td>
 <tr>
             <td>
             Fecha:
             </td>
             <td>
-            <input class="form-control" id="Fecha" name="Fecha" type="text" value="<% paseo.getFecha(); %>" readOnly> 
+            <input class="form-control" id="Fecha" name="Fecha" type="text" value="<%= paseo.getFecha() %>" readOnly> 
             </td>
             <tr>
             <td>
             Horario:
             </td>
             <td>
-            <input class="form-control" id="Horarioi" name="Horarioi" type="text" value="<% paseo.getHoraInicio(); %>" readOnly>  
+            <input class="form-control" id="Horarioi" name="Horarioi" type="text" value="<%= paseo.getHoraInicio() %>" readOnly>  
             </td>
             <td>
-            <input class="form-control" id="Horariof" name="Horariof" type="text" value="<% paseo.getHoraFin(); %>" readOnly> 
+            <input class="form-control" id="Horariof" name="Horariof" type="text" value="<%= paseo.getHoraFin() %>" readOnly> 
             </td>
 
             </tr>
@@ -136,10 +137,12 @@
             </td>
             <td>
             <select>
-                         <option value="volvo">Volvo</option>
-                         <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                           <option value="audi">Audi</option>
+            	<% for (PerroDTO perro : cliente.getPerros()){ %>
+    
+            	<option value="<%=perro.getIdPerro() %>"> <%=perro.getNombre()%> </option>
+                   
+    			<% }%>
+                         
             </select>
             </td>
             
@@ -157,8 +160,7 @@
             </tr>
             </table>
             </form>
-      
-          
+            
       
    
       

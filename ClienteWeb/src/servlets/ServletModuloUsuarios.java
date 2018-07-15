@@ -38,6 +38,7 @@ public class ServletModuloUsuarios extends HttpServlet{
 							ClienteDTO cliente = (ClienteDTO) usuario;
 							List<ReservaDTO> reservas = null;
 							session.setAttribute("user",cliente.getIdUsuario());
+							session.setAttribute("cliente",cliente);
 							
 							try {
 								reservas = BusinessDelegate.getInstancia().reservasCliente(cliente);

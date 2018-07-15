@@ -261,11 +261,14 @@ public class ServletModuloPaseos extends HttpServlet{
 																if(request.getParameter("action").equalsIgnoreCase("reservarPaseo")){
 																	RequestDispatcher dispatcher;
 																	int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
-	
+																	ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
+																	
+
 																	
 																	PaseoDTO paseo = null;
 														    		try {
 																		paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
+																		request.setAttribute("cliente", cliente);
 																		request.setAttribute("paseo", paseo);
 																		dispatcher=request.getRequestDispatcher("/reservarPaseo.jsp");
 															    		dispatcher.forward(request, response);
