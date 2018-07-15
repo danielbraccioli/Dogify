@@ -257,6 +257,26 @@ public class ServletModuloPaseos extends HttpServlet{
 																	e.printStackTrace();
 																}
 															}
+															else{
+																if(request.getParameter("action").equalsIgnoreCase("reservarPaseo")){
+																	RequestDispatcher dispatcher;
+																	int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+	
+																	
+																	PaseoDTO paseo = null;
+														    		try {
+																		paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
+																		request.setAttribute("paseo", paseo);
+																		dispatcher=request.getRequestDispatcher("/reservarPaseo.jsp");
+															    		dispatcher.forward(request, response);
+													
+																	}catch (Exception e) {
+																		e.printStackTrace();
+																	}
+																}
+																
+																
+															}
 														}
 													}
 												}

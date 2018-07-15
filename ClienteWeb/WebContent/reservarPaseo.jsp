@@ -2,6 +2,9 @@
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
 
+<%PaseoDTO paseo = (PaseoDTO) request.getAttribute("paseo"); %> 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,9 +83,7 @@
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
 			
-			<a class="nav-link" data-toggle="modal" data-target="#exampleModal2">
-            <i class="fa fa-fw fa-sign-out"></i>SubirFoto</a>
-        
+       
       </ul>
     </div>
   </nav>
@@ -90,63 +91,85 @@
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">RESERVAR UN PASEO</li>
+        <li class="breadcrumb-item active">RESERVA DE PASEO	</li>
       </ol>
+      
+  <form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloUsuarios" method="post" id="loginUsuarios">
+            <table class="table table-bordered" cellspacing="0" witdh=50%>
+            
+            <tr>
+            <td>
+            Paseador:
+            </td>
+            <td>
+            <input class="form-control" id="paseador" name="paseador" type="text" readOnly><% paseo.getPaseador().getNombre(); %>
+            </td>
+            <tr>
+            <td>
+            Barrio:
+            </td>
+            <td>
+            <input class="form-control" id="Barrio" name="Barrio" type="text" value="<% paseo.getBarrio(); %>" readOnly>
+            </td>
+<tr>
+            <td>
+            Fecha:
+            </td>
+            <td>
+            <input class="form-control" id="Fecha" name="Fecha" type="text" value="<% paseo.getFecha(); %>" readOnly> 
+            </td>
+            <tr>
+            <td>
+            Horario:
+            </td>
+            <td>
+            <input class="form-control" id="Horarioi" name="Horarioi" type="text" value="<% paseo.getHoraInicio(); %>" readOnly>  
+            </td>
+            <td>
+            <input class="form-control" id="Horariof" name="Horariof" type="text" value="<% paseo.getHoraFin(); %>" readOnly> 
+            </td>
 
-      <div class="card mb-3" id="photos">
-			<div class="card-header">
-      	   <i class="fa fa-bar-chart"></i>Paseos disponibles</div>
-          
-       
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Fecha</th>
-                  <th>Inicio</th>
-                  <th>Fin</th>
-                  <th>Capacidad</th>
-				  <th>Participantes</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-              <%
-				List<PaseoDTO> paseos = (List<PaseoDTO>) request.getAttribute("paseos");
-				PaseoDTO paseo = null;
-			
-				if (paseos != null) {
-					for (Iterator<PaseoDTO> i = paseos.iterator(); i.hasNext();) {
-						paseo = i.next();
-				%>
-                <tr>
-                  <td><%=paseo.getFechaPaseoFormateada() %></td>
-                  <td><%=paseo.getHorarioInicio() %></td>
-                  <td><%=paseo.getHorarioFin() %></td>
-                  <td><%=paseo.getCapacidad() %></td>
-                  <td>5</td>
-				  <td><%=paseo.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=reservarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/reservar.png" witdh=30 height=30/></th></table></td>
-	
-                </tr>
-                <%
-						}
-						}
-					%>
-              </tbody>
+            </tr>
+            
+            <td>
+            Perro:
+            </td>
+            <td>
+            <select>
+                         <option value="volvo">Volvo</option>
+                         <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                           <option value="audi">Audi</option>
+            </select>
+            </td>
+            
+            <tr>
+            <td>
+            
+            </td>
+            
+            <td>
+            <input type="hidden" name="action" value="loginUsuarios">
+            <input type="submit" class="btn btn-primary" align=center name="loginUsuarios" value="Confirmar">
+            <input type="submit" class="btn btn-primary" align=center name="loginUsuarios" value="Cancelar">
+      
+            </td>
+            </tr>
             </table>
-          </div>
-        </div>
+            </form>
+      
+          
+      
+   
+      
       </div>
-    
     </div>
-    
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>
