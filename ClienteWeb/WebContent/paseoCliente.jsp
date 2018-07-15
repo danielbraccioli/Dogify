@@ -41,35 +41,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Mi cuenta</span>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text" >Reservas </span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <ul class="sidenav-second-level collapse" id="collapseReservas">
             <li>
-              <a href="navbar.html">Mis datos</a>
-            </li>
-            <li>
-              <a href="cards.html">Mis perros</a>
-            </li>
-			<li>
-              <a href="cards.html">Facturación</a>
+              <a href="ServletModuloPaseos?action=reservasCliente&idCliente=1">Ver mis reservas</a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Reservas</span>
-          </a>
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePaseos" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Buscar Paseo</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapsePaseos">
+            <li>
+              <a href="ServletModuloPaseos?action=disponibilidadPaseos">Ver paseos</a>
+            </li>
+          </ul>
             </li>
           </ul>
         </li>
@@ -107,7 +101,7 @@
             <div class="table-responsive">
               <div class="row">
                <%ReservaDTO reserva = (ReservaDTO) request.getAttribute("reserva"); %> 
-              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="<%=reserva.getPerro().getAvatar() %>>" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
+              <table class="table table-borde1red" id="dataTable" align="center" cellspacing="0"><td align="center"><img src="<%=reserva.getPerro().getAvatar() %>" align="center"/></td><td align="center"><img src="http://localhost:8080/ClienteWeb/avatar1.png"/></td><tr><td align="center"><a class="btn btn-primary" href="login.html"><%=reserva.getPerro().getNombre()%></a></td><td align="center"><a class="btn btn-primary" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=reserva.getPaseo().getPaseador().getIdUsuario() %>"><%=reserva.getPaseo().getPaseador().getNombre() %></a></td></tr></table>
              <table class="table table-borde1red" id="dataTable" cellspacing="0">
                 <tr>
                
@@ -154,7 +148,7 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkBgIxRpAnjSJS4WeovRC4kiriTxrpD6A&callback=initMap">
     </script>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted"></div>
             </div>
             
             <div class="card mb-3" id="photos">

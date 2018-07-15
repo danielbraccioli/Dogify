@@ -40,23 +40,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCuenta" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Mi cuenta</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseCuenta">
-            <li>
-              <a href="navbar.html">Mis datos</a>
-            </li>
-            <li>
-              <a href="cards.html">Mis perros</a>
-            </li>
-			<li>
-              <a href="cards.html">Facturación</a>
-            </li>
-          </ul>
-        </li>
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -108,8 +92,11 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">RESERVAS</li>
       </ol>
-
-        <div class="card-body">
+      
+      <div class="card mb-3">
+      	    <div class="card-header">
+      	   <i class="fa fa-bar-chart"></i>Mis reservas</div>
+        
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -138,8 +125,31 @@
                   <td><%=reserva.getPaseo().getPaseador().getNombre() %></td>
                   <td><%=reserva.getPerro().getNombre() %></td>
 				  <td><%=reserva.getEstado() %></td>
-				  <td><table class="table table-bordered" ><td bgcolor="#49D658"><a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="ServletModuloUsuarios?action=calificarPaseador&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></td><td bgcolor="#49D658"><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></td></table></td>
-	
+				  <td><table class="table table-bordered" ><td>
+				  
+				  <%if (!reserva.getEstado().equals("CANCELADA")){%>
+				  <a href="ServletModuloPaseos?action=paseoCliente&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/ver.png" witdh=30 height=30/></td>
+				  <%}else{%>
+				  <img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></td>
+				  <%}
+				  if((!reserva.getEstado().equals("CANCELADA")) && (reserva.getPaseo().getEstado().equals("PENDIENTE"))){
+				  %>
+				  <td><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></td>
+				  <%}else{%>
+				  <td><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></td>
+				  <%}
+				  if(reserva.getEstado().equals("PAGADO")){ %>
+				  <td><a href="ServletModuloUsuarios?action=calificarPaseador&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/calificar.png" witdh=30 height=30/></td>
+				  <%}else{%>
+				  <td><img align="center" src="http://localhost:8080/ClienteWeb/calificarInhab.png" witdh=30 height=30/></td>
+				  <%} 
+				  if(reserva.getEstado().equals("DEVUELTO")){
+				  %>
+				  <td><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/pagar.png" witdh=30 height=30/></td></table></td>
+                  <%}else{%>
+                  <td><img align="center" src="http://localhost:8080/ClienteWeb/pagarInhab.png" witdh=30 height=30/></td></table></td>
+                  <%}%>
+                  
                 </tr>
                 <%
 						}
@@ -149,6 +159,7 @@
             </table>
           </div>
         </div>
+      
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -156,7 +167,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>

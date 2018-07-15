@@ -1,5 +1,6 @@
 <%@ page import="dto.PaseoDTO"%>
 <%@ page import="dto.ReservaDTO"%>
+<%@ page import="dto.FotoDTO"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.Iterator"%>
 
@@ -22,7 +23,29 @@
   <link href="http://localhost:8080/ClienteWeb/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="http://localhost:8080/ClienteWeb/css/sb-admin.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/ClienteWeb/css/stylesSlider.css" />
+<style>
+td.hiper {
+ 	a:visited {
+	font-weight: bold;
+	color:#49D658;
+	}
+	link {
+	font-weight: bold;
+	color:#49D658;
+	}
+	a:active {
+	font-weight: bold;
+	color:#49D658;
+	}
+	a:hover {
+	font-weight: bold;
+	font-size:20px;
+	color:#49D658;
+	}
+}
+</style>
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -107,7 +130,26 @@
              <table class="table table-bordered" id="datosPaseo"  width="100%" cellspacing="0">
                 <tbody>
                 <%PaseoDTO paseo = (PaseoDTO) request.getAttribute("paseo"); %> 
-                <tr bgcolor="#49D658"><td align=center><a href="ServletModuloPaseos?action=iniciarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/iniciarInhab.png" witdh=32 height=32/></td><td align=center>    <a href="ServletModuloPaseos?action=finalizarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/finalizarInhab.png" witdh=32 height=32/></td><td align=center><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/subirFotoInhab.png" witdh=32 height=32/></td> <td align =center>    <a href="ServletModuloPaseos?action=compartirUbicacion&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/compUbicacionInhab.png" witdh=32 height=32/></tr>
+                <tr bgcolor="#49D658"><td align=center>
+                <%if (paseo.getEstado().equals("PENDIENTE")){
+                	%><a href="ServletModuloPaseos?action=iniciarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Iniciar paseo" src="http://localhost:8080/ClienteWeb/iniciar.png" witdh=32 height=32/></td>
+                <%}else{
+                %>
+                	<img align="center" title="Iniciar paseo" src="http://localhost:8080/ClienteWeb/iniciarInhab.png" witdh=32 height=32/></td>
+                <%}%>
+                <td align=center>    
+                <%if (paseo.getEstado().equals("EN CURSO")){ %>
+                	<a href="ServletModuloPaseos?action=finalizarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Finalizar paseo" src="http://localhost:8080/ClienteWeb/finalizar.png" witdh=32 height=32/></td>
+                <%}else{%>
+                	<img align="center" title="Finalizar paseo" src="http://localhost:8080/ClienteWeb/finalizarInhab.png" witdh=32 height=32/></td>
+                <%}%>
+                <td align=center>
+                <%if (paseo.getEstado().equals("EN CURSO")){ %>
+                	<a href="#photos"><img align="center" title="Subir foto" src="http://localhost:8080/ClienteWeb/subirFoto.png" witdh=32 height=32/></td> <td align =center>    <a href="ServletModuloPaseos?action=compartirUbicacion&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Compartir ubicacion" src="http://localhost:8080/ClienteWeb/compUbicacion.png" witdh=32 height=32/></tr>
+                <%}else{%>
+                	<img align="center" title="Subir foto" src="http://localhost:8080/ClienteWeb/subirFotoInhab.png" witdh=32 height=32/></td> <td align =center><img align="center" title="Compartir ubicacion" src="http://localhost:8080/ClienteWeb/compUbicacionInhab.png" witdh=32 height=32/></tr>
+                <%}%>
+                
                 
                 <tr>
                   <table class="table table-borered" id="dataTable"  cellspacing="0" align=center width="100%">
@@ -152,16 +194,25 @@
 						reserva = i.next();
 				%>
                 <tr>
-                  <td><%=reserva.getPerro().getNombre() %></td>
+                  <td class="hiper"><a class="hiper" href="ServletModuloUsuarios?action=perfilPerro&idPerro=<%=reserva.getPerro().getIdPerro()%>"><%=reserva.getPerro().getNombre() %></td>
                   <td><%=reserva.getPerro().getRaza() %></td>
                   <td><%=reserva.getCliente().getNombre() %></td>
                   <td><%=reserva.getCliente().getDireccion().getDireccionFormateada() %></td>
                   <td><%=reserva.getEstado() %></td> 
 				  <td><%=reserva.getHoraRetiro() %></td>
 				  <td><%=reserva.getHoraDevolucion() %></td>
-				  <td><table class="table table-"><th><a href="ServletModuloPaseos?action=retirarPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" src="http://localhost:8080/ClienteWeb/retirarInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=devolverPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" src="http://localhost:8080/ClienteWeb/devolverInhab.png" witdh=30 height=30/></th></table></td>
-	
-                </tr>
+				  <td><table class="table table-"><th>
+				  <%if (reserva.getEstado().equals("PENDIENTE") && paseo.getEstado().equals("EN CURSO")){ %>
+				  	 <a href="ServletModuloPaseos?action=retirarPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" title="Retirar perro" src="http://localhost:8080/ClienteWeb/retirar.png" witdh=30 height=30/></th>
+				  <%}else{ %>
+				  	 <img align="center" title="Retirar perro" src="http://localhost:8080/ClienteWeb/retirarInhab.png" witdh=30 height=30/></th>
+				  <%}%>
+				  <%if (reserva.getEstado().equals("RETIRADO")){ %>
+				     <th><a href="ServletModuloPaseos?action=devolverPerro&idReserva=<%=reserva.getIdReserva()%>&idPaseo=<%=paseo.getIdPaseo()%>"><img align="center" title="Devolver perro" src="http://localhost:8080/ClienteWeb/devolver.png" witdh=30 height=30/></th></table></td>
+				  <%}else{ %>
+				     <th><img align="center" title="Devolver perro" src="http://localhost:8080/ClienteWeb/devolverInhab.png" witdh=30 height=30/></th></table></td>
+				  <%}%>
+                  </tr>
                 <%
 						}
 						}
@@ -174,7 +225,9 @@
           <div class="card mb-3">
             <div class="card-header">
               <i class="fa fa-bar-chart"></i> Ubicacion Actual</div>
-            <div class="card-body2" id="map" width="100" height="400"></div>
+            <div class="card-body2" id="map" height="400"></div>
+            
+            <div class="table-responsive">
               
     <div id="map"></div>
     <script>
@@ -197,30 +250,57 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkBgIxRpAnjSJS4WeovRC4kiriTxrpD6A&callback=initMap">
     </script>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+    </div>
+            <div class="card-footer small text-muted"></div>
             </div>
             
             <div class="card mb-3" id="photos">
             <div class="card-header"id="photos">
               <i class="fa fa-bar-chart"></i> Fotos del paseo</div>
-            
+            <div class="card-body">
+            <div class="table-responsive">
+        
         <div class="slider-holder">
-        <span id="slider-image-1"></span>
-        <span id="slider-image-2"></span>
-        <span id="slider-image-3"></span>
+        <%
+        int i = 0;
+        String id = "";
+        for(FotoDTO foto : paseo.getFotos()){ 
+        	i+=1;
+        	id = "slider-image-" + i;
+        	
+        %>
+        	<span id="<%=id%>"></span>
+        <%}
+        if(i==0){ %>
+        	<span id="slider-image-1"></span>
+        <%}%>
+        
         <div class="image-holder">
-            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
-            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
-            <img src="C:/Users/Pictures/Chrysanthemum.jpg" class="slider-image" />
+        <%for(FotoDTO foto : paseo.getFotos()){ %>
+        	i +=1;
+        	<img src="<%=foto.getImagen() %>" class="slider-image" />
+        <%}
+        if(i==0){ %>
+    	<img src="http://localhost:8080/ClienteWeb/sinFotos.jpg" class="slider-image" />
+    	<%}%>
+        
         </div>
         <div class="button-holder">
-            <a href="#slider-image-1" class="slider-change"></a>
-            <a href="#slider-image-2" class="slider-change"></a>
-            <a href="#slider-image-3" class="slider-change"></a>
+                <%
+        int j = 0;
+        String id2 = "";
+        for(FotoDTO foto : paseo.getFotos()){ 
+        	j+=1;
+        	id2 = "#slider-image-" + j;
+        	
+        %>
+        	<a href="<%=id2%>" class="slider-change"></a>
+
+        <%}%>
         </div>
     </div>
-
-            
+</div>
+      </div>      
 
 
     </div>

@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import negocio.Cliente;
-
 @Entity
 @Table(name = "Perro")
 public class PerroEntity implements Serializable {

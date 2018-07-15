@@ -133,7 +133,14 @@
                   <td><%=paseo.getCapacidad() %></td>
                   <td>5</td>
 				  <td><%=paseo.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/verInhab.png" witdh=30 height=30/></th><th><a href="ServletModuloPaseos?action=cancelarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th></table></td>
+				  <td><table class="table table-bordered">
+				  
+				  <th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Ver paseo" src="http://localhost:8080/ClienteWeb/ver.png" witdh=30 height=30/></th>
+				  <%if (paseo.getEstado().equals("PENDIENTE")){ %>
+				  <th><a href="ServletModuloPaseos?action=cancelarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Cancelar paseo" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></th></table></td>
+				  <%}else{%>
+				  <th><img align="center" title="Cancelar paseo" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th></table></td>
+				  <%} %>
 	
                 </tr>
                 <%

@@ -40,23 +40,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseCuenta" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Mi cuenta</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseCuenta">
-            <li>
-              <a href="navbar.html">Mis datos</a>
-            </li>
-            <li>
-              <a href="cards.html">Mis perros</a>
-            </li>
-			<li>
-              <a href="cards.html">Facturación</a>
-            </li>
-          </ul>
-        </li>
+        
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
@@ -70,10 +54,15 @@
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePaseos" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Buscar Paseo</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapsePaseos">
+            <li>
+              <a href="ServletModuloPaseos?action=disponibilidadPaseos">Ver paseos</a>
+            </li>
+          </ul>
             </li>
           </ul>
         </li>
@@ -178,7 +167,7 @@
           <div class="modal-body">Click en logout para finalizar tu sesión!</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="ServletModuloUsuarios?action=logoutUsuarios">Logout</a>
           </div>
         </div>
       </div>

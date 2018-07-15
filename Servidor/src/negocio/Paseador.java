@@ -3,6 +3,7 @@ package negocio;
 import java.sql.SQLException;
 import java.util.*;
 
+import excepciones.ReservaException;
 import excepciones.UsuarioException;
 
 public class Paseador extends Usuario {
@@ -24,17 +25,18 @@ public class Paseador extends Usuario {
 			this.paseos = paseos;
 		}
 		
-		public void calificar(Reserva reserva, int puntaje, String observaciones) throws UsuarioException {
+		public void calificar(Reserva reserva, int puntaje, String observaciones) throws UsuarioException, ReservaException {
 			Date fecha = new Date();
 			Calificacion calificacion = new Calificacion(0, puntaje, observaciones, fecha, reserva, this);
-			calificaciones.add(calificacion);
-			calificacion.save();
+			
 			if (this.getReputacion() != 0) {
 				this.reputacion = Math.round(this.reputacion + puntaje)/2;
 			}else {
 				this.reputacion = puntaje;
 			}
-			
+			calificaciones.add(calificacion);
+			calificacion.save();
+			reserva.actualizarEstado("FINALIZADO");
 		}
 		
 		public String getNumeroRegistro() {

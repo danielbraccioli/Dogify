@@ -46,6 +46,26 @@
         {
             left: -1200px;
         }
+        #slider-image-4:target ~ .image-holder
+        {
+            left: -1800px;
+        }
+        #slider-image-5:target ~ .image-holder
+        {
+            left: -2400px;
+        }
+        #slider-image-6:target ~ .image-holder
+        {
+            left: -3000px;
+        }
+        #slider-image-7:target ~ .image-holder
+        {
+            left: -3600px;
+        }
+        #slider-image-8:target ~ .image-holder
+        {
+            left: -4200px;
+        }
         
         .button-holder
         {

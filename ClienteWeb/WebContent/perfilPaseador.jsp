@@ -41,35 +41,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Mi cuenta</span>
+        
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseReservas" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text" >Reservas </span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <ul class="sidenav-second-level collapse" id="collapseReservas">
             <li>
-              <a href="navbar.html">Mis datos</a>
-            </li>
-            <li>
-              <a href="cards.html">Mis perros</a>
-            </li>
-			<li>
-              <a href="cards.html">Facturación</a>
+              <a href="ServletModuloPaseos?action=reservasCliente&idCliente=1">Ver mis reservas</a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Reservas</span>
-          </a>
     
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapsePaseos" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-sitemap"></i>
             <span class="nav-link-text">Buscar Paseo</span>
           </a>
+          <ul class="sidenav-second-level collapse" id="collapsePaseos">
+            <li>
+              <a href="ServletModuloPaseos?action=disponibilidadPaseos">Ver paseos</a>
+            </li>
+          </ul>
             </li>
           </ul>
         </li>
@@ -104,7 +98,7 @@
             <div class="card-header">
               <i class="fa fa-bar-chart"></i> Datos generales</div>
             <div class="card-body">
-              O<div class="table-responsive">
+              <div class="table-responsive">
              <table class="table table-borderd" id="dataTable" cellspacing="0">
                 <tr>
                 <%PaseadorDTO paseador = (PaseadorDTO) request.getAttribute("paseador"); %> 
@@ -141,11 +135,12 @@
                   <th><table class="table table-borered" id="dataTable"  cellspacing="0">
                   <tr><td>Fecha   <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getFecha() %> readonly></td></tr>
                   <tr><td>Perro  <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=calificacion.getReserva().getPerro().getNombre() %> readonly></td> </tr>
-                  <tr><td><textarea readonly name="mes1sage" rows="10" cols="60">
-					<%=calificacion.getComentarios() %>
+                  <tr><td><textarea readonly name="message" rows="10" cols="60">
+					<%=calificacion.getComentarios().trim() %>
 					</textarea></td>
-					</table>
+					
 					</tr>
+					</table>
                   <%} %>
                   
                   </th>
@@ -185,7 +180,7 @@
           <div class="modal-body">Click en logout para finalizar tu sesión!</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="ServletModuloUsuarios?action=logoutUsuarios">Logout</a>
           </div>
         </div>
       </div>

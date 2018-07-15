@@ -62,7 +62,11 @@ public class UsuarioDTO implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getAvatar() {
+		if (this.avatar != null) {
 		return avatar;
+		}else {
+			return "http://localhost:8080/ClienteWeb/sinFoto.png";
+		}
 	}
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
