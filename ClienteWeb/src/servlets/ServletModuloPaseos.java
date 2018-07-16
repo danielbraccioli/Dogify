@@ -23,6 +23,7 @@ import delegado.BusinessDelegate;
 import dto.ClienteDTO;
 import dto.PaseadorDTO;
 import dto.PaseoDTO;
+import dto.PerroDTO;
 import dto.ReservaDTO;
 
 @WebServlet("/servlets/ServletModuloPaseos")
@@ -277,6 +278,28 @@ public class ServletModuloPaseos extends HttpServlet{
 																		e.printStackTrace();
 																	}
 																}
+																else{
+																	if(request.getParameter("action").equalsIgnoreCase("reservaPaseoCliente")){
+																		RequestDispatcher dispatcher;
+																		int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+																		ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
+																		PerroDTO perro = new PerroDTO();
+
+																		
+																		PaseoDTO paseo = null;
+															    		try {
+																			BusinessDelegate.getInstancia().reservarPaseo(paseo, cliente, perro);
+																			request.setAttribute("cliente", cliente);
+																			request.setAttribute("paseo", paseo);
+																			dispatcher=request.getRequestDispatcher("/reservarPaseo.jsp");
+																    		dispatcher.forward(request, response);
+														
+																		}catch (Exception e) {
+																			e.printStackTrace();
+																		}
+																	}
+																}
+																	
 																
 																
 															}

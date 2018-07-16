@@ -21,6 +21,11 @@ import rmi.ObjetoRemoto;
 public class test {
 
 	public static void main(String[] args) {	
+		login();
+		
+	}
+	
+	public static void mapa(String[] args) {	
 		Geocoding ObjGeocod=new Geocoding();
 		MapsJava.setKey("AIzaSyDkBgIxRpAnjSJS4WeovRC4kiriTxrpD6A");
         try {     
@@ -82,7 +87,7 @@ public class test {
 
 		
 		try {
-			usuario= ObjetoRemoto.getInstance().loginUsuario("cliete1@gmail.com","cliente1");
+			usuario= ObjetoRemoto.getInstance().loginUsuario("cliente1@gmail.com","cliente1");
 			if (usuario==null){
 				System.out.println("No encontro el usuario");
 			}

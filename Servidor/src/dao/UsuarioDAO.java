@@ -185,9 +185,11 @@ public class UsuarioDAO {
 			perrosDTO.add(PerroDAO.getInstancia().toDTO(perro));
 		}
 		List<ReservaDTO> reservasDTO = new ArrayList<ReservaDTO>();
+		clienteDTO.setPerros(perrosDTO);
 		for(ReservaEntity reserva : cliente.getReservas()) {
 			reservasDTO.add(ReservaDAO.getInstancia().toDTO(reserva));
 		}
+		clienteDTO.setReservas(reservasDTO);
 		return clienteDTO;
 	}
 	

@@ -95,7 +95,7 @@
         <li class="breadcrumb-item active">RESERVA DE PASEO	</li>
       </ol>
       
-  <form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloUsuarios" method="post" id="loginUsuarios">
+  		<form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloPaseos?action=reservaPaseoCliente" method="post" id="reservarPaseo">
             <table class="table table-bordered" cellspacing="0" witdh=50%>
             
             <tr>
@@ -153,8 +153,8 @@
             
             <td>
             <input type="hidden" name="action" value="loginUsuarios">
-            <input type="submit" class="btn btn-primary" align=center name="loginUsuarios" value="Confirmar">
-            <input type="submit" class="btn btn-primary" align=center name="loginUsuarios" value="Cancelar">
+            <input type="submit" class="btn btn-primary" align=center name="reservarPaseo" value="Confirmar">
+            <input type="submit" class="btn btn-primary" align=center name="reservarPaseo" value="Cancelar">
       
             </td>
             </tr>
