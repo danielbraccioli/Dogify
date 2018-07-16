@@ -284,13 +284,13 @@ public class ServletModuloPaseos extends HttpServlet{
 																	/* Esta parte es para reservar un paseo hay que modificarla*/
 																	if(request.getParameter("action").equalsIgnoreCase("reservaPaseoCliente")){
 																		RequestDispatcher dispatcher;
-																		int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+//																		int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 																		ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
-																		PerroDTO perro = new PerroDTO();
-
-																		
-																		PaseoDTO paseo = null;
+																		PaseoDTO paseo = (PaseoDTO) request.getSession().getAttribute("paseo");
+																		int testid = Integer.parseInt((String)request.getParameter("idPerro"));
+																		ReservaDTO reserva = null;
 															    		try {
+															    			PerroDTO perro = BusinessDelegate.getInstancia().buscarPerroById(testid);
 																			BusinessDelegate.getInstancia().reservarPaseo(paseo, cliente, perro);
 																			request.setAttribute("cliente", cliente);
 																			request.setAttribute("paseo", paseo);

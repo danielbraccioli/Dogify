@@ -1,19 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/ejb3-persistence.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/hibernate3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/hibernate-annotations.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/hibernate-commons-annotations.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/javassist-3.4.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/jtds-1.2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/slf4j-api-1.5.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/DANIEL/git/Dogify/Servidor/lib/slf4j-simple-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/hibernate3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/javassist-3.4.GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/jtds-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/MapsJava.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/slf4j-simple-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/taglibs-standard-compat-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/taglibs-standard-impl-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/taglibs-standard-jstlel-1.2.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Fok09/Downloads/Librerias para agregar en servidor/taglibs-standard-spec-1.2.5.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/C-_Program Files_apache-tomcat-7.0.88">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.utility"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_171">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

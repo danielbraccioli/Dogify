@@ -1,9 +1,14 @@
 package dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.classic.Session;
 
+import dto.PaseadorDTO;
 import dto.PerroDTO;
+import entity.ClienteEntity;
+import entity.PaseadorEntity;
 import entity.PerroEntity;
+import excepciones.UsuarioException;
 import hibernate.HibernateUtil;
 import negocio.Cliente;
 import negocio.Perro;
@@ -21,6 +26,22 @@ public class PerroDAO {
 			instancia = new PerroDAO();
 		}
 		return instancia;
+	}
+	
+	public PerroDTO buscarPerroById(int idPerro) throws UsuarioException{
+		PerroEntity perro = null;
+		try {
+		Session session = sf.openSession();
+		session.beginTransaction();
+		perro = (PerroEntity) session
+				.createQuery("from PerroEntity c where c.idPerro = :idPerro ")
+				.setParameter("idPerro", idPerro).uniqueResult();
+		session.getTransaction().commit();
+		session.close();
+		}catch(Exception e) {
+			new UsuarioException("Error en buscar paseador en BD, reintente");
+		}
+		return toDTO(perro);
 	}
 	
 	public Perro toNegocio(PerroEntity perro) {
@@ -58,5 +79,7 @@ public class PerroDAO {
 		perroAux.setAvatar(perro.getAvatar());
 		return perroAux;
 	}
+	
+	
 
 }

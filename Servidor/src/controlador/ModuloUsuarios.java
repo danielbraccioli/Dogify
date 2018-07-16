@@ -2,8 +2,10 @@ package controlador;
 
 import java.sql.SQLException;
 
+import dao.PerroDAO;
 import dao.UsuarioDAO;
 import dto.PaseadorDTO;
+import dto.PerroDTO;
 import dto.UsuarioDTO;
 import excepciones.UsuarioException;
 import negocio.Cliente;
@@ -36,5 +38,7 @@ public class ModuloUsuarios {
 		return UsuarioDAO.getInstancia().buscarPaseadorById(idPaseador);
 	}
 	
-	
+	public PerroDTO buscarPerroById(int idPerro) throws UsuarioException {
+		return PerroDAO.getInstancia().buscarPerroById(idPerro);
+	}
 }

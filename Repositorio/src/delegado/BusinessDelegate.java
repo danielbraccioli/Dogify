@@ -97,6 +97,10 @@ public class BusinessDelegate {
 		return ir.buscarPaseosByFecha(fecha);
 	}
 	
+	public PerroDTO buscarPerroById(int idPerro) throws RemoteException, UsuarioException{
+		return ir.buscarPerroById(idPerro);
+	}
+	
 	// Ambos
 	public UsuarioDTO loginUsuario(String email,String password) throws RemoteException, UsuarioException{
 		return ir.loginUsuario(email, password);

@@ -46,4 +46,5 @@ public interface InterfazRemota extends Remote{
 	public List<ReservaDTO> reservasCliente(ClienteDTO cliente) throws RemoteException, ReservaException;
 	public List<PaseoDTO> buscarPaseosByMesAnio(int mes, int anio) throws RemoteException, PaseoException;
 	public List<PaseoDTO> buscarPaseosByFecha(Date fecha) throws RemoteException, PaseoException;
+	public PerroDTO buscarPerroById(int idPerro) throws RemoteException, UsuarioException;
 }

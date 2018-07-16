@@ -136,7 +136,7 @@
             Perro:
             </td>
             <td>
-            <select>
+            <select name="idPerro">
             	<% for (PerroDTO perro : cliente.getPerros()){ %>
     
             	<option value="<%=perro.getIdPerro() %>"> <%=perro.getNombre()%> </option>

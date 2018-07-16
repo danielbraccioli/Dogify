@@ -99,4 +99,9 @@ public class ObjetoRemoto  extends UnicastRemoteObject implements InterfazRemota
 		public PaseoDTO paseoPaseador(int idPaseo) throws RemoteException,PaseoException {
 			return ModuloPaseos.getInstancia().paseoPaseador(idPaseo);
 		}
+
+		@Override
+		public PerroDTO buscarPerroById(int idPerro) throws RemoteException, UsuarioException {
+			return ModuloUsuarios.getInstancia().buscarPerroById(idPerro);
+		}
 }
