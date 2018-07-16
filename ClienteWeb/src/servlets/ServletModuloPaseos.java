@@ -54,7 +54,9 @@ public class ServletModuloPaseos extends HttpServlet{
 			}else {
 				if(request.getParameter("action").equalsIgnoreCase("paseosPaseador")){
 					RequestDispatcher dispatcher;
-					int nroPaseador = Integer.parseInt((String)request.getParameter("idPaseador"));
+					int nroPaseador = (int) request.getSession().getAttribute("user");
+					
+				//	int nroPaseador = Integer.parseInt((String)request.getParameter("idPaseador"));
 		    		PaseadorDTO paseador = new PaseadorDTO();
 		    		paseador.setIdUsuario(nroPaseador);
 		    		List<PaseoDTO> paseos = null;
@@ -279,6 +281,7 @@ public class ServletModuloPaseos extends HttpServlet{
 																	}
 																}
 																else{
+																	/* Esta parte es para reservar un paseo hay que modificarla*/
 																	if(request.getParameter("action").equalsIgnoreCase("reservaPaseoCliente")){
 																		RequestDispatcher dispatcher;
 																		int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
