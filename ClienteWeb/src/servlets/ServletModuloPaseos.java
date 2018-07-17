@@ -175,14 +175,14 @@ public class ServletModuloPaseos extends HttpServlet{
 												int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 									    		PaseoDTO paseo = new PaseoDTO();
 									    		paseo.setIdPaseo(nroPaseo);
-									    		String imagen = (String)request.getParameter("fileFoto");
+									    		String imagen = "http://localhost:8180/ClienteWeb/" + (String)request.getParameter("fileFoto");
 									    		
 									    		
 									    		try {
 													BusinessDelegate.getInstancia().subirFoto(paseo, imagen);
 													paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
 													request.setAttribute("paseo", paseo);
-													dispatcher=request.getRequestDispatcher("/reservasCliente.jsp");
+													dispatcher=request.getRequestDispatcher("/paseoPaseador.jsp");
 										    		dispatcher.forward(request, response);
 								
 												}catch (Exception e) {
