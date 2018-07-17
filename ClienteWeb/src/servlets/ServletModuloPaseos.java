@@ -265,14 +265,14 @@ public class ServletModuloPaseos extends HttpServlet{
 																	RequestDispatcher dispatcher;
 																	int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 																	ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
-																	
-
-																	
+																															
 																	PaseoDTO paseo = null;
 														    		try {
 																		paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
 																		request.setAttribute("cliente", cliente);
 																		request.setAttribute("paseo", paseo);
+																		session.setAttribute("paseo",paseo);
+																		
 																		dispatcher=request.getRequestDispatcher("/reservarPaseo.jsp");
 															    		dispatcher.forward(request, response);
 													
@@ -286,15 +286,18 @@ public class ServletModuloPaseos extends HttpServlet{
 																		RequestDispatcher dispatcher;
 //																		int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 																		ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
-																		PaseoDTO paseo = (PaseoDTO) request.getSession().getAttribute("paseo");
-																		int testid = Integer.parseInt((String)request.getParameter("idPerro"));
-																		ReservaDTO reserva = null;
-															    		try {
+																		PaseoDTO paseo = (PaseoDTO) session.getAttribute("paseo");
+																	 	int testid = Integer.valueOf(request.getParameter("idPerro"));
+																		try {
 															    			PerroDTO perro = BusinessDelegate.getInstancia().buscarPerroById(testid);
-																			BusinessDelegate.getInstancia().reservarPaseo(paseo, cliente, perro);
-																			request.setAttribute("cliente", cliente);
-																			request.setAttribute("paseo", paseo);
-																			dispatcher=request.getRequestDispatcher("/reservarPaseo.jsp");
+																 			BusinessDelegate.getInstancia().reservarPaseo(paseo, cliente, perro);
+																//			request.setAttribute("cliente", cliente);
+																//			request.setAttribute("paseo", paseo);
+																 			session.removeAttribute("paseo");
+																 			
+															    			List<ReservaDTO> reservas = BusinessDelegate.getInstancia().reservasCliente(cliente);
+																			request.setAttribute("reservas", reservas);
+																			dispatcher=request.getRequestDispatcher("/reservasCliente.jsp");
 																    		dispatcher.forward(request, response);
 														
 																		}catch (Exception e) {

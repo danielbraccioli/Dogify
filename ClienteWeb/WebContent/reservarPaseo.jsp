@@ -94,9 +94,10 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">RESERVA DE PASEO	</li>
       </ol>
-      
-  		<form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloPaseos?action=reservaPaseoCliente" method="post" id="reservarPaseo">
-            <table class="table table-bordered" cellspacing="0" witdh=50%>
+      		<form>
+      		
+      		<% int i=-1;%>
+  	        <table class="table table-bordered" cellspacing="0" witdh=50%>
             
             <tr>
             <td>
@@ -139,7 +140,7 @@
             <select name="idPerro">
             	<% for (PerroDTO perro : cliente.getPerros()){ %>
     
-            	<option value="<%=perro.getIdPerro() %>"> <%=perro.getNombre()%> </option>
+            	<option value="<%i=perro.getIdPerro(); %>"> <%=perro.getNombre()%> </option>
                    
     			<% }%>
                          
@@ -152,15 +153,13 @@
             </td>
             
             <td>
-            <input type="hidden" name="action" value="loginUsuarios">
-            <input type="submit" class="btn btn-primary" align=center name="reservarPaseo" value="Confirmar">
-            <input type="submit" class="btn btn-primary" align=center name="reservarPaseo" value="Cancelar">
-      
+            <a type="button" class="btn btn-default" href="ServletModuloPaseos?action=reservaPaseoCliente&idPerro=<%= i%>">Reservar</a>
+         
             </td>
             </tr>
             </table>
-            </form>
             
+            </form>
       
    
       
