@@ -113,7 +113,7 @@
 				  
 				  <th><a href="ServletModuloPaseos?action=paseoPaseador&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Ver paseo" src="http://localhost:8080/ClienteWeb/ver.png" witdh=30 height=30/></th>
 				  <%if (paseo.getEstado().equals("PENDIENTE")){ %>
-				  <th><a href="ServletModuloPaseos?action=cancelarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" title="Cancelar paseo" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></th></table></td>
+				  <th><a href="ServletModuloPaseos?action=paseosPaseador"><img align="center" title="Cancelar paseo" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></th></table></td>
 				  <%}else{%>
 				  <th><img align="center" title="Cancelar paseo" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></th></table></td>
 				  <%} %>
