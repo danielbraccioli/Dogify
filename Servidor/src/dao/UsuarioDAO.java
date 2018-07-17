@@ -302,6 +302,23 @@ public class UsuarioDAO {
 		clienteEntity.setIdUsuario(cliente.getIdUsuario());
 		clienteEntity.setNombre(cliente.getNombre());
 		clienteEntity.setPassword(cliente.getPassword());
+		List<PerroEntity> perros = new ArrayList<PerroEntity>();
+		for (Perro perro : cliente.getPerros()){
+			PerroEntity perroE = new PerroEntity();
+			perroE.setAvatar(perro.getAvatar());
+	//		perroE.setCliente(perro.set);
+			perroE.setDadoDeBaja(perro.getDadoDeBaja());
+			perroE.setEdad(perro.getEdad());
+			perroE.setIdPerro(perro.getIdPerro());
+			perroE.setNombre(perro.getNombre());
+			perroE.setObservaciones(perro.getObservaciones());
+			perroE.setRaza(perro.getRaza());
+			perroE.setRequiereBozal(perro.getRequiereBozal());
+			perroE.setSexo(perro.getSexo());
+			perroE.setTamano(perro.getTamano());
+			perros.add(perroE);
+		}
+		clienteEntity.setPerros(perros);
 		return clienteEntity;
 	}
 

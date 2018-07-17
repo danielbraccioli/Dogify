@@ -36,11 +36,11 @@ public class ReservaEntity implements Serializable {
 	@JoinColumn(name = "idReserva")
 	private List<MensajeEntity> mensajes = new ArrayList<MensajeEntity>();
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idCliente")
 	private ClienteEntity cliente;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "idPerro")
 	private PerroEntity perro;
 	
