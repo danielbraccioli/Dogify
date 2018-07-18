@@ -9,6 +9,12 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.io.InputStream;
+import java.net.Inet4Address;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import javax.naming.NamingException;
+import javax.servlet.annotation.MultipartConfig;
+
+
+
 
 import delegado.BusinessDelegate;
 import dto.ClienteDTO;
@@ -175,7 +187,7 @@ public class ServletModuloPaseos extends HttpServlet{
 												int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 									    		PaseoDTO paseo = new PaseoDTO();
 									    		paseo.setIdPaseo(nroPaseo);
-									    		String imagen = "http://localhost:8180/ClienteWeb/" + (String)request.getParameter("fileFoto");
+									     		String imagen = "http://localhost:8080/ClienteWeb/" + (String)request.getParameter("fileFoto");
 									    		
 									    		
 									    		try {
@@ -263,7 +275,7 @@ public class ServletModuloPaseos extends HttpServlet{
 															else{
 																if(request.getParameter("action").equalsIgnoreCase("reservarPaseo")){
 																	RequestDispatcher dispatcher;
-																	int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+ 																	int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
 																	ClienteDTO cliente = (ClienteDTO) request.getSession().getAttribute("cliente");
 																															
 																	PaseoDTO paseo = null;
@@ -326,4 +338,6 @@ public class ServletModuloPaseos extends HttpServlet{
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
 			doPost(req, resp);
 		}
+		
+		
 }

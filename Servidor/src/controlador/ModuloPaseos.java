@@ -94,7 +94,7 @@ public class ModuloPaseos {
 		Cliente auxCliente = ModuloUsuarios.getInstancia().buscarClienteById(cliente.getIdUsuario());
 		Perro auxPerro = null;
 		for(Perro perro1 : auxCliente.getPerros()) {
-			if (perro.getIdPerro() == perro.getIdPerro()) {
+			if (perro1.getIdPerro() == perro.getIdPerro()) {
 				auxPerro = perro1;
 			}
 		}

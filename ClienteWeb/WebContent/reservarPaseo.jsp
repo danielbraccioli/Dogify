@@ -94,7 +94,7 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item active">RESERVA DE PASEO	</li>
       </ol>
-      		<form>
+      		 <form action="http://localhost:8080/ClienteWeb/servlets/ServletModuloPaseos" method="post" id="reservaPaseoCliente">
       		
       		<% int i=-1;%>
   	        <table class="table table-bordered" cellspacing="0" witdh=50%>
@@ -125,10 +125,10 @@
             Horario:
             </td>
             <td>
-            <input class="form-control" id="Horarioi" name="Horarioi" type="text" value="<%= paseo.getHoraInicio() %>" readOnly>  
+            <input class="form-control" id="Horarioi" name="Horarioi" type="text" value="<%= paseo.getHorarioInicio() %>" readOnly>  
             </td>
             <td>
-            <input class="form-control" id="Horariof" name="Horariof" type="text" value="<%= paseo.getHoraFin() %>" readOnly> 
+            <input class="form-control" id="Horariof" name="Horariof" type="text" value="<%= paseo.getHorarioFin() %>" readOnly> 
             </td>
 
             </tr>
@@ -140,7 +140,7 @@
             <select name="idPerro">
             	<% for (PerroDTO perro : cliente.getPerros()){ %>
     
-            	<option value="<%i=perro.getIdPerro(); %>"> <%=perro.getNombre()%> </option>
+            	<option value="<%=perro.getIdPerro()%>"> <%=perro.getNombre()%> </option>
                    
     			<% }%>
                          
@@ -153,7 +153,8 @@
             </td>
             
             <td>
-            <a type="button" class="btn btn-default" href="ServletModuloPaseos?action=reservaPaseoCliente&idPerro=<%= i%>">Reservar</a>
+            <input type="hidden" name="action" value="reservaPaseoCliente">
+           <input type="submit" class="btn btn-primary" align=center name="Reservar" value="Reservar">
          
             </td>
             </tr>

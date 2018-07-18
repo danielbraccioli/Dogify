@@ -134,7 +134,7 @@
 				  <%}
 				  if((!reserva.getEstado().equals("CANCELADA")) && (reserva.getPaseo().getEstado().equals("PENDIENTE"))){
 				  %>
-				  <td><a href="ServletModuloPaseos?action=cancelarReserva&idReserva=<%=reserva.getIdReserva() %>"><img align="center" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></td>
+				  <td><a href="ServletModuloPaseos?action=reservasCliente&idCliente=1"><img align="center" src="http://localhost:8080/ClienteWeb/cancelar.png" witdh=30 height=30/></td>
 				  <%}else{%>
 				  <td><img align="center" src="http://localhost:8080/ClienteWeb/cancelarInhab.png" witdh=30 height=30/></td>
 				  <%}

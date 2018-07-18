@@ -109,7 +109,7 @@
                   <th></th>
                   <th><table class="table table-bordered" id="dataTable"  cellspacing="0">
                   <tr><td>Fecha</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getFecha()%> readonly></td><td>Barrio</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getPaseo().getBarrio()%>" readonly></td></tr>
-                  <tr><td>Horario Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getHorarioInicio() %> readonly></td><td>Retiro</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraRetiro() %> readonly></td></tr>
+                  <tr><td>Horario Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getPaseo().getHorarioInicio() %> readonly></td><td>Retiro</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraRetiro()%> readonly></td></tr>
                   <tr><td>Fin Estimado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getPaseo().getHorarioFin() %>" readonly></td><td>Regreso</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder=<%=reserva.getHoraDevolucion() %> readonly></td></tr>
                   <tr><td>Estado</td><td><input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="<%=reserva.getEstado() %>" readonly></td><td></td><td><table class="table table-borered" id="dataTable"  cellspacing="0"><th><a href="#photos"><img align="center" src="http://localhost:8080/ClienteWeb/camara.png" witdh=50 height=50/></th> <th>    <a href="#map"><img align="center" src="http://localhost:8080/ClienteWeb/ubicacion.png" witdh=50 height=50/>    </th></table> </tr>
                   </table>
@@ -157,22 +157,46 @@
               <div class="card-body">
             <div class="table-responsive">
             
-        <div class="slider-holder">
-        <span id="slider-image-1"></span>
-        <span id="slider-image-2"></span>
-        <span id="slider-image-3"></span>
+		<div class="slider-holder">
+		        <%
+		        int i = 0;
+		        String id = "";
+		        for(FotoDTO foto : reserva.getPaseo().getFotos()){ 
+		        	i+=1;
+		        	id = "slider-image-" + i;
+		        	
+		        %>
+		        	<span id="<%=id%>"></span>
+		        <%}
+	        if(i==0){ %>
+	        	<span id="slider-image-1"></span>
+	        <%}%>
+          
         <div class="image-holder">
+        <%for(FotoDTO foto : reserva.getPaseo().getFotos()){ %>
+        	i +=1;
+        	<img src="<%=foto.getImagen() %>" class="slider-image" />
+        <%}
+        if(i==0){ %>
+    	<img src="http://localhost:8080/ClienteWeb/sinFotos.jpg" class="slider-image" />
+    	<%}%>
         
-        	<img src="http://localhost:8080/ClienteWeb/paseo1.jpg" class="slider-image" />
-        	<img src="http://localhost:8080/ClienteWeb/paseo2.jpg" class="slider-image" />
-        	<img src="http://localhost:8080/ClienteWeb/paseo3.jpg" class="slider-image" />
-
         </div>
         <div class="button-holder">
-            <a href="#slider-image-1" class="slider-change"></a>
-            <a href="#slider-image-2" class="slider-change"></a>
-            <a href="#slider-image-3" class="slider-change"></a>
+                <%
+        int j = 0;
+        String id2 = "";
+        for(FotoDTO foto : reserva.getPaseo().getFotos()){ 
+        	j+=1;
+        	id2 = "#slider-image-" + j;
+        	
+        %>
+        	<a href="<%=id2%>" class="slider-change"></a>
+
+        <%}%>
         </div>
+    </div>
+</div>
     </div>
     </div>
     </div>
