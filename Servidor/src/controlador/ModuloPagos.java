@@ -24,7 +24,7 @@ public class ModuloPagos {
 		Date fecha = new Date();
 		MercadoPago mp = new MercadoPago(0, fecha, aux, aux.getCliente(), nroTarjeta, vtoTarjeta, titularNombre, titularDNI);
 			mp.save(); 
-			aux.actualizarEstado("Pagada");
+			aux.actualizarEstado("PAGADO");
 
 	}
 	
@@ -33,7 +33,7 @@ public class ModuloPagos {
 		Date fecha = new Date();
 		Efectivo efe = new Efectivo(0, fecha, aux, aux.getCliente());
 		efe.save();
-		aux.actualizarEstado("Pagada");
+		aux.actualizarEstado("PAGADO");
 	}
 	
 }

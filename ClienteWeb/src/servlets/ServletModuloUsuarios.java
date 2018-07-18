@@ -52,6 +52,7 @@ public class ServletModuloUsuarios extends HttpServlet{
 							PaseadorDTO paseador = (PaseadorDTO) usuario;
 				    		List<PaseoDTO> paseos = null;
 							session.setAttribute("user",paseador.getIdUsuario());
+							session.setAttribute("paseador",paseador);
 				    		try {
 								paseos = BusinessDelegate.getInstancia().paseosPaseador(paseador);
 								request.setAttribute("paseos", paseos);

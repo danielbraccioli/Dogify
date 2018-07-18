@@ -3,6 +3,7 @@ package negocio;
 import java.sql.SQLException;
 import java.util.*;
 
+import dao.UsuarioDAO;
 import excepciones.ReservaException;
 import excepciones.UsuarioException;
 
@@ -36,6 +37,7 @@ public class Paseador extends Usuario {
 			}
 			calificaciones.add(calificacion);
 			calificacion.save();
+			this.update();
 			reserva.actualizarEstado("FINALIZADO");
 		}
 		
@@ -68,5 +70,9 @@ public class Paseador extends Usuario {
 		}
 		public void setPaseos(List<Paseo> paseos) {
 			this.paseos = paseos;
+		}
+		
+		public void update() {
+			UsuarioDAO.getInstancia().update(this);
 		}
 }

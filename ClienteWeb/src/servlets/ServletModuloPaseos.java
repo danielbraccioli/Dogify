@@ -137,19 +137,71 @@ public class ServletModuloPaseos extends HttpServlet{
 						    		ReservaDTO reserva = new ReservaDTO();
 						    		reserva.setIdReserva(nroReserva);
 						    		try {
-						    			BusinessDelegate.getInstancia().devolverPerro(reserva);
+						    			//BusinessDelegate.getInstancia().devolverPerro(reserva);
 										int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
-							    		PaseoDTO paseo = new PaseoDTO();
-							    		paseo.setIdPaseo(nroPaseo);
+							    		PaseoDTO paseo = null;
+							    		
 										paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
+										reserva = BusinessDelegate.getInstancia().reservaCliente(nroReserva);
+									
+										request.setAttribute("reserva", reserva);
 										request.setAttribute("paseo", paseo);
-										dispatcher=request.getRequestDispatcher("/paseoPaseador.jsp");
+										
+										dispatcher=request.getRequestDispatcher("/devolucionPerro.jsp");
 							    		dispatcher.forward(request, response);
 					
 									}catch (Exception e) {
 										e.printStackTrace();
 									}
 								}else {
+									if(request.getParameter("action").equalsIgnoreCase("confirmarDevolucion")){
+										RequestDispatcher dispatcher;
+										int nroReserva = Integer.parseInt((String)request.getParameter("idReserva"));
+										int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+							    		ReservaDTO reserva = new ReservaDTO();
+							    		reserva.setIdReserva(nroReserva);
+							    		try {
+							    			BusinessDelegate.getInstancia().devolverPerro(reserva);
+											
+								    		PaseoDTO paseo = null;
+											paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
+											
+											request.setAttribute("paseo", paseo);
+											
+											dispatcher=request.getRequestDispatcher("/paseoPaseador.jsp");
+								    		dispatcher.forward(request, response);
+						
+										}catch (Exception e) {
+											e.printStackTrace();
+										}
+							    		
+								}else {
+									if(request.getParameter("action").equalsIgnoreCase("confirmarDevolucionPago")){
+										RequestDispatcher dispatcher;
+										int nroReserva = Integer.parseInt((String)request.getParameter("idReserva"));
+										int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
+							    		ReservaDTO reserva = new ReservaDTO();
+							    		reserva.setIdReserva(nroReserva);
+							    		try {
+							    			BusinessDelegate.getInstancia().devolverPerro(reserva);
+							    			BusinessDelegate.getInstancia().pagarReservaEfectivo(reserva);
+							    			
+											
+								    		PaseoDTO paseo = null;
+											paseo = BusinessDelegate.getInstancia().paseoPaseador(nroPaseo);
+											
+											request.setAttribute("paseo", paseo);
+											
+											dispatcher=request.getRequestDispatcher("/paseoPaseador.jsp");
+								    		dispatcher.forward(request, response);
+						
+										}catch (Exception e) {
+											e.printStackTrace();
+										}
+									}else {
+									
+									
+							
 									if(request.getParameter("action").equalsIgnoreCase("finalizarPaseo")){
 										RequestDispatcher dispatcher;
 										int nroPaseo = Integer.parseInt((String)request.getParameter("idPaseo"));
@@ -333,6 +385,8 @@ public class ServletModuloPaseos extends HttpServlet{
 						}
 					}
 				}
+			}
+		}
 			}
 		}
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{

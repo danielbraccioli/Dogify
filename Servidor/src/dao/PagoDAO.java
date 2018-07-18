@@ -33,7 +33,7 @@ public class PagoDAO {
 			SessionFactory sf = HibernateUtil.getSessionFactory();
 			Session s = sf.openSession();
 			s.beginTransaction();
-			s.update(aux);
+			s.save(aux);
 			s.getTransaction().commit();
 			s.close();
 		}else {
@@ -42,7 +42,7 @@ public class PagoDAO {
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session s = sf.openSession();
 				s.beginTransaction();
-				s.update(aux);
+				s.save(aux);
 				s.getTransaction().commit();
 				s.close();
 			}

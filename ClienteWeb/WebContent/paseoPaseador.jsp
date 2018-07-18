@@ -178,7 +178,7 @@ td.hiper {
 						reserva = i.next();
 				%>
                 <tr>
-                  <td class="hiper"><a class="hiper" href="ServletModuloUsuarios?action=perfilPerro&idPerro=<%=reserva.getPerro().getIdPerro()%>"><%=reserva.getPerro().getNombre() %></td>
+                  <td><%=reserva.getPerro().getNombre() %></td>
                   <td><%=reserva.getPerro().getRaza() %></td>
                   <td><%=reserva.getCliente().getNombre() %></td>
                   <td><%=reserva.getCliente().getDireccion().getDireccionFormateada() %></td>
@@ -293,7 +293,7 @@ td.hiper {
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center"> 
-          <small>Copyright © Dogify! 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>

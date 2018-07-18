@@ -80,6 +80,9 @@
         <li class="breadcrumb-item active">MIS PASEOS</li>
       </ol>
 
+<div class="card mb-3">
+      	    <div class="card-header">
+      	   <i class="fa fa-bar-chart"></i>Paseos registrados</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" cellspacing="0">
@@ -107,7 +110,7 @@
                   <td><%=paseo.getHorarioInicio() %></td>
                   <td><%=paseo.getHorarioFin() %></td>
                   <td><%=paseo.getCapacidad() %></td>
-                  <td>5</td>
+                  <td><%=paseo.getParticipantes() %></td>
 				  <td><%=paseo.getEstado() %></td>
 				  <td><table class="table table-bordered">
 				  
@@ -129,12 +132,14 @@
         </div>
       </div>
     </div>
+    </div>
+    </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>

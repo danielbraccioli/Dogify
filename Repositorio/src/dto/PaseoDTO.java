@@ -125,6 +125,14 @@ public class PaseoDTO implements Serializable {
 			this.ubicacionLongitud = ubicacionLongitud;
 		}
 		
+		public int getParticipantes() {
+			return this.reservas.size();
+		}
+		
+		public int getDisponibles() {
+			return (this.capacidad - this.reservas.size());
+		}
+		
 
 
 }

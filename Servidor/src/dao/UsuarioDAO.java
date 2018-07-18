@@ -338,4 +338,13 @@ public class UsuarioDAO {
 		return toDTO(paseador);
 	}
 
+	public void update(Paseador paseador) {
+		PaseadorEntity paseadorEntity = toEntity(paseador);
+		Session session = sf.openSession();
+		session.beginTransaction();
+		session.update(paseadorEntity);
+		session.getTransaction().commit();
+		session.close();
+	}
+
 }

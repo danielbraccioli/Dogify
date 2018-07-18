@@ -168,7 +168,7 @@
             <td>
             <input type="hidden" name="action" value="procesarCalificacion">
             <input type="hidden" name="idReserva" value="<%=reserva.getIdReserva() %>">
-            <input type="hidden" name="idCliente" value="1">
+            <input type="hidden" name="idCliente" value="<%=reserva.getCliente().getIdUsuario()%>">
             <input type="submit" class="btn btn-primary" align=center name="procesarCalificacion" value="Calificar!">
             </td>
             
@@ -183,7 +183,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>

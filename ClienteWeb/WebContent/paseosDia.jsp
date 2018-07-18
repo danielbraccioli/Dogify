@@ -105,9 +105,11 @@
                   <th>Fecha</th>
                   <th>Inicio</th>
                   <th>Fin</th>
+                  <th>Barrio</th>
+                  <th>Paseador</th>
                   <th>Capacidad</th>
-				  <th>Participantes</th>
-                  <th>Estado</th>
+				  <th>Disponibles</th>
+          
                 </tr>
               </thead>
               <tbody>
@@ -123,11 +125,17 @@
                   <td><%=paseo.getFechaPaseoFormateada() %></td>
                   <td><%=paseo.getHorarioInicio() %></td>
                   <td><%=paseo.getHorarioFin() %></td>
+                  <td><%=paseo.getBarrio() %></td>
+                   <td><a class="hiper" href="ServletModuloUsuarios?action=perfilPaseador&idPaseador=<%=paseo.getPaseador().getIdUsuario() %>"> <%=paseo.getPaseador().getNombre() %></td>
                   <td><%=paseo.getCapacidad() %></td>
-                  <td>5</td>
-				  <td><%=paseo.getEstado() %></td>
-				  <td><table class="table table-bordered"><th><a href="ServletModuloPaseos?action=reservarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/reservar.png" witdh=30 height=30/></th></table></td>
-	
+                  <td><%=paseo.getDisponibles() %></td>
+				 
+				  <td><table class="table table-bordered">
+				  <%if (paseo.getDisponibles() > 0){ %>
+				  <th><a href="ServletModuloPaseos?action=reservarPaseo&idPaseo=<%=paseo.getIdPaseo() %>"><img align="center" src="http://localhost:8080/ClienteWeb/reservar.png" witdh=30 height=30/></th></table></td>
+				  <%}else{%>
+                  <th></th></table></td>
+                <%}%>
                 </tr>
                 <%
 						}
@@ -146,7 +154,7 @@
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
-          <small>Copyright © Your Website 2018</small>
+          <small></small>
         </div>
       </div>
     </footer>

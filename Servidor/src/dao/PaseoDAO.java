@@ -250,7 +250,7 @@ public class PaseoDAO {
 		try {
 			Session session = sf.openSession();
 			session.beginTransaction();
-			aux1 = session.createQuery("From PaseoEntity r where month(r.fecha)=? and year(r.fecha)=?").setInteger(0, mes).setInteger(1, anio).list();
+			aux1 = session.createQuery("From PaseoEntity r where month(r.fecha)=? and year(r.fecha)=? and r.estado=?").setInteger(0, mes).setInteger(1, anio).setString(2, "PENDIENTE").list();
 			session.getTransaction().commit();
 			session.close();
 		for(PaseoEntity paseo : aux1) {
@@ -268,7 +268,7 @@ public class PaseoDAO {
 		try {
 			Session session = sf.openSession();
 			session.beginTransaction();
-			aux1 = session.createQuery("From PaseoEntity r where r.fecha = ?").setDate(0, fecha).list();
+			aux1 = session.createQuery("From PaseoEntity r where r.fecha = ? and r.estado=?").setDate(0, fecha).setString(1, "PENDIENTE").list();
 			session.getTransaction().commit();
 			session.close();
 		for(PaseoEntity paseo : aux1) {
