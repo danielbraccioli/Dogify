@@ -65,8 +65,8 @@
           </ul>
             </li>
           </ul>
-        </li>
-      </ul>
+        
+      
       <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">
@@ -78,10 +78,12 @@
         
 
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+            <i class="fa fa-fw fa-sign-out"></i>Logout
+          </a>
 			
 			<a class="nav-link" data-toggle="modal" data-target="#exampleModal2">
-            <i class="fa fa-fw fa-sign-out"></i>SubirFoto</a>
+            <i class="fa fa-fw fa-sign-out"></i>SubirFoto
+            </a>
         
       </ul>
     </div>
